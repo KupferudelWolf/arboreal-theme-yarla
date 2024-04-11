@@ -771,7 +771,7 @@ header.site-header > * {
 	display: flex;
 	align-items: center;
 }
-header + main {
+header.site-header + * {
 	margin-top: 1.5em !important;
 }
 header.site-header .main-navigation a {
@@ -781,7 +781,7 @@ header.site-header .main-navigation a:visited {
 	color: lightgrey;
 }
 header.site-header .site-title a {
-	font-size: 2em;
+	font-size: 2rem;
 	font-weight: bolder;
 	color: white;
 	text-decoration: none;
@@ -817,12 +817,18 @@ footer.site-footer {
 	/* height: 50vh; */
 }
 
+section.no-results,
+section.not-found,
 .single main#primary,
 .page main#primary {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
 	align-items: center;
+	width: 80vw;
+}
+.single main#primary,
+.page main#primary {
 	gap: 1.5em;
 }
 .single main#primary {
@@ -838,6 +844,11 @@ footer.site-footer {
 	border: 4px solid black;
 	background-color: white;
 	padding: 1em;
+}
+section.no-results,
+section.not-found {
+	border: 4px solid black;
+	background-color: white;
 }
 
 .post {
