@@ -12,6 +12,7 @@
     <div class="nav-links">
         <?php
         $current_id = $post->ID;
+        $current_time = get_post_timestamp();
 
         $q = new WP_Query(
             array(
@@ -27,32 +28,24 @@
         $nav_next = null;
         $nav_last = null;
         $nav_earlier = true;
-        // foreach ($q->posts as $post) {
-        //     if (null === $nav_first) {
-        //         $nav_first = $post;
-        //     }
-        //     $nav_last = $post;
-        //     $post_id = $post->ID;
-        //     if ($post_id === $current_id) {
-        //         $nav_prev = $nav_last;
-        //     } elseif (null === $nav_next && null !== $nav_prev) {
-        //         $nav_next = $post;
-        //     }
-        // }
         foreach ($q->posts as $post) {
             $nav_last = $post;
-            if ($post->ID === $current_id) {
+            if ($current_time <= get_post_timestamp($post)) {
                 $nav_earlier = false;
-            } elseif ($nav_earlier) {
-                $nav_prev = $post;
-                if (null === $nav_first) {
-                    $nav_first = $post;
+            }
+            if ($post->ID !== $current_id) {
+                if ($nav_earlier) {
+                    $nav_prev = $post;
+                    if (null === $nav_first) {
+                        $nav_first = $post;
+                    }
+                } elseif (null === $nav_next) {
+                    $nav_next = $post;
                 }
-            } elseif (null === $nav_next) {
-                $nav_next = $post;
-                // $nav_last = null;
             }
         }
+        if ($nav_earlier)
+            $nav_last = null;
         if ($nav_first && $nav_first->ID === $current_id)
             $nav_first = null;
         if ($nav_last && $nav_last->ID === $current_id)
