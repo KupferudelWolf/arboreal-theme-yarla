@@ -64,7 +64,9 @@
                 </a>
             <?php endif; ?>
         </div>
-        <div></div>
+        <div class="nav-language">
+            <?php echo do_shortcode('[language-switcher]'); ?>
+        </div>
         <div class="nav-next">
             <?php if ($nav_next): ?>
                 <a href="<?php echo get_permalink($nav_next); ?>" rel="next">

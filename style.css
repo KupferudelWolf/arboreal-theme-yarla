@@ -725,8 +725,10 @@ textarea {
 .post-navigation .nav-links {
 	/* display: flex; */
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+	gap: 1em;
 	text-align: center;
+	justify-items: center;
 }
 
 .comment-navigation .nav-previous,
@@ -742,7 +744,8 @@ textarea {
 	flex: 1 0 50%;
 }
 
-.post-navigation a {
+.post-navigation .nav-links .trp-ls-shortcode-current-language a,
+.post-navigation .nav-links > div > a {
 	padding: 1px 6px;
 	border: 1px outset buttonborder;
 	border-radius: 3px;
@@ -750,7 +753,38 @@ textarea {
 	background-color: buttonface;
 	text-decoration: none;
 	display: inline-block;
-	min-width: 80%;
+	width: 100%;
+}
+
+.post-navigation .nav-links > div {
+	width: 100%;
+	height: 1.75em;
+}
+
+.post-navigation .nav-links .trp_language_switcher_shortcode,
+.post-navigation .nav-links .trp-language-switcher-container {
+	width: 100%;
+	height: 100%;
+}
+.post-navigation .nav-links .trp-language-switcher-container > * {
+	width: 100% !important;
+}
+.post-navigation .nav-links .trp-ls-shortcode-current-language {
+	width: 100% !important;
+	height: 100%;
+	border: none;
+	padding: 0 5%;
+}
+.post-navigation .nav-links .trp-ls-shortcode-current-language > * {
+	height: 100%;
+	padding: 1px 6px;
+}
+.post-navigation .nav-links .trp-ls-shortcode-current-language .trp-flag-image {
+	/* display: none; */
+}
+.post-navigation .nav-links .trp-ls-shortcode-language > * {
+	margin: 0.5em 0;
+	border: none;
 }
 
 /* Header
@@ -765,6 +799,7 @@ header.site-header {
 	display: flex;
 	padding: 0.5em 1.5em;
 	gap: 1.5em;
+	z-index: 100;
 }
 header.site-header > * {
 	height: 100%;
