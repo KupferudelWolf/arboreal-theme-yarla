@@ -54,17 +54,22 @@
 				<button class="menu-toggle" aria-controls="primary-menu"
 					aria-expanded="false"><?php esc_html_e('Primary Menu', 'arboreal'); ?></button>
 				<?php
-				wp_nav_menu(
+				$nav_menu = wp_nav_menu(
 					array(
-						'theme_location' => 'menu-1',
+						'echo' => false,
+						// 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+						'items_wrap' => '%3$s',
+						'theme_location' => 'nav-menu',
+						'container' => '',
 						'menu_id' => 'primary-menu',
 					)
 				);
+				echo preg_replace('/<li (.*)><a href=(".*".*?)>(.*)<\/a><\/li>/', '<a href=$2 class="menu-button"><div $1>$3</div></a>', $nav_menu, -1);
 				?>
 			</nav><!-- #site-navigation -->
 			<?php
-			if (!is_single()) {
-				echo do_shortcode('[language-switcher]');
-			}
+			// if (!is_single()) {
+			// 	echo do_shortcode('[language-switcher]');
+			// }
 			?>
 		</header><!-- #masthead -->

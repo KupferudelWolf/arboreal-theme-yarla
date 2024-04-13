@@ -54,13 +54,13 @@
         <div class="nav-first">
             <?php if ($nav_first): ?>
                 <a href="<?php echo get_permalink($nav_first); ?>" rel="first">
-                    << First </a>
+                    << </a>
                     <?php endif; ?>
         </div>
         <div class="nav-previous">
             <?php if ($nav_prev): ?>
                 <a href="<?php echo get_permalink($nav_prev); ?>" rel="prev">
-                    < <?php echo get_the_title($nav_prev); ?>
+                    < <?php //echo get_the_title($nav_prev); ?>
                 </a>
             <?php endif; ?>
         </div>
@@ -70,14 +70,14 @@
         <div class="nav-next">
             <?php if ($nav_next): ?>
                 <a href="<?php echo get_permalink($nav_next); ?>" rel="next">
-                    <?php echo get_the_title($nav_next); ?> >
+                    <?php //echo get_the_title($nav_next); ?> >
                 </a>
             <?php endif; ?>
         </div>
         <div class="nav-newest">
             <?php if ($nav_last): ?>
                 <a href="<?php echo get_permalink($nav_last); ?>" rel="newest">
-                    Latest >>
+                    >>
                 </a>
             <?php endif; ?>
         </div>

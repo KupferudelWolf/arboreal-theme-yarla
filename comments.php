@@ -52,8 +52,15 @@ if (post_password_required()) {
 			<?php
 			wp_list_comments(
 				array(
-					'style' => 'ol',
+					'avatar_size' => 64,
+					'callback' => 'custom_comments',
+					// 'max_depth' => 3,
+					// 'per_page' => 2,
+					'reverse_children' => true,
+					'reverse_top_level' => true,
 					'short_ping' => true,
+					'style' => 'ol',
+					'type' => 'comment'
 				)
 			);
 			?>
@@ -71,7 +78,12 @@ if (post_password_required()) {
 
 	endif; // Check for have_comments().
 	
-	comment_form();
+	comment_form(
+		array(
+			'title_reply' => 'Leave a Comment',
+			'logged_in_as' => '<div class="logged-in-as">' . sprintf(__('Logged in as <a href="%1$s">%2$s</a>.'), admin_url('profile.php'), $user_identity) . '</div>'
+		)
+	);
 	?>
 
 </div><!-- #comments -->

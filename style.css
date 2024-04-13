@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Avoyt
 Author URI: http://yar.la
 Description: Theme for yar.la.
-Version: 1.0.0
+Version: 1.1.0
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -54,6 +54,228 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Generic
 --------------------------------------------------------------*/
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+	-webkit-font-smoothing: none !important;
+}
+
+@font-face {
+	font-family: 'Ruberoid Oblique';
+	src: url('font/Ruberoid/Ruberoid-Oblique.eot');
+	src: local('font/Ruberoid/Ruberoid Oblique'), local('font/Ruberoid/Ruberoid-Oblique'),
+		url('font/Ruberoid/Ruberoid-Oblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-Oblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-Oblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-Oblique.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid Extra';
+	src: url('font/Ruberoid/Ruberoid-ExtraLight.eot');
+	src: local('font/Ruberoid/Ruberoid Extra Light'), local('font/Ruberoid/Ruberoid-ExtraLight'),
+		url('font/Ruberoid/Ruberoid-ExtraLight.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-ExtraLight.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-ExtraLight.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-ExtraLight.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid Bold Oblique';
+	src: url('font/Ruberoid/Ruberoid-BoldOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Bold Oblique'), local('font/Ruberoid/Ruberoid-BoldOblique'),
+		url('font/Ruberoid/Ruberoid-BoldOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-BoldOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-BoldOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-BoldOblique.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid';
+	src: url('font/Ruberoid/Ruberoid-Bold.eot');
+	src: local('font/Ruberoid/Ruberoid Bold'), local('font/Ruberoid/Ruberoid-Bold'),
+		url('font/Ruberoid/Ruberoid-Bold.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-Bold.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-Bold.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid Light Oblique';
+	src: url('font/Ruberoid/Ruberoid-LightOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Light Oblique'), local('font/Ruberoid/Ruberoid-LightOblique'),
+		url('font/Ruberoid/Ruberoid-LightOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-LightOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-LightOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-LightOblique.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid Extra';
+	src: url('font/Ruberoid/Ruberoid-ExtraBold.eot');
+	src: local('font/Ruberoid/Ruberoid Extra Bold'), local('font/Ruberoid/Ruberoid-ExtraBold'),
+		url('font/Ruberoid/Ruberoid-ExtraBold.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-ExtraBold.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-ExtraBold.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-ExtraBold.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid Extra Bold Oblique';
+	src: url('font/Ruberoid/Ruberoid-ExtraBoldOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Extra Bold Oblique'), local('font/Ruberoid/Ruberoid-ExtraBoldOblique'),
+		url('font/Ruberoid/Ruberoid-ExtraBoldOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-ExtraBoldOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-ExtraBoldOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-ExtraBoldOblique.ttf') format('truetype');
+	font-weight: 800;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid Medium Oblique';
+	src: url('font/Ruberoid/Ruberoid-MediumOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Medium Oblique'), local('font/Ruberoid/Ruberoid-MediumOblique'),
+		url('font/Ruberoid/Ruberoid-MediumOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-MediumOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-MediumOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-MediumOblique.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid';
+	src: url('font/Ruberoid/Ruberoid-Light.eot');
+	src: local('font/Ruberoid/Ruberoid Light'), local('font/Ruberoid/Ruberoid-Light'),
+		url('font/Ruberoid/Ruberoid-Light.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-Light.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-Light.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid Extra Light Oblique';
+	src: url('font/Ruberoid/Ruberoid-ExtraLightOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Extra Light Oblique'), local('font/Ruberoid/Ruberoid-ExtraLightOblique'),
+		url('font/Ruberoid/Ruberoid-ExtraLightOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-ExtraLightOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-ExtraLightOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-ExtraLightOblique.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid';
+	src: url('font/Ruberoid/Ruberoid-Medium.eot');
+	src: local('font/Ruberoid/Ruberoid Medium'), local('font/Ruberoid/Ruberoid-Medium'),
+		url('font/Ruberoid/Ruberoid-Medium.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-Medium.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-Medium.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid Semi Bold Oblique';
+	src: url('font/Ruberoid/Ruberoid-SemiBoldOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Semi Bold Oblique'), local('font/Ruberoid/Ruberoid-SemiBoldOblique'),
+		url('font/Ruberoid/Ruberoid-SemiBoldOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-SemiBoldOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-SemiBoldOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-SemiBoldOblique.ttf') format('truetype');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid Thin Oblique';
+	src: url('font/Ruberoid/Ruberoid-ThinOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Thin Oblique'), local('font/Ruberoid/Ruberoid-ThinOblique'),
+		url('font/Ruberoid/Ruberoid-ThinOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-ThinOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-ThinOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-ThinOblique.ttf') format('truetype');
+	font-weight: 100;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid Semi';
+	src: url('font/Ruberoid/Ruberoid-SemiBold.eot');
+	src: local('font/Ruberoid/Ruberoid Semi Bold'), local('font/Ruberoid/Ruberoid-SemiBold'),
+		url('font/Ruberoid/Ruberoid-SemiBold.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-SemiBold.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-SemiBold.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid';
+	src: url('font/Ruberoid/Ruberoid-Thin.eot');
+	src: local('font/Ruberoid/Ruberoid Thin'), local('font/Ruberoid/Ruberoid-Thin'),
+		url('font/Ruberoid/Ruberoid-Thin.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-Thin.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-Thin.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-Thin.ttf') format('truetype');
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid';
+	src: url('font/Ruberoid/Ruberoid-Regular.eot');
+	src: local('font/Ruberoid/Ruberoid'), local('font/Ruberoid/Ruberoid-Regular'),
+		url('font/Ruberoid/Ruberoid-Regular.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-Regular.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-Regular.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ruberoid Ultra Light Oblique';
+	src: url('font/Ruberoid/Ruberoid-UltraLightOblique.eot');
+	src: local('font/Ruberoid/Ruberoid Ultra Light Oblique'), local('font/Ruberoid/Ruberoid-UltraLightOblique'),
+		url('font/Ruberoid/Ruberoid-UltraLightOblique.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-UltraLightOblique.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-UltraLightOblique.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-UltraLightOblique.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Ruberoid Ultra';
+	src: url('font/Ruberoid/Ruberoid-UltraLight.eot');
+	src: local('font/Ruberoid/Ruberoid Ultra Light'), local('font/Ruberoid/Ruberoid-UltraLight'),
+		url('font/Ruberoid/Ruberoid-UltraLight.eot?#iefix') format('embedded-opentype'),
+		url('font/Ruberoid/Ruberoid-UltraLight.woff2') format('woff2'),
+		url('font/Ruberoid/Ruberoid-UltraLight.woff') format('woff'),
+		url('font/Ruberoid/Ruberoid-UltraLight.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
 /* Normalize
 --------------------------------------------- */
 
@@ -86,15 +308,6 @@ body {
  */
 main {
 	display: block;
-}
-
-/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */
-h1 {
-	font-size: 2em;
-	margin: 0.67em 0;
 }
 
 /* Grouping content
@@ -402,9 +615,10 @@ input,
 select,
 optgroup,
 textarea {
-	color: #404040;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-	font-size: 1rem;
+	color: #313f40;
+	font-family: 'Noto Sans', Noto-Sans, sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
+	font-size: 1.25vh;
 	line-height: 1.5;
 }
 
@@ -415,10 +629,47 @@ h4,
 h5,
 h6 {
 	clear: both;
+	font-family: 'Ruberoid';
+	margin: 0;
+	margin-top: 1vh;
+}
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+	margin-top: 0;
+}
+h1 {
+	font-size: 4vh;
+}
+h2 {
+	font-size: 3vh;
+}
+h3 {
+	font-size: 2.5vh;
+}
+h4 {
+	font-size: 2vh;
+}
+h5 {
+	font-size: 1.8vh;
+}
+h6 {
+	font-size: 1.75vh;
 }
 
 p {
-	margin-bottom: 1.5em;
+	/* margin-bottom: 1.5em; */
+	margin: 0;
+	margin-bottom: 1vh;
+	font-size: 1.5vh;
+	font-weight: 500;
+	line-height: 150%;
+}
+p:last-child {
+	margin-bottom: 0;
 }
 
 dfn,
@@ -429,7 +680,7 @@ i {
 }
 
 blockquote {
-	margin: 0 1.5em;
+	margin: 0 1.5em 1vh 1.5em;
 }
 
 address {
@@ -437,7 +688,7 @@ address {
 }
 
 pre {
-	background: #eee;
+	background: #f0eed4;
 	font-family: "Courier 10 Pitch", courier, monospace;
 	line-height: 1.6;
 	margin-bottom: 1.6em;
@@ -472,11 +723,11 @@ big {
 /* Elements
 --------------------------------------------- */
 body {
-	background-color: lightgrey;
+	background-color: #fcfade;
 }
 
 hr {
-	background-color: #ccc;
+	background-color: #313f40;
 	border: 0;
 	height: 1px;
 	margin-bottom: 1.5em;
@@ -497,8 +748,7 @@ ol {
 
 li > ul,
 li > ol {
-	margin-bottom: 0;
-	margin-left: 1.5em;
+	margin: 0;
 }
 
 dt {
@@ -533,7 +783,7 @@ table {
 /* Links
 --------------------------------------------- */
 a {
-	color: #4169e1;
+	color: #5e4aff;
 }
 
 a:visited {
@@ -543,7 +793,7 @@ a:visited {
 a:hover,
 a:focus,
 a:active {
-	color: #191970;
+	color: #47c8ff;
 }
 
 a:focus {
@@ -561,10 +811,10 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	border: 1px solid;
-	border-color: #ccc #ccc #bbb;
-	border-radius: 3px;
-	background: #e6e6e6;
+	border: 2px solid;
+	border-color: #313f40;
+	border-radius: 0;
+	background-color: white;
 	color: rgba(0, 0, 0, 0.8);
 	line-height: 1;
 	padding: 0.6em 1em 0.4em;
@@ -574,7 +824,7 @@ button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
-	border-color: #ccc #bbb #aaa;
+	border-color: #47c8ff;
 }
 
 button:active,
@@ -585,7 +835,7 @@ input[type="reset"]:active,
 input[type="reset"]:focus,
 input[type="submit"]:active,
 input[type="submit"]:focus {
-	border-color: #aaa #bbb #bbb;
+	border-color: #47c8ff;
 }
 
 input[type="text"],
@@ -604,9 +854,9 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
-	color: #666;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+	color: #313f40;
+	border: 2px solid #313f40;
+	border-radius: 0;
 	padding: 3px;
 }
 
@@ -626,11 +876,11 @@ input[type="datetime"]:focus,
 input[type="datetime-local"]:focus,
 input[type="color"]:focus,
 textarea:focus {
-	color: #111;
+	color: #313f40;
 }
 
 select {
-	border: 1px solid #ccc;
+	border: 2px solid #313f40;
 }
 
 textarea {
@@ -693,6 +943,7 @@ textarea {
 }
 
 .main-navigation a {
+	color: #f7fcde;
 	display: block;
 	text-decoration: none;
 }
@@ -717,18 +968,19 @@ textarea {
 .site-main .comment-navigation,
 .site-main .posts-navigation,
 .site-main .post-navigation {
-	margin: 0 0 1.5em;
+	height: 7vh;
+	padding: 2vh 0;
 }
 
 .comment-navigation .nav-links,
 .posts-navigation .nav-links,
 .post-navigation .nav-links {
-	/* display: flex; */
 	display: grid;
 	grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
 	gap: 1em;
 	text-align: center;
 	justify-items: center;
+	height: 100%;
 }
 
 .comment-navigation .nav-previous,
@@ -744,40 +996,54 @@ textarea {
 	flex: 1 0 50%;
 }
 
-.post-navigation .nav-links .trp-ls-shortcode-current-language a,
+.post-navigation .nav-links .trp-ls-shortcode-current-language a {
+	color: #313f40;
+	background-color: white;
+}
+
 .post-navigation .nav-links > div > a {
-	padding: 1px 6px;
-	border: 1px outset buttonborder;
-	border-radius: 3px;
-	color: buttontext;
-	background-color: buttonface;
+	/* border: 1px outset buttonborder; */
+	/* border-radius: 3px; */
+	color: #313f40;
+	/* background-color: buttonface; */
 	text-decoration: none;
 	display: inline-block;
 	width: 100%;
+	font-size: 1.5vh;
 }
 
 .post-navigation .nav-links > div {
 	width: 100%;
-	height: 1.75em;
+	height: 100%;
+	border: 2px solid #313f40;
+	color: #313f40;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	text-align: center;
 }
 
-.post-navigation .nav-links .trp_language_switcher_shortcode,
-.post-navigation .nav-links .trp-language-switcher-container {
+.post-navigation .nav-links .trp_language_switcher_shortcode {
 	width: 100%;
 	height: 100%;
 }
+.post-navigation .nav-links .trp-language-switcher-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
 .post-navigation .nav-links .trp-language-switcher-container > * {
 	width: 100% !important;
+	font-size: 1.5vh;
 }
 .post-navigation .nav-links .trp-ls-shortcode-current-language {
 	width: 100% !important;
-	height: 100%;
+	padding: 0;
 	border: none;
-	padding: 0 5%;
 }
 .post-navigation .nav-links .trp-ls-shortcode-current-language > * {
-	height: 100%;
-	padding: 1px 6px;
+	padding: 0;
 }
 .post-navigation .nav-links .trp-ls-shortcode-current-language .trp-flag-image {
 	/* display: none; */
@@ -787,71 +1053,79 @@ textarea {
 	border: none;
 }
 
+.trp-language-switcher > div > a {
+	font-size: 1.5vh;
+}
+.trp-language-switcher > div > a > img {
+	width: auto;
+	height: 1.25vh;
+}
+
 /* Header
 --------------------------------------------- */
 header.site-header {
+	font-family: 'Ruberoid';
 	position: sticky;
 	top: 0;
 	width: 100%;
 	height: 8vh;
-	color: white;
-	background-color: black;
-	display: flex;
-	padding: 0.5em 1.5em;
+	color: #f7fcde;
+	background-color: #313f40;
+	padding: 1vh 2vh;
 	gap: 1.5em;
 	z-index: 100;
+	display: flex;
+	align-items: center;
 }
 header.site-header > * {
 	height: 100%;
 	display: flex;
 	align-items: center;
-	gap: 1em;
+	gap: 2vh;
+	align-items: center;
 }
-header.site-header + * {
-	margin-top: 1.5em !important;
+header.site-header .site-title {
+	font-size: 4vmin;
+	font-weight: 800;
+	margin: 0;
+}
+header.site-header .site-description {
+	font-size: 2vmin;
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	font-style: italic;
+	margin: 0;
 }
 
-header.site-header #primary-menu,
+header.site-header .main-navigation .menu,
 header.site-header .nav-menu {
 	height: 100%;
 	margin: auto 0;
 	display: flex;
-	gap: 1em;
+	gap: 2vh;
 	align-items: center;
 }
-header.site-header .nav-menu > li {
-	border: 1px solid white;
+header.site-header ul .page_item,
+header.site-header .menu-button {
+	font-weight: 400;
+	border: 2px solid #f7fcde;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	max-width: 10em;
-	padding: 0.5em;
+	max-width: 20vh;
+	padding: 0.5vh 1vh;
+	text-align: center;
 }
 
-header.site-header .main-navigation a {
-	color: white;
-}
+header.site-header .site-title a,
+header.site-header .main-navigation,
 header.site-header .main-navigation a:visited {
-	color: lightgrey;
-}
-header.site-header .site-title a {
-	font-size: 2rem;
-	font-weight: bolder;
-	color: white;
+	color: #f7fcde;
 	text-decoration: none;
-}
-header.site-header .site-description {
-	font-size: smaller;
-	font-style: italic;
 }
 
 header.site-header .trp-language-switcher {
 	width: auto;
-}
-
-#wpadminbar + div {
-	/* margin-top: 32px; */
 }
 
 /* Footer
@@ -872,7 +1146,7 @@ footer.site-footer {
 
 .post,
 .page {
-	margin: 0 0 1.5em;
+	/* margin: 0 0 1.5em; */
 	/* height: 50vh; */
 }
 
@@ -886,55 +1160,67 @@ section.not-found,
 	align-items: center;
 	width: 80vw;
 }
+.single main#primary {
+	width: min-content;
+}
 .single main#primary,
 .page main#primary {
 	gap: 1.5em;
 }
-.single main#primary {
-	min-width: 720px;
-	width: 40vw;
-}
-.page main#primary {
-	width: 80vw;
-}
-.single main#primary > *,
-.page main#primary > * {
+/* .single main#primary > *, */
+/* .page main#primary > * { */
+.container {
 	width: 100%;
-	border: 4px solid black;
+	border: 4px solid #313f40;
 	background-color: white;
-	padding: 1em;
+	padding: 6vh;
+	margin-top: 4vh;
+}
+.single .container:first-child {
+	padding-top: 0;
 }
 section.no-results,
 section.not-found {
-	border: 4px solid black;
+	border: 4px solid #313f40;
 	background-color: white;
 }
 
+
 .post {
-	height: 85vh;
-	/* border-radius: 4vh; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: min-content;
+	min-width: 100%;
 }
 .post .post-thumbnail {
 	display: flex;
-	min-height: 0;
+	width: max-content;
+	height: 71vh;
+	margin: 0;
 }
-.post img {
-	width: auto;
-	max-height: 100%;
+.post .post-thumbnail img {
+	width: 100%;
+	height: 100%;
+}
+.post .entry-header {
+	display: none;
 }
 
 .updated:not(.published) {
 	display: none;
 }
 
+.post .entry-content {
+	margin-top: 3vh;
+	text-align: center;
+}
+
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	/* margin: 1.5em 0 0; */
 }
 
 .page-links {
@@ -942,25 +1228,49 @@ section.not-found {
 	margin: 0 0 1.5em;
 }
 
+@media screen and (max-aspect-ratio: 0.75) {
+	.single main#primary,
+	.page main#primary {
+		width: 100%;
+	}
+
+	.site-main .comment-navigation,
+	.site-main .posts-navigation,
+	.site-main .post-navigation {
+		padding: 2vh;
+	}
+
+	.container {
+		border-left: none;
+		border-right: none;
+		padding: 4vh 4vh;
+	}
+
+	.single .container:first-child {
+		margin-top: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.post .entry-header,
+	.post .entry-content {
+		margin-left: 3vh;
+		margin-right: 3vh;
+	}
+	.post .post-thumbnail {
+		width: 100%;
+		height: max-content;
+	}
+
+	.comment-form textarea {
+		resize: none;
+	}
+}
+
 /* Comments
 --------------------------------------------- */
 .comment-content a {
 	word-wrap: break-word;
-}
-
-ol.comment-list {
-	margin: 0 1.5em;
-	padding-left: 1em;
-}
-
-ol.comment-list li {
-	padding-bottom: 1.5em;
-	margin-bottom: 1.5em;
-	border-bottom: 2px solid black;
-}
-ol.comment-list li:last-child {
-	border: none;
-	padding-bottom: 0;
 }
 
 .required-field-message {
@@ -975,6 +1285,108 @@ ol.comment-list li:last-child {
 
 .bypostauthor {
 	display: block;
+}
+
+.comments-title {
+	display: none;
+}
+
+ol.comment-list {
+	margin: 0;
+	padding-left: 0;
+}
+.comments > ol.comment-list {
+	margin: 0;
+	padding: 0;
+}
+.comment-list > .comment {
+	padding-bottom: 1.5em;
+	margin-bottom: 1.5em;
+	border-bottom: 2px solid #313f40;
+}
+.comment-list > .comment:last-child {
+	border: none;
+	padding-bottom: 0;
+}
+
+div.comment {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.comment .comment-header {
+	display: flex;
+	gap: 10px;
+}
+.comment .comment-meta {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	align-items: center;
+}
+.comment .comment-author {
+	font-size: 1.85vh;
+	font-weight: 600;
+}
+.comment .comment-date {
+	font-size: 1.333vh;
+	font-weight: 400;
+}
+.comment .comment-thumbnail {
+	width: 64px;
+	height: 64px;
+	margin: 0;
+	padding: 0;
+}
+.comment .comment-thumbnail img {
+	width: auto;
+	height: 100%;
+}
+.comment .comment-body p {
+	font-size: 1.333vh;
+	font-weight: 500;
+	line-height: 1.5;
+}
+.comment .comment-footer {
+	font-size: 1.333vh;
+	font-weight: 400;
+}
+.comment .children {
+	padding-left: 30px;
+}
+.comment .children .comment {
+	margin-top: 30px;
+}
+
+.comment-form textarea {
+	margin: 15px 0;
+	resize: vertical;
+	min-height: 4em;
+	max-height: 32em;
+}
+.comment-respond {
+	margin-top: 4vh;
+}
+.comment-respond > .comment-reply-title small {
+	display: block;
+}
+.comment-form-comment > label {
+	display: none;
+}
+
+@media screen and (max-aspect-ratio: 1) {
+	.comment .comment-thumbnail {
+		width: 6vh;
+		height: 6vh;
+		min-width: 64px;
+		min-height: 64px;
+		margin: 0;
+		padding: 0;
+	}
+}
+@media screen and (max-aspect-ratio: 0.75) {
+	.comment-respond > * {
+		text-align: center;
+	}
 }
 
 /* Widgets
@@ -1079,8 +1491,8 @@ ol.comment-list li:last-child {
 
 aside#secondary {
 	float: right;
-	border: 4px solid black;
-	background-color: white;
+	border: 4px solid #313f40;
+	background-color: #fcfade;
 	padding: 1em;
 }
 
@@ -1124,7 +1536,7 @@ aside#secondary {
 }
 
 .screen-reader-text:focus {
-	background-color: #f1f1f1;
+	background-color: #fcfade;
 	border-radius: 3px;
 	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 	clip: auto !important;
