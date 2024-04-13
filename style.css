@@ -631,7 +631,8 @@ h6 {
 	clear: both;
 	font-family: 'Ruberoid';
 	margin: 0;
-	margin-top: 1vh;
+	margin-top: 1.5vh;
+	margin-bottom: 1vh;
 }
 h1:first-child,
 h2:first-child,
@@ -1179,11 +1180,6 @@ section.not-found,
 .single .container:first-child {
 	padding-top: 0;
 }
-section.no-results,
-section.not-found {
-	border: 4px solid #313f40;
-	background-color: white;
-}
 
 
 .post {
@@ -1241,9 +1237,15 @@ section.not-found {
 	}
 
 	.container {
+		padding: 4vh;
+	}
+
+	.single .container,
+	.page .container {
+		width: 100%;
 		border-left: none;
 		border-right: none;
-		padding: 4vh 4vh;
+		padding: 4vh;
 	}
 
 	.single .container:first-child {
