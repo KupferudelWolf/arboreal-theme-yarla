@@ -301,6 +301,7 @@ html {
  */
 body {
 	margin: 0;
+	overflow-x: hidden;
 }
 
 /**
@@ -1151,10 +1152,7 @@ footer.site-footer {
 	/* height: 50vh; */
 }
 
-section.no-results,
-section.not-found,
-.single main#primary,
-.page main#primary {
+main#primary {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
@@ -1225,8 +1223,7 @@ section.not-found,
 }
 
 @media screen and (max-aspect-ratio: 0.75) {
-	.single main#primary,
-	.page main#primary {
+	main#primary {
 		width: 100%;
 	}
 
@@ -1238,18 +1235,18 @@ section.not-found,
 
 	.container {
 		padding: 4vh;
+		margin-top: 0;
+		border-left: none;
+		border-right: none;
 	}
 
 	.single .container,
 	.page .container {
 		width: 100%;
-		border-left: none;
-		border-right: none;
 		padding: 4vh;
 	}
 
 	.single .container:first-child {
-		margin-top: 0;
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -1486,6 +1483,56 @@ div.comment {
 
 .gallery-caption {
 	display: block;
+}
+
+/* Archive
+--------------------------------------------- */
+
+.archive .container .page-title,
+.search .container .page-title {
+	text-align: center;
+	margin-bottom: 6vmin;
+}
+.archive .container article.post .entry-content,
+.search .container article.post .entry-content {
+	display: none;
+}
+.archive .container .archive-posts-container,
+.search .container .archive-posts-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 4vmax 3vmax;
+}
+.archive .container .archive-post,
+.search .container .archive-post {
+	display: inline-block;
+	width: min-content;
+	height: min-content;
+	border: 2px solid #313f40
+}
+.search .container .archive-post {
+	width: 20vmax;
+	height: 15vmax;
+	padding: 1vmin;
+	overflow: hidden;
+}
+.archive .container .archive-post .post {
+	min-width: unset;
+}
+.search .container .archive-post .post {
+	min-width: unset;
+	width: 100%;
+}
+
+.archive-post .post .post-thumbnail,
+.search-post .post .post-thumbnail {
+	width: 20vmax;
+	height: auto;
+}
+.search .container .archive-post .has-post-thumbnail {
+	position: relative;
+	top: -1vh;
 }
 
 /* Sidebar
