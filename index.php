@@ -12,16 +12,15 @@
  * @package Arboreal_Theme
  */
 
-// get_header();
+get_header();
 ?>
 
 <main id="primary" class="site-main">
-
 	<?php
 
 	$q = new WP_Query(
 		array(
-			'category_name' => getLocaleSlug(),
+			'category_name' => 'a',//getLocaleSlug(),
 			'numberposts' => 1,
 			'orderby' => 'date',
 			'order' => 'ASC',
@@ -32,10 +31,13 @@
 	foreach ($q->posts as $post) {
 		wp_redirect(get_permalink());
 	}
-
-	get_template_part('template-parts/content', 'none');
-
 	?>
+
+	<div class="container">
+		<?php
+		get_template_part('template-parts/content', 'none');
+		?>
+	</div>
 
 </main><!-- #main -->
 

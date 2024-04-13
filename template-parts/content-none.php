@@ -7,7 +7,6 @@
  * @package Arboreal_Theme
  */
 
-get_header();
 ?>
 
 <section class="no-results not-found">
