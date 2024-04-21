@@ -16,7 +16,6 @@ get_template_part('template-parts/meta');
 get_header();
 get_sidebar();
 ?>
-<?php echo get_site_icon_url(); ?>
 
 <main id="primary" class="site-main">
 	<div class="container">
