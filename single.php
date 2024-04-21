@@ -7,6 +7,7 @@
  * @package Arboreal_Theme
  */
 
+get_template_part('template-parts/meta');
 get_header();
 get_sidebar();
 ?>

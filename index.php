@@ -25,9 +25,11 @@ $q = new WP_Query(
 foreach ($q->posts as $post) {
 	wp_redirect(get_permalink());
 }
-?>
 
-<?php get_header(); ?>
+get_template_part('template-parts/meta');
+get_header();
+
+?>
 <main id="primary" class="site-main">
 	<div class="container">
 		<?php
