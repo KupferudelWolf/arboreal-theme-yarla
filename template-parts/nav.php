@@ -51,47 +51,47 @@
         if ($nav_last && $nav_last->ID === $current_id)
             $nav_last = null;
         ?>
-        <div class="nav-first">
-            <?php if ($nav_first): ?>
-                <a href="<?php echo get_permalink($nav_first); ?>" rel="first">
-                    << </a>
-                    <?php endif; ?>
-        </div>
-        <div class="nav-previous">
-            <?php if ($nav_prev): ?>
+
+        <?php if ($nav_first): ?>
+            <div class="nav-first">
+                <a href="<?php echo get_permalink($nav_first); ?>" rel="first">&lt;&lt;</a>
+            </div>
+        <?php else: ?>
+            <div class="nav-blank"></div>
+        <?php endif; ?>
+
+        <?php if ($nav_prev): ?>
+            <div class="nav-previous">
                 <a href="<?php echo get_permalink($nav_prev); ?>" rel="prev">
-                    < <?php //echo get_the_title($nav_prev); ?>
+                    &lt; <?php //echo get_the_title($nav_prev); ?>
                 </a>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php else: ?>
+            <div class="nav-blank"></div>
+        <?php endif; ?>
+
         <div class="nav-language">
             <?php echo do_shortcode('[language-switcher]'); ?>
         </div>
-        <div class="nav-next">
-            <?php if ($nav_next): ?>
+
+        <?php if ($nav_next): ?>
+            <div class="nav-next">
                 <a href="<?php echo get_permalink($nav_next); ?>" rel="next">
-                    <?php //echo get_the_title($nav_next); ?> >
+                    <?php //echo get_the_title($nav_next); ?> &gt;
                 </a>
-            <?php endif; ?>
-        </div>
-        <div class="nav-newest">
-            <?php if ($nav_last): ?>
+            </div>
+        <?php else: ?>
+            <div class="nav-blank"></div>
+        <?php endif; ?>
+
+        <?php if ($nav_last): ?>
+            <div class="nav-newest">
                 <a href="<?php echo get_permalink($nav_last); ?>" rel="newest">
-                    >>
+                    &gt;&gt;
                 </a>
-            <?php endif; ?>
-        </div>
-        <!-- <div class="nav-previous">
-            <a href="http://localhost/yar.la/pilot-01/" rel="prev">
-                <span class="nav-subtitle">Previous:</span>
-                <span class="nav-title">PILOT #01</span>
-            </a>
-        </div>
-        <div class="nav-next">
-            <a href="http://localhost/yar.la/pilot-03/" rel="next">
-                <span class="nav-subtitle">Next:</span>
-                <span class="nav-title">PILOT #03</span>
-            </a>
-        </div> -->
+            </div>
+        <?php else: ?>
+            <div class="nav-blank"></div>
+        <?php endif; ?>
     </div>
 </nav>
