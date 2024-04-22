@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Avoyt
 Author URI: http://yar.la
 Description: Theme for yar.la.
-Version: 1.4.7
+Version: 1.5.0
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -301,6 +301,9 @@ html {
  */
 body {
 	margin: 0;
+	overflow-x: hidden;
+}
+body > div {
 	overflow-x: hidden;
 }
 
@@ -1180,6 +1183,9 @@ main#primary {
 }
 .single .container:first-child {
 	padding-top: 0;
+	position: relative;
+	left: 0;
+	transition: left 0.5s;
 }
 
 
@@ -1201,6 +1207,11 @@ main#primary {
 	width: 100%;
 	height: 100%;
 }
+.post .post-thumbnail.enlarged {
+	min-width: 90vw;
+	height: auto;
+}
+
 .post .entry-header {
 	margin-top: 1.5vh;
 }

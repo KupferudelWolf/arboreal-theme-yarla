@@ -150,6 +150,8 @@ function arboreal_scripts()
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
+
+	wp_enqueue_script('arboreal-interaction', get_template_directory_uri() . '/js/interaction.js', array('jquery'), _S_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'arboreal_scripts');
 
@@ -179,7 +181,6 @@ require get_template_directory() . '/inc/customizer.php';
 if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
-
 
 
 require get_template_directory() . '/inc/custom-comments.php';
