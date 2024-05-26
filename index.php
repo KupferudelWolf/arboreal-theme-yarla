@@ -14,7 +14,7 @@
 
 $q = new WP_Query(
 	array(
-		'category_name' => getLocaleSlug(),
+		// 'category_name' => getLocaleSlug(),
 		'numberposts' => 1,
 		'orderby' => 'date',
 		'order' => 'ASC',

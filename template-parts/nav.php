@@ -16,7 +16,7 @@
 
         $q = new WP_Query(
             array(
-                'category_name' => getLocaleSlug(),
+                // 'category_name' => getLocaleSlug(),
                 'orderby' => 'date',
                 'order' => 'ASC',
                 'post_type' => 'post'
@@ -70,9 +70,7 @@
             <div class="nav-blank"></div>
         <?php endif; ?>
 
-        <div class="nav-language">
-            <?php echo do_shortcode('[language-switcher]'); ?>
-        </div>
+        <div class="nav-middle"></div>
 
         <?php if ($nav_next): ?>
             <div class="nav-next">

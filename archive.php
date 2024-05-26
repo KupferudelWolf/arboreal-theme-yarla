@@ -13,13 +13,13 @@ get_header();
 <main id="primary" class="site-main">
 	<div class="container">
 		<?php
-		$title = get_the_archive_title();
-
-		$args = $wp_query->query_vars;
-		$args['category_name'] = getLocaleSlug();
-
-		$wp_query = new WP_Query($args);
-
+		// $title = get_the_archive_title();
+		
+		// $args = $wp_query->query_vars;
+		// $args['category_name'] = getLocaleSlug();
+		
+		// $wp_query = new WP_Query($args);
+		
 		if (have_posts()): ?>
 
 			<header class="page-header">
