@@ -58,4 +58,50 @@
         is_enlarged = event.currentTarget.classList.contains( 'enlarged' );
     } );
 
+    const post_thumbnail = $( '.post .post-thumbnail' );
+    if ( post_thumbnail.length ) {
+        /// Toggle area boxes.
+        const toggle_button = $( '.nav-toggle' );
+        let boxes_mode = -1;
+        const box_toggle_on_click = function () {
+            boxes_mode = ( boxes_mode + 1 ) % 3;
+            post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
+            switch ( boxes_mode ) {
+                case 0:
+                    toggle_button.children( 'a' ).html( 'Boxes: Hover' );
+                    break;
+                case 1:
+                    toggle_button.children( 'a' ).html( 'Boxes: Show' );
+                    post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
+                    break;
+                case 2:
+                    toggle_button.children( 'a' ).html( 'Boxes: Hide' );
+                    post_thumbnail.addClass( 'boxes-no_hover' );
+                    break;
+            }
+        };
+        toggle_button.on( 'click', box_toggle_on_click );
+        box_toggle_on_click();
+
+        /// Hoverbox functionality..
+        $( '.hoverbox' ).parent().on( 'hover mouseover mousemove', function ( event ) {
+            const mouse_x = event.pageX;
+            const mouse_y = event.pageY;
+            if ( !mouse_x || !mouse_y ) return;
+            const $this = $( this );
+            const x = mouse_x - $this.offset().left;
+            const y = mouse_y - $this.offset().top;
+            const width = $this.width();
+            const height = $this.height();
+            const left = Math.round( 10000 * x / width ) / 100 + '%';
+            const top = Math.round( 10000 * y / height ) / 100 + '%';
+            $this.children( '.hoverbox' ).css( {
+                left: left,
+                top: top
+            } ).filter( '.adminbox' ).html(
+                `left: ${ left };</br>top: ${ top };`
+            );
+        } );
+    }
+
 }( jQuery ) );

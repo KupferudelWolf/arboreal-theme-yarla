@@ -70,7 +70,9 @@
             <div class="nav-blank"></div>
         <?php endif; ?>
 
-        <div class="nav-middle"></div>
+        <div class="nav-toggle">
+            <a href="javascript:void(0);" rel="toggle"></a>
+        </div>
 
         <?php if ($nav_next): ?>
             <div class="nav-next">

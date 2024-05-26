@@ -1202,6 +1202,7 @@ main#primary {
 	width: max-content;
 	height: 71vh;
 	margin: 0;
+	position: relative;
 }
 .post .post-thumbnail img {
 	width: 100%;
@@ -1211,6 +1212,43 @@ main#primary {
 	min-width: 90vw;
 	height: auto;
 }
+
+
+.post .post-thumbnail .hoverbox {
+	width: 12em;
+	height: auto;
+	min-height: 1.5em;
+	padding: 0.5vmin 1vmin;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fcfade;
+	border: 2px solid #313f40;
+	display: none;
+	pointer-events: none;
+	z-index: 10;
+}
+.post .post-thumbnail .adminbox {
+	z-index: 1;
+	background-color: #eecece;
+}
+.post .post-thumbnail .areamap {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 2px solid #313f40;
+	background-color: #fcfadebf;
+	display: none;
+}
+.post .post-thumbnail:not(.boxes-no_hover):hover > .areamap,
+.post .post-thumbnail.boxes-sticky > .areamap,
+.post .post-thumbnail .areamap:hover > .hoverbox,
+.post .post-thumbnail:hover > .hoverbox {
+	display: block;
+}
+
 
 .post .entry-header {
 	margin-top: 1.5vh;
@@ -1281,6 +1319,11 @@ main#primary {
 	.post .post-thumbnail {
 		width: 100%;
 		height: max-content;
+	}
+
+	.hoverbox {
+		transform: translate(-50%, -50%);
+		text-align: center;
 	}
 
 	.comment-form textarea {
