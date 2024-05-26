@@ -1,14 +1,14 @@
 /* global wp, jQuery */
 
 ( function ( $ ) {
-    const params = new URLSearchParams( window.location.search );
-    /// Keep the image enlarged.
-    let is_enlarged = params.get( 'enlarged' );
-    $( '.single .post-thumbnail' ).get( 0 ).classList.toggle( 'enlarged', is_enlarged );
-    /// Keep the scroll position.
-    document.documentElement.scrollTop = document.body.scrollTop = +params.get( 'scrollTop' );
-    window.scrollTo( 0, +params.get( 'scrollTop' ) || 0 );
-    window.history.replaceState( {}, document.title, window.location.pathname );
+    // const params = new URLSearchParams( window.location.search );
+    // /// Keep the image enlarged.
+    // let is_enlarged = params.get( 'enlarged' );
+    // $( '.single .post-thumbnail' ).get( 0 ).classList.toggle( 'enlarged', is_enlarged );
+    // /// Keep the scroll position.
+    // document.documentElement.scrollTop = document.body.scrollTop = +params.get( 'scrollTop' );
+    // window.scrollTo( 0, +params.get( 'scrollTop' ) || 0 );
+    // window.history.replaceState( {}, document.title, window.location.pathname );
 
     /// Swipe to previous or next page.
     const m_pos = {
@@ -61,8 +61,10 @@
     const post_thumbnail = $( '.post .post-thumbnail' );
     if ( post_thumbnail.length ) {
         /// Toggle area boxes.
+        console.log( document.cookie );
         const toggle_button = $( '.nav-toggle' );
-        let boxes_mode = -1;
+        let boxes_mode = toggle_button.attr( 'data-boxes_mode' ) || 0;
+        --boxes_mode;
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
             post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
@@ -79,6 +81,8 @@
                     post_thumbnail.addClass( 'boxes-no_hover' );
                     break;
             }
+            toggle_button.attr( 'data-boxes_mode', boxes_mode );
+            $.cookie( 'boxes_mode', boxes_mode, { expires: 31, path: COOKIEPATH } );
         };
         toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();

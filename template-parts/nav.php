@@ -70,7 +70,7 @@
             <div class="nav-blank"></div>
         <?php endif; ?>
 
-        <div class="nav-toggle">
+        <div class="nav-toggle" data-boxes_mode="<?php echo $_COOKIE['boxes_mode']; ?>">
             <a href="javascript:void(0);" rel="toggle"></a>
         </div>
 

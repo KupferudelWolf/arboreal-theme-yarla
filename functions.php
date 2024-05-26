@@ -151,6 +151,7 @@ function arboreal_scripts()
 		wp_enqueue_script('comment-reply');
 	}
 
+	wp_enqueue_script('jquery.cookie.js', get_template_directory_uri() . '/js/jquery.cookie.js', array('jquery'), _S_VERSION, true);
 	wp_enqueue_script('arboreal-interaction', get_template_directory_uri() . '/js/interaction.js', array('jquery'), _S_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'arboreal_scripts');
@@ -230,3 +231,12 @@ function automatic_GitHub_updates($data)
 	}
 	return $data;
 }
+
+/**
+ * Cookies
+ */
+add_action('init', function () {
+	if (!isset ($_COOKIE['boxes_mode'])) {
+		setcookie('boxes_mode', '0', strtotime('+1 month'), COOKIEPATH, COOKIE_DOMAIN);
+	}
+});
