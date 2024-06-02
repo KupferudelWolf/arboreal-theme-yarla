@@ -14,6 +14,18 @@
         return '' + getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
     }
 
+    window.addEventListener( 'touchstart', function ( event ) {
+        /// Prevent mobile swipe actions.
+        const touch_margin = 0.05;
+        for ( let i = 0, l = event.touches.length; i < l; ++i ) {
+            const touch = event.touches[ i ];
+            if ( touch.clientX < window.innerWidth * touch_margin || touch.clientX > window.innerWidth * ( 1 - touch_margin ) ) {
+                event.preventDefault();
+                return;
+            }
+        }
+    }, { passive: false } );
+
     /// Swipe to previous or next page.
     const m_pos = {
         x: null,
@@ -22,7 +34,7 @@
         next: null,
         scroll_x: null
     };
-    const swipe_limit = 0.11;
+    const swipe_limit = 0.15;
     const swipe_speed = 2 / 3;
     const url_prev = $( '.nav-previous a' ).attr( 'href' );
     const url_next = $( '.nav-next a' ).attr( 'href' );
@@ -54,12 +66,12 @@
     } ).on( 'touchcancel touchend', ( event ) => {
         const tags = [];
         // if ( is_enlarged ) tags.push( 'enlarged=true' );
-        if ( m_pos.scroll_x ) tags.push( `scrollTop=${ m_pos.scroll_x }` );
+        // if ( m_pos.scroll_x ) tags.push( `scrollTop=${ m_pos.scroll_x }` );
 
         if ( url_prev && m_pos.prev ) {
-            window.location.href = url_prev + ( tags.length ? `?${ tags.join( '&' ) }` : '' );
+            window.location = url_prev + ( tags.length ? `?${ tags.join( '&' ) }` : '' );
         } else if ( url_next && m_pos.next ) {
-            window.location.href = url_next + ( tags.length ? `?${ tags.join( '&' ) }` : '' );
+            window.location = url_next + ( tags.length ? `?${ tags.join( '&' ) }` : '' );
         }
 
         for ( const key of Object.keys( m_pos ) ) {

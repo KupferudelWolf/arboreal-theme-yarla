@@ -60,7 +60,4 @@
 		</div><!-- .entry-content -->
 	<?php endif; ?>
 
-	<!-- <footer class="entry-footer">
-		<?php //arboreal_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
