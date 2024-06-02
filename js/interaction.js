@@ -61,7 +61,6 @@
     const post_thumbnail = $( '.post .post-thumbnail' );
     if ( post_thumbnail.length ) {
         /// Toggle area boxes.
-        console.log( document.cookie );
         const toggle_button = $( '.nav-toggle' );
         let boxes_mode = toggle_button.attr( 'data-boxes_mode' ) || 0;
         --boxes_mode;

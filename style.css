@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Avoyt
 Author URI: http://yar.la
 Description: Theme for yar.la.
-Version: 1.6.2
+Version: 1.6.3
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -56,9 +56,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-* {
+/* * {
 	-webkit-font-smoothing: none !important;
-}
+} */
 
 @font-face {
 	font-family: 'Ruberoid Oblique';
@@ -637,6 +637,7 @@ h6 {
 	margin: 0;
 	margin-top: 1.5vh;
 	margin-bottom: 1vh;
+	-webkit-font-smoothing: none !important;
 }
 h1:first-child,
 h2:first-child,
@@ -1084,6 +1085,7 @@ header.site-header {
 	z-index: 100;
 	display: flex;
 	align-items: center;
+	-webkit-font-smoothing: none !important;
 }
 header.site-header > * {
 	height: 100%;
@@ -1200,15 +1202,15 @@ main#primary {
 .post .post-thumbnail {
 	display: flex;
 	width: max-content;
-	height: 71vh;
+	height: auto;
 	margin: 0;
 	position: relative;
 }
 .post .post-thumbnail img {
-	width: 100%;
-	height: 100%;
+	width: auto;
+	height: 71vh;
 }
-.post .post-thumbnail.enlarged {
+.post .post-thumbnail.enlarged img {
 	min-width: 90vw;
 	height: auto;
 }
