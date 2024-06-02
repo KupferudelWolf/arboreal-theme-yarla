@@ -10,6 +10,10 @@
     // window.scrollTo( 0, +params.get( 'scrollTop' ) || 0 );
     // window.history.replaceState( {}, document.title, window.location.pathname );
 
+    function isMobile() {
+        return '' + getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
+    }
+
     /// Swipe to previous or next page.
     const m_pos = {
         x: null,
@@ -78,20 +82,23 @@
     if ( post_thumbnail.length ) {
         /// Toggle area boxes.
         const toggle_button = $( '.nav-toggle' );
-        let boxes_mode = toggle_button.attr( 'data-boxes_mode' ) || 0;
+        let boxes_mode = toggle_button.attr( 'data-boxes_mode' ) || ( isMobile() ? 1 : 0 );
         --boxes_mode;
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
+            if ( isMobile() && boxes_mode === 0 ) {
+                boxes_mode = 1;
+            }
             post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
             switch ( boxes_mode ) {
-                case 0:
+                case 0: /// Hover
                     toggle_button.children( 'a' ).html( 'Boxes: Hover' );
                     break;
-                case 1:
+                case 1: /// Show
                     toggle_button.children( 'a' ).html( 'Boxes: Show' );
                     post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
                     break;
-                case 2:
+                case 2: /// Hide
                     toggle_button.children( 'a' ).html( 'Boxes: Hide' );
                     post_thumbnail.addClass( 'boxes-no_hover' );
                     break;

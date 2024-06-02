@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Avoyt
 Author URI: http://yar.la
 Description: Theme for yar.la.
-Version: 1.6.7
+Version: 1.6.8
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -274,6 +274,10 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 		url('font/Ruberoid/Ruberoid-UltraLight.ttf') format('truetype');
 	font-weight: 200;
 	font-style: normal;
+}
+
+:root {
+	--is-mobile: 0;
 }
 
 /* Normalize
@@ -1226,9 +1230,9 @@ main#primary {
 	left: 0;
 	background-color: #fcfade;
 	border: 2px solid #313f40;
-	display: none;
 	pointer-events: none;
 	z-index: 10;
+	opacity: 0;
 }
 .post .post-thumbnail .adminbox {
 	z-index: 1;
@@ -1242,14 +1246,15 @@ main#primary {
 	left: 0;
 	border: 2px solid #313f40;
 	background-color: #fcfadebf;
-	display: none;
 	cursor: crosshair;
+	opacity: 0;
+	transition: opacity 0.1s;
 }
 .post .post-thumbnail:not(.boxes-no_hover):hover > .areamap,
 .post .post-thumbnail.boxes-sticky > .areamap,
 .post .post-thumbnail .areamap:hover > .hoverbox,
 .post .post-thumbnail:hover > .hoverbox {
-	display: block;
+	opacity: 1
 }
 
 
@@ -1280,6 +1285,10 @@ main#primary {
 }
 
 @media screen and (max-aspect-ratio: 3 / 4) {
+	:root {
+		--is-mobile: true;
+	}
+
 	.single main#primary,
 	.page main#primary,
 	main#primary {
@@ -1337,6 +1346,14 @@ main#primary {
 	.swipe-nav-left,
 	.swipe-nav-right {
 		display: flex;
+	}
+
+	.post .post-thumbnail,
+	.post .post-thumbnail > .hoverbox {
+		transition: none !important;
+	}
+	.post .post-thumbnail:not(.boxes-no_hover) > .areamap {
+		opacity: 1;
 	}
 }
 
