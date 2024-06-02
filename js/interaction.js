@@ -18,22 +18,35 @@
         next: null,
         scroll_x: null
     };
-    const swipe_limit = 0.2;
+    const swipe_limit = 0.11;
+    const swipe_speed = 2 / 3;
     const url_prev = $( '.nav-previous a' ).attr( 'href' );
     const url_next = $( '.nav-next a' ).attr( 'href' );
-    $( '.single .container:first-child' ).on( 'touchstart', ( event ) => {
+    $( '.single .container' ).first().on( 'touchstart', ( event ) => {
         m_pos.active = true;
         m_pos.x = event.clientX || event.targetTouches[ 0 ].pageX;
         m_pos.scroll_x = document.documentElement.scrollTop || document.body.scrollTop;
+        $( '.swipe-nav-left, .swipe-nav-right' ).addClass( 'show' );
     } ).on( 'touchmove', ( event ) => {
+        /// Ignore multi-touch.
         if ( event.targetTouches.length !== 1 ) return;
+        /// Ignore if scrolled down.
+        const rect = event.currentTarget.getBoundingClientRect();
+        if ( -rect.top > rect.height / 6 ) {
+            event.currentTarget.style.left = '';
+            event.currentTarget.style.transition = '';
+            return;
+        }
+
         const x = event.clientX || event.targetTouches[ 0 ].pageX;
-        const dx = ( x - m_pos.x ) * 2 / 3;
+        const dx = ( x - m_pos.x ) * swipe_speed;
         const width = event.currentTarget.clientWidth * swipe_limit;
         event.currentTarget.style.left = `${ dx }px`;
         event.currentTarget.style.transition = 'none';
         m_pos.prev = dx >= width;
         m_pos.next = -dx >= width;
+        $( '.swipe-nav-left' ).toggleClass( 'active', m_pos.prev );
+        $( '.swipe-nav-right' ).toggleClass( 'active', m_pos.next );
     } ).on( 'touchcancel touchend', ( event ) => {
         const tags = [];
         // if ( is_enlarged ) tags.push( 'enlarged=true' );
@@ -50,6 +63,7 @@
         }
         event.currentTarget.style.left = '';
         event.currentTarget.style.transition = '';
+        $( '.swipe-nav-left, .swipe-nav-right' ).removeClass( 'show' );
     } );
 
     /// Enlarge the image when clicked.

@@ -5,6 +5,11 @@
  * @package Arboreal_Theme
  */
 
+$nav_first = null;
+$nav_prev = null;
+$nav_next = null;
+$nav_last = null;
+
 ?>
 
 <nav class="navigation post-navigation" aria-label="Posts">
@@ -23,10 +28,6 @@
             )
         );
 
-        $nav_first = null;
-        $nav_prev = null;
-        $nav_next = null;
-        $nav_last = null;
         $nav_earlier = true;
         foreach ($q->posts as $post) {
             $nav_last = $post;
@@ -98,3 +99,11 @@
         <?php endif; ?>
     </div>
 </nav>
+
+<?php /// Swipe indicators.
+if ($nav_prev): ?>
+    <div class="swipe-nav-left">&lt;</div>
+<?php endif;
+if ($nav_next): ?>
+    <div class="swipe-nav-right">&gt;</div>
+<?php endif; ?>
