@@ -18,6 +18,7 @@
         next: null,
         scroll_x: null
     };
+    const swipe_limit = 0.2;
     const url_prev = $( '.nav-previous a' ).attr( 'href' );
     const url_next = $( '.nav-next a' ).attr( 'href' );
     $( '.single .container:first-child' ).on( 'touchstart', ( event ) => {
@@ -28,14 +29,14 @@
         if ( event.targetTouches.length !== 1 ) return;
         const x = event.clientX || event.targetTouches[ 0 ].pageX;
         const dx = ( x - m_pos.x ) * 2 / 3;
-        const width = event.currentTarget.clientWidth / 3;
+        const width = event.currentTarget.clientWidth * swipe_limit;
         event.currentTarget.style.left = `${ dx }px`;
         event.currentTarget.style.transition = 'none';
         m_pos.prev = dx >= width;
         m_pos.next = -dx >= width;
     } ).on( 'touchcancel touchend', ( event ) => {
         const tags = [];
-        if ( is_enlarged ) tags.push( 'enlarged=true' );
+        // if ( is_enlarged ) tags.push( 'enlarged=true' );
         if ( m_pos.scroll_x ) tags.push( `scrollTop=${ m_pos.scroll_x }` );
 
         if ( url_prev && m_pos.prev ) {
@@ -52,8 +53,9 @@
     } );
 
     /// Enlarge the image when clicked.
-    $( '.single .post-thumbnail' ).on( 'click', ( event ) => {
+    $( '.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
         if ( m_pos.active ) return;
+        if ( event.pointerType === 'touch' ) return;
         event.currentTarget.classList.toggle( 'enlarged' );
         is_enlarged = event.currentTarget.classList.contains( 'enlarged' );
     } );
