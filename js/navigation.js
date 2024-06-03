@@ -4,11 +4,11 @@
  * Handles toggling the navigation menu for small screens and enables TAB key
  * navigation support for dropdown menus.
  */
-( function() {
+( function () {
 	const siteNavigation = document.getElementById( 'site-navigation' );
 
 	// Return early if the navigation doesn't exist.
-	if ( ! siteNavigation ) {
+	if ( !siteNavigation ) {
 		return;
 	}
 
@@ -19,7 +19,7 @@
 		return;
 	}
 
-	const menu = siteNavigation.getElementsByTagName( 'ul' )[ 0 ];
+	const menu = siteNavigation.getElementsByTagName( 'li' )[ 0 ];
 
 	// Hide menu toggle button if menu is empty and return early.
 	if ( 'undefined' === typeof menu ) {
@@ -27,12 +27,12 @@
 		return;
 	}
 
-	if ( ! menu.classList.contains( 'nav-menu' ) ) {
+	if ( !menu.classList.contains( 'nav-menu' ) ) {
 		menu.classList.add( 'nav-menu' );
 	}
 
 	// Toggle the .toggled class and the aria-expanded value each time the button is clicked.
-	button.addEventListener( 'click', function() {
+	button.addEventListener( 'click', function () {
 		siteNavigation.classList.toggle( 'toggled' );
 
 		if ( button.getAttribute( 'aria-expanded' ) === 'true' ) {
@@ -43,10 +43,10 @@
 	} );
 
 	// Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
-	document.addEventListener( 'click', function( event ) {
+	document.addEventListener( 'click', function ( event ) {
 		const isClickInside = siteNavigation.contains( event.target );
 
-		if ( ! isClickInside ) {
+		if ( !isClickInside ) {
 			siteNavigation.classList.remove( 'toggled' );
 			button.setAttribute( 'aria-expanded', 'false' );
 		}
@@ -76,7 +76,7 @@
 		if ( event.type === 'focus' || event.type === 'blur' ) {
 			let self = this;
 			// Move up through the ancestors of the current link until we hit .nav-menu.
-			while ( ! self.classList.contains( 'nav-menu' ) ) {
+			while ( !self.classList.contains( 'nav-menu' ) ) {
 				// On li elements toggle the class .focus.
 				if ( 'li' === self.tagName.toLowerCase() ) {
 					self.classList.toggle( 'focus' );
