@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Avoyt
 Author URI: http://yar.la
 Description: Theme for yar.la.
-Version: 1.6.11
+Version: 1.6.12
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -54,6 +54,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Generic
 --------------------------------------------------------------*/
 
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* * {
@@ -1590,7 +1591,9 @@ div.comment {
 	margin-bottom: 6vmin;
 }
 .archive .container article.post .entry-content,
-.search .container article.post .entry-content {
+.search .container article.post .entry-content,
+.archive .container article.post .entry-header,
+.search .container article.post .entry-header {
 	display: none;
 }
 .archive .container .archive-posts-container,
@@ -1598,14 +1601,13 @@ div.comment {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	gap: 4vmax 3vmax;
+	gap: 1vmax 1vmax;
 }
 .archive .container .archive-post,
 .search .container .archive-post {
 	display: inline-block;
 	width: min-content;
 	height: min-content;
-	border: 2px solid #313f40
 }
 .search .container .archive-post {
 	width: 20vmax;
@@ -1621,8 +1623,8 @@ div.comment {
 	width: 100%;
 }
 
-.archive-post .post .post-thumbnail,
-.search-post .post .post-thumbnail {
+.archive-post .post .post-thumbnail img,
+.search-post .post .post-thumbnail img {
 	width: 20vmax;
 	height: auto;
 }
