@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Avoyt
 Author URI: http://yar.la
 Description: Theme for yar.la.
-Version: 1.6.12
+Version: 1.6.13
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -53,6 +53,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # Generic
 --------------------------------------------------------------*/
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
@@ -918,66 +920,99 @@ textarea {
 }
 
 .main-navigation ul {
-	display: none;
+	display: flex;
 	list-style: none;
 	margin: 0;
 	padding-left: 0;
-}
-
-.main-navigation ul ul {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 	float: left;
 	position: absolute;
 	top: 100%;
-	left: -999em;
+	opacity: 0;
 	z-index: 99999;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
 }
 
-.main-navigation ul ul ul {
-	left: -999em;
-	top: 0;
-}
-
-.main-navigation ul ul li:hover > ul,
-.main-navigation ul ul li.focus > ul {
+.main-navigation ul ul {
 	display: block;
-	left: auto;
+	opacity: 0;
+	left: 100%;
+	top: -2px;
 }
-
-.main-navigation ul ul a {
-	width: 200px;
+.main-navigation ul .menu-item {
+	min-height: 3em;
+	width: 100%;
+	box-sizing: content-box;
+	margin-bottom: -2px;
 }
 
 .main-navigation ul li:hover > ul,
 .main-navigation ul li.focus > ul {
-	left: auto;
+	/* display: block; */
+	opacity: 1;
+}
+
+.main-navigation ul a {
+	width: 100%;
+	text-align: left;
+}
+
+.main-navigation li:hover > ul,
+.main-navigation li.focus > ul {
+	opacity: 1;
 }
 
 .main-navigation li {
 	position: relative;
 }
 
-.main-navigation a {
+header.site-header a,
+.main-navigation .menu-toggle {
 	color: #f7fcde;
 	display: block;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	align-content: center;
+	padding: 0.5vh 1vh;
+}
+
+.main-navigation ul .page_item,
+.main-navigation .menu-item,
+.main-navigation .menu-toggle {
+	appearance: none;
+	font-weight: 400;
+	border: 2px solid #f7fcde;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 6vh;
+	max-width: 20vh;
+	text-align: center;
+	background-color: #313f40;
+}
+
+header.site-header .site-title {
+	display: block;
+}
+header.site-header .site-title a {
+	display: flex;
+	align-items: center;
+}
+header.site-header .site-title a,
+header.site-header .main-navigation,
+header.site-header .main-navigation a:visited {
+	color: #f7fcde;
 	text-decoration: none;
 }
 
 /* Small menu. */
-.menu-toggle,
+.main-navigation .menu-toggle,
 .main-navigation.toggled ul {
-	display: block;
-}
-
-@media screen and (min-width: 37.5em) {
-
-	.menu-toggle {
-		display: none;
-	}
-
-	.main-navigation ul {
-		display: flex;
-	}
+	display: none;
+	cursor: pointer;
 }
 
 .site-main .comment-navigation,
@@ -1086,6 +1121,7 @@ header.site-header {
 	top: 0;
 	width: 100%;
 	height: 8vh;
+	min-height: 8vh;
 	color: #f7fcde;
 	background-color: #313f40;
 	padding: 1vh 2vh;
@@ -1103,7 +1139,7 @@ header.site-header > * {
 	align-items: center;
 }
 header.site-header .site-title {
-	font-size: 4vmin;
+	font-size: 3.5vh;
 	font-weight: 800;
 	margin: 0;
 }
@@ -1114,37 +1150,6 @@ header.site-header .site-description {
 	font-style: italic;
 	margin: 0;
 	width: 8em;
-}
-
-header.site-header .main-navigation .menu,
-header.site-header .nav-menu {
-	height: 100%;
-	margin: auto 0;
-	display: flex;
-	gap: 2vh;
-	align-items: center;
-}
-header.site-header ul .page_item,
-header.site-header .menu-button {
-	font-weight: 400;
-	border: 2px solid #f7fcde;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	max-width: 20vh;
-	padding: 0.5vh 1vh;
-	text-align: center;
-}
-
-header.site-header .site-title a,
-header.site-header .main-navigation,
-header.site-header .main-navigation a:visited {
-	color: #f7fcde;
-	text-decoration: none;
-}
-
-header.site-header .trp-language-switcher {
-	width: auto;
 }
 
 /* Footer
@@ -1360,6 +1365,48 @@ main#primary {
 	}
 	.post .post-thumbnail:not(.boxes-no_hover) > .areamap {
 		opacity: 1;
+	}
+
+	header.site-header {
+		height: auto;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+	header.site-header > * {
+		width: auto;
+		height: 6vh;
+		max-width: none;
+	}
+	.main-navigation .menu-item,
+	.main-navigation .menu-toggle {
+		width: 100%;
+		height: 6vh;
+		max-width: none;
+	}
+	header.site-header .main-navigation {
+		width: 100%;
+		flex-direction: column;
+	}
+	.main-navigation.toggled {
+		height: auto !important;
+	}
+	.main-navigation:not(.toggled) li {
+		display: none;
+	}
+	.main-navigation .menu-item,
+	.main-navigation .menu-toggle {
+		align-items: center;
+		justify-content: center;
+	}
+	.main-navigation .menu-toggle {
+		display: block;
+		width: 6vh;
+		font-size: 200%;
+		border: none;
+		margin-left: auto;
+	}
+	.main-navigation ul {
+		display: none;
 	}
 }
 
