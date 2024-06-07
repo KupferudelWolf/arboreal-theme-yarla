@@ -788,6 +788,31 @@ main#primary {
     margin: 0;
 }
 
+.page .page-hierarchy {
+    display: none;
+    margin-bottom: 2vh;
+}
+.page .page-hierarchy > div {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5em;
+    border-left: 2px solid #313f40;
+    padding-left: 1em;
+    padding-bottom: 1vh;
+}
+.page .page-hierarchy > div:last-child {
+    padding-bottom: 0;
+}
+.page .page-hierarchy * {
+    margin-bottom: 0;
+    font-size: 1.5vh;
+}
+.page .page-parent:not(a),
+.page .page-children:not(a) {
+    font-style: italic;
+}
+
 
 /*
  ****************
@@ -1055,6 +1080,10 @@ aside#secondary {
     }
     .post .post-thumbnail:not(.boxes-no_hover) > .areamap {
         opacity: 1;
+    }
+
+    .page .page-hierarchy {
+        display: block;
     }
 
     header.site-header {
