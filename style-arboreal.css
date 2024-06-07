@@ -264,6 +264,7 @@ h6 {
     margin: 0;
     margin-top: 1.5vh;
     margin-bottom: 1vh;
+    font-smooth: none !important;
     -webkit-font-smoothing: none !important;
 }
 h1:first-child,
@@ -440,11 +441,11 @@ select {
 }
 
 .main-navigation ul {
-    display: none;
     float: none;
     position: absolute;
     left: -2px;
     top: 100%;
+    display: none;
     opacity: 0;
     z-index: 99999;
     width: 100%;
@@ -454,7 +455,6 @@ select {
 
 .main-navigation ul ul {
     box-shadow: none;
-    float: none;
     display: none;
     opacity: 0;
     left: 100% !important;
@@ -485,6 +485,26 @@ select {
 
 .main-navigation li {
     position: relative;
+}
+
+.main-navigation > li:has(.sub-menu) {
+    padding-right: 2.5em;
+}
+.main-navigation li:has(.sub-menu)::after {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-smooth: none !important;
+    -webkit-font-smoothing: none !important;
+}
+.main-navigation > li:has(.sub-menu)::after {
+    content: "\25BC";
+}
+.main-navigation ul li:has(.sub-menu)::after {
+    content: "\25B6";
 }
 
 header.site-header a,
@@ -1132,5 +1152,12 @@ aside#secondary {
     .main-navigation li.focus > ul {
         display: none;
         opacity: 0;
+    }
+
+    .main-navigation li:has(.sub-menu) {
+        padding-right: 0;
+    }
+    .main-navigation li:has(.sub-menu)::after {
+        content: "";
     }
 }
