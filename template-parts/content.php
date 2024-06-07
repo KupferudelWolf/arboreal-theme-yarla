@@ -32,8 +32,8 @@
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php if ($post->post_content != ''): ?>
-		<div class="entry-content">
+	<div class="entry-content">
+		<?php if ($post->post_content != ''): ?>
 			<?php
 			the_content(
 				sprintf(
@@ -57,7 +57,10 @@
 				)
 			);
 			?>
-		</div><!-- .entry-content -->
-	<?php endif; ?>
+		<?php endif; ?>
+		<p class="timestamp"><?php _e('Originally published: ', 'arboreal') . the_time('D, Y M j') ?>, at
+			<?php the_time('g:i a'); ?>
+		</p>
+	</div>
 
 </article><!-- #post-<?php the_ID(); ?> -->
