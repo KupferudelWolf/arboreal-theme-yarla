@@ -144,6 +144,7 @@ function arboreal_scripts()
 {
 	wp_enqueue_style('arboreal-style', get_stylesheet_uri(), array(), _S_VERSION);
 	wp_style_add_data('arboreal-style', 'rtl', 'replace');
+	wp_enqueue_style('arboreal-style-mod', get_template_directory_uri() . '/style-arboreal.css', array(), _S_VERSION);
 
 	wp_enqueue_script('arboreal-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
