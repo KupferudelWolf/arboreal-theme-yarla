@@ -1,0 +1,11 @@
+.wp-block-column,
+.wp-block-group > * {
+    border: 1px dashed lightgrey;
+    padding: 0 0.5em;
+}
+.wp-block-quote {
+    padding-left: 2em;
+}
+.wp-element-caption {
+    color: darkgrey;
+}

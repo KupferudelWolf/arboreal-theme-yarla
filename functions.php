@@ -271,3 +271,9 @@ add_action('do_feed_atom', function ($for_comments) {
 			load_template(ABSPATH . WPINC . '/feed-atom.php');
 	}
 }, 10, 1);
+
+/**
+ * Custom Editor Theme
+ */
+add_theme_support('editor-styles');
+add_editor_style('style-editor.css');
