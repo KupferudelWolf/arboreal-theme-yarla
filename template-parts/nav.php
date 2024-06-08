@@ -72,7 +72,10 @@ $nav_last = null;
         <?php endif; ?>
 
         <div class="nav-toggle" data-boxes_mode="<?php
-        $mode = $_COOKIE['boxes_mode'] ?: "0";
+        $mode = "0";
+        if ($_COOKIE && $_COOKIE['boxes_mode']) {
+            $mode = $_COOKIE['boxes_mode'];
+        }
         echo $mode == "NaN" ? "0" : $mode;
         ?>">
             <a href="javascript:void(0);" rel="toggle"></a>

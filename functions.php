@@ -241,3 +241,33 @@ add_action('init', function () {
 		setcookie('boxes_mode', '0', strtotime('+1 month'), COOKIEPATH, COOKIE_DOMAIN);
 	}
 });
+
+/**
+ * Custom RSS
+ */
+remove_all_actions('do_feed_rss2');
+add_action('do_feed_rss2', function ($for_comments) {
+	if ($for_comments)
+		load_template(ABSPATH . WPINC . '/feed-rss2-comments.php');
+	else {
+		if ($rss_template = locate_template('feed-rss2.php'))
+			// locate_template() returns path to file
+			// if either the child theme or the parent theme have overridden the template
+			load_template($rss_template);
+		else
+			load_template(ABSPATH . WPINC . '/feed-rss2.php');
+	}
+}, 10, 1);
+remove_all_actions('do_feed_atom');
+add_action('do_feed_atom', function ($for_comments) {
+	if ($for_comments)
+		load_template(ABSPATH . WPINC . '/feed-atom-comments.php');
+	else {
+		if ($rss_template = locate_template('feed-atom.php'))
+			// locate_template() returns path to file
+			// if either the child theme or the parent theme have overridden the template
+			load_template($rss_template);
+		else
+			load_template(ABSPATH . WPINC . '/feed-atom.php');
+	}
+}, 10, 1);
