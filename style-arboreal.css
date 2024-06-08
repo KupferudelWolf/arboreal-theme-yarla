@@ -420,6 +420,16 @@ select {
     border: 2px solid #313f40;
 }
 
+.wp-block-column {
+    align-content: center;
+}
+.wp-block-column > *:first-child {
+    margin-top: 0;
+}
+.wp-block-column > *:last-child {
+    margin-bottom: 0;
+}
+
 
 /*
  ***************************
