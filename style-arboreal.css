@@ -804,9 +804,14 @@ main#primary {
 }
 .post .entry-title {
     margin-bottom: 0;
+    text-align: center;
+    line-height: 100%;
 }
 .post .entry-content {
     text-align: center;
+}
+.post .entry-header + .entry-content {
+    margin-top: 1vh;
 }
 .post .timestamp {
     font-size: 1.25vh;
