@@ -27,6 +27,7 @@
     }, { passive: false } );
 
     /// Swipe to previous or next page.
+    /*
     const m_pos = {
         x: null,
         active: null,
@@ -81,6 +82,7 @@
         event.currentTarget.style.transition = '';
         $( '.swipe-nav-left, .swipe-nav-right' ).removeClass( 'show' );
     } );
+    */
 
     /// Enlarge the image when clicked.
     $( '.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
