@@ -242,7 +242,7 @@ body {
 }
 body,
 body * {
-    touch-action: pan-y;
+    touch-action: pan-y pinch-zoom;
 }
 body > div {
     overflow-x: hidden;
