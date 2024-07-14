@@ -134,6 +134,17 @@ function arboreal_widgets_init()
 			'after_title' => '</h2>',
 		)
 	);
+	register_sidebar(
+		array(
+			'name' => esc_html__('Footer', 'arboreal'),
+			'id' => 'footer',
+			'description' => esc_html__('Footer contents.', 'arboreal'),
+			'before_widget' => '<section class="widget-footer">',
+			'after_widget' => '</section>',
+			'before_title' => '<h2 class="widget-title">',
+			'after_title' => '</h2>'
+		)
+	);
 }
 add_action('widgets_init', 'arboreal_widgets_init');
 

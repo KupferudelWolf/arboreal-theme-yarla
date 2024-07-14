@@ -673,6 +673,10 @@ footer.site-footer {
     display: flex;
     /* align-items: center; */
     justify-content: center;
+    text-align: center;
+}
+footer.site-footer section + section {
+    margin-top: 0.5em;
 }
 
 
