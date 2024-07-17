@@ -86,7 +86,7 @@
 
     /// Enlarge the image when clicked.
     $( '.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
-        if ( m_pos.active ) return;
+        // if ( m_pos.active ) return;
         if ( event.pointerType === 'touch' ) return;
         event.currentTarget.classList.toggle( 'enlarged' );
         is_enlarged = event.currentTarget.classList.contains( 'enlarged' );

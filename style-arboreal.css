@@ -753,6 +753,7 @@ main#primary {
     height: auto;
     margin: 0;
     position: relative;
+    image-rendering: pixelated;
 }
 .post .post-thumbnail img {
     width: auto;
