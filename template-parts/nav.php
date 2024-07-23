@@ -93,7 +93,10 @@ $nav_last = null;
 
         <?php if ($nav_last): ?>
             <div class="nav-newest">
-                <a href="<?php echo get_permalink($nav_last); ?>" rel="newest">
+                <a href="<?php
+                // echo get_permalink($nav_last);
+                echo get_home_url();
+                ?>" rel="newest">
                     &gt;&gt;
                 </a>
             </div>
