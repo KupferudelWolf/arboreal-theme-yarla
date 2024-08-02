@@ -142,26 +142,34 @@ if (!function_exists('arboreal_post_thumbnail')):
 					foreach ($arr as &$row) {
 						if (is_array($row)) {
 							foreach ($row as &$cell) {
-								// echo $cell[0]['c'];
-								$left = (float) $cell[1]['c'];
-								$top = (float) $cell[2]['c'];
-								$right = (float) $cell[3]['c'];
-								$bottom = (float) $cell[4]['c'];
-								$width = $right - $left;
-								$height = $bottom - $top;
+								$celldata = json_decode($cell[2]['c'], true);
 								if (
-									min($left, $top) >= 0 &&
-									max($right, $bottom) <= 100 &&
-									min($width, $height) > 0
+									$celldata
+									and array_key_exists('x1', $celldata)
+									and array_key_exists('y1', $celldata)
+									and array_key_exists('x2', $celldata)
+									and array_key_exists('y2', $celldata)
 								):
-									?>
-									<div class="areamap"
-										style="top: <?php echo $top; ?>%; left: <?php echo $left; ?>%; width: <?php echo $width; ?>%; height: <?php echo $height; ?>%;">
-										<div class="hoverbox">
-											<?php echo $cell[0]['c']; ?>
+									$left = (float) $celldata['x1'];
+									$top = (float) $celldata['y1'];
+									$right = (float) $celldata['x2'];
+									$bottom = (float) $celldata['y2'];
+									$width = $right - $left;
+									$height = $bottom - $top;
+									if (
+										min($left, $top) >= 0 &&
+										max($right, $bottom) <= 100 &&
+										min($width, $height) > 0
+									):
+										?>
+										<div class="areamap"
+											style="top: <?php echo $top; ?>%; left: <?php echo $left; ?>%; width: <?php echo $width; ?>%; height: <?php echo $height; ?>%;">
+											<div class="hoverbox">
+												<?php echo $cell[0]['c']; ?>
+											</div>
 										</div>
-									</div>
-								<?php endif;
+									<?php endif;
+								endif;
 							}
 						}
 					}

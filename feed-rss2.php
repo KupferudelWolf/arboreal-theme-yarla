@@ -56,21 +56,10 @@
                                 foreach ($translation as &$row) {
                                     if (is_array($row)) {
                                         foreach ($row as &$cell) {
-                                            if (array_key_exists(0, $cell) and array_key_exists(5, $cell)) {
+                                            if (array_key_exists(0, $cell)) {
                                                 $text = (string) $cell[0]['c'];
-                                                $left = (float) $cell[1]['c'];
-                                                $top = (float) $cell[2]['c'];
-                                                $right = (float) $cell[3]['c'];
-                                                $bottom = (float) $cell[4]['c'];
-                                                $subject = (string) $cell[5]['c'];
-                                                $width = $right - $left;
-                                                $height = $bottom - $top;
-                                                if (
-                                                    $text &&
-                                                    min($left, $top) >= 0 &&
-                                                    max($right, $bottom) <= 100 &&
-                                                    min($width, $height) > 0
-                                                ) {
+                                                $subject = (string) $cell[1]['c'];
+                                                if ($text) {
                                                     if ($subject) {
                                                         $desc .= "<b>";
                                                         $desc .= $subject;

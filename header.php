@@ -69,9 +69,4 @@
 				);
 				?>
 			</nav><!-- #site-navigation -->
-			<?php
-			// if (!is_single()) {
-			// 	echo do_shortcode('[language-switcher]');
-			// }
-			?>
 		</header><!-- #masthead -->
