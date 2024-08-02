@@ -10,6 +10,8 @@
     // window.scrollTo( 0, +params.get( 'scrollTop' ) || 0 );
     // window.history.replaceState( {}, document.title, window.location.pathname );
 
+    const _admin_data = {};
+
     function isMobile() {
         return '' + getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
     }
@@ -85,11 +87,12 @@
     */
 
     /// Enlarge the image when clicked.
-    $( '.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
-        // if ( m_pos.active ) return;
+    $( 'body.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
         if ( event.pointerType === 'touch' ) return;
+        if ( _admin_data.dragging ) return;
         event.currentTarget.classList.toggle( 'enlarged' );
         is_enlarged = event.currentTarget.classList.contains( 'enlarged' );
+        _admin_data.dragging_start = _admin_data.dragging = false;
     } );
 
     const post_thumbnail = $( '.post .post-thumbnail' );
@@ -123,25 +126,95 @@
         toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();
 
-        /// Hoverbox functionality..
-        $( '.hoverbox' ).parent().on( 'hover mouseover mousemove', function ( event ) {
+        const toXY = function ( event, $target ) {
             const mouse_x = event.pageX;
             const mouse_y = event.pageY;
-            if ( !mouse_x || !mouse_y ) return;
+            if ( !mouse_x || !mouse_y ) return null;
+            const offset = $target.offset();
+            const width = $target.width();
+            const height = $target.height();
+            const x = mouse_x - offset.left;
+            const y = mouse_y - offset.top;
+            const left = Math.round( 10000 * x / width ) / 100;
+            const top = Math.round( 10000 * y / height ) / 100;
+            return [ left, top ];
+        };
+
+        /// Hoverbox functionality.
+        $( '.hoverbox' ).parent().on( 'hover mouseover mousemove', function ( event ) {
             const $this = $( this );
-            const x = mouse_x - $this.offset().left;
-            const y = mouse_y - $this.offset().top;
-            const width = $this.width();
-            const height = $this.height();
-            const left = Math.round( 10000 * x / width ) / 100 + '%';
-            const top = Math.round( 10000 * y / height ) / 100 + '%';
-            $this.children( '.hoverbox' ).css( {
-                left: left,
-                top: top
-            } ).filter( '.adminbox' ).html(
-                `left: ${ left };</br>top: ${ top };`
+            const [ left, top ] = toXY( event, $this );
+            if ( left === null || top === null ) return;
+            const $boxes = $this.children( '.hoverbox' );
+            if ( _admin_data.dragging ) return;
+            $boxes.css( {
+                left: left + '%',
+                top: top + '%',
+                right: '',
+                bottom: '',
+                width: '',
+                height: '',
+                opacity: ''
+            } );
+            $boxes.filter( '.adminbox' ).html(
+                `left: ${ left + '%' };</br>top: ${ top + '%' };`
             );
         } );
+
+        /// Interactive translation tool.
+        $( 'body.admin-bar.single .post-thumbnail' )
+            .on( 'mousedown', function ( event ) {
+                event.preventDefault();
+                const $this = $( this );
+                const [ left, top ] = toXY( event, $this );
+                if ( left === null || top === null ) return;
+                _admin_data.dragging_start = true;
+                _admin_data.x1 = left;
+                _admin_data.y1 = top;
+            } )
+            .on( 'mousemove', function ( event ) {
+                if ( _admin_data.dragging ) {
+                    const $this = $( this );
+                    const [ left, top ] = toXY( event, $this );
+                    _admin_data.x2 = left;
+                    _admin_data.y2 = top;
+                    $( '.adminbox' ).html( '' ).css( {
+                        left: Math.min( _admin_data.x1, _admin_data.x2 ) + '%',
+                        top: Math.min( _admin_data.y1, _admin_data.y2 ) + '%',
+                        right: ( 100 - Math.max( _admin_data.x1, _admin_data.x2 ) ) + '%',
+                        bottom: ( 100 - Math.max( _admin_data.y1, _admin_data.y2 ) ) + '%',
+                        width: 'auto',
+                        height: 'auto',
+                        opacity: '50%'
+                    } );
+                } else if ( _admin_data.dragging_start ) {
+                    const $this = $( this );
+                    const [ left, top ] = toXY( event, $this );
+                    if ( left === null || top === null ) return;
+                    if (
+                        Math.abs( _admin_data.x1 - left ) > 2 ||
+                        Math.abs( _admin_data.y1 - top ) > 2
+                    ) {
+                        _admin_data.dragging = true;
+                    }
+                }
+            } )
+            .on( 'mouseup mouseleave', function ( event ) {
+                if ( !_admin_data.dragging ) return;
+                const $this = $( this );
+                const [ left, top ] = toXY( event, $this );
+                if ( left === null || top === null ) return;
+                const data = {
+                    x1: Math.min( _admin_data.x1, _admin_data.x2 ),
+                    y1: Math.min( _admin_data.y1, _admin_data.y2 ),
+                    x2: Math.max( _admin_data.x1, _admin_data.x2 ),
+                    y2: Math.max( _admin_data.y1, _admin_data.y2 )
+                };
+                navigator.clipboard.writeText( JSON.stringify( data, null, 4 ) );
+                console.log( 'Box:', data, '\n(copied to clipboard)' );
+                _admin_data.dragging_start = false;
+                _admin_data.dragging = false;
+            } );
     }
 
 }( jQuery ) );
