@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 /**
  * @package Arboreal_Theme

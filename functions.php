@@ -248,8 +248,16 @@ function automatic_GitHub_updates($data)
  * Cookies
  */
 add_action('init', function () {
-	if (!isset ($_COOKIE['boxes_mode'])) {
-		setcookie('boxes_mode', '0', strtotime('+1 month'), COOKIEPATH, COOKIE_DOMAIN);
+	if (!isset($_COOKIE['boxes_mode'])) {
+		// setcookie('boxes_mode', '0', strtotime('+1 month'), COOKIEPATH, COOKIE_DOMAIN);
+		setcookie('boxes_mode', '0', [
+			'expires' => strtotime('+1 month'),
+			'path' => COOKIEPATH,
+			'domain' => COOKIE_DOMAIN,
+			'secure' => false,
+			'httponly' => false,
+			'samesite' => 'Strict'
+		]);
 	}
 });
 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 /**
  * The main template file
