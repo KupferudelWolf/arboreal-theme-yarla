@@ -1122,6 +1122,9 @@ aside#secondary {
     .post .post-thumbnail:not(.boxes-no_hover) > .areamap {
         opacity: 1;
     }
+    .post .post-thumbnail .areamap {
+        cursor: none;
+    }
 
     .page .page-hierarchy {
         display: block;
