@@ -13,19 +13,18 @@
  * @package Arboreal_Theme
  */
 
-$q = new WP_Query(
+$posts_array = get_posts(
 	array(
-		// 'category_name' => getLocaleSlug(),
-		'numberposts' => 1,
-		'orderby' => 'date',
-		'order' => 'ASC',
-		'post_type' => 'post'
+		'offset' => 0,
+		'orderby' => 'DESC',
+		'order' => 'DESC',
+		'post_type' => 'post',
+		'post_status' => 'publish',
+		'suppress_filters' => true
 	)
 );
 
-foreach ($q->posts as $post) {
-	wp_redirect(get_permalink());
-}
+wp_redirect(get_permalink($posts_array[0]));
 
 get_template_part('template-parts/meta');
 get_header();

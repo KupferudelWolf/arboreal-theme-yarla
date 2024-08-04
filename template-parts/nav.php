@@ -15,57 +15,28 @@ $nav_last = null;
 <nav class="navigation post-navigation" aria-label="Posts">
     <h2 class="screen-reader-text">Post navigation</h2>
     <div class="nav-links">
-        <?php
-        $current_id = $post->ID;
-        $current_time = get_post_timestamp();
-
-        $q = new WP_Query(
-            array(
-                // 'category_name' => getLocaleSlug(),
-                'orderby' => 'date',
-                'order' => 'ASC',
-                'post_type' => 'post'
-            )
-        );
-
-        $nav_earlier = true;
-        foreach ($q->posts as $post) {
-            $nav_last = $post;
-            if ($current_time <= get_post_timestamp($post)) {
-                $nav_earlier = false;
-            }
-            if ($post->ID !== $current_id) {
-                if ($nav_earlier) {
-                    $nav_prev = $post;
-                    if (null === $nav_first) {
-                        $nav_first = $post;
-                    }
-                } elseif (null === $nav_next) {
-                    $nav_next = $post;
-                }
-            }
-        }
-        if ($nav_earlier)
-            $nav_last = null;
-        if ($nav_first && $nav_first->ID === $current_id)
-            $nav_first = null;
-        if ($nav_last && $nav_last->ID === $current_id)
-            $nav_last = null;
-        ?>
-
-        <?php if ($nav_first): ?>
+        <?php if (get_previous_post_link()):
+            $posts_array = get_posts(
+                array(
+                    'offset' => 0,
+                    'orderby' => 'ASC',
+                    'order' => 'ASC',
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'suppress_filters' => true
+                )
+            );
+            ?>
             <div class="nav-first">
-                <a href="<?php echo get_permalink($nav_first); ?>" rel="first">&lt;&lt;</a>
+                <a href="<?php echo get_permalink($posts_array[0]); ?>" rel="first">&lt;&lt;</a>
             </div>
         <?php else: ?>
             <div class="nav-blank"></div>
         <?php endif; ?>
 
-        <?php if ($nav_prev): ?>
+        <?php if (get_previous_post_link()): ?>
             <div class="nav-previous">
-                <a href="<?php echo get_permalink($nav_prev); ?>" rel="prev">
-                    &lt; <?php //echo get_the_title($nav_prev); ?>
-                </a>
+                <?php echo get_previous_post_link('%link', '&lt;'); ?>
             </div>
         <?php else: ?>
             <div class="nav-blank"></div>
@@ -81,17 +52,16 @@ $nav_last = null;
             <a href="javascript:void(0);" rel="toggle"></a>
         </div>
 
-        <?php if ($nav_next): ?>
+        <?php if (get_next_post_link()): ?>
             <div class="nav-next">
-                <a href="<?php echo get_permalink($nav_next); ?>" rel="next">
-                    <?php //echo get_the_title($nav_next); ?> &gt;
-                </a>
+                <?php echo get_next_post_link('%link', '&gt;'); ?>
             </div>
         <?php else: ?>
             <div class="nav-blank"></div>
         <?php endif; ?>
 
-        <?php if ($nav_last): ?>
+        <?php
+        if (get_next_post_link()): ?>
             <div class="nav-newest">
                 <a href="<?php
                 // echo get_permalink($nav_last);
