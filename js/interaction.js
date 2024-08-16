@@ -28,64 +28,6 @@
         }
     }, { passive: false } );
 
-    /// Swipe to previous or next page.
-    /*
-    const m_pos = {
-        x: null,
-        active: null,
-        prev: null,
-        next: null,
-        scroll_x: null
-    };
-    const swipe_limit = 0.15;
-    const swipe_speed = 2 / 3;
-    const url_prev = $( '.nav-previous a' ).attr( 'href' );
-    const url_next = $( '.nav-next a' ).attr( 'href' );
-    $( '.single .container' ).first().on( 'touchstart', ( event ) => {
-        m_pos.active = true;
-        m_pos.x = event.clientX || event.targetTouches[ 0 ].pageX;
-        m_pos.scroll_x = document.documentElement.scrollTop || document.body.scrollTop;
-        $( '.swipe-nav-left, .swipe-nav-right' ).addClass( 'show' );
-    } ).on( 'touchmove', ( event ) => {
-        /// Ignore multi-touch.
-        if ( event.targetTouches.length !== 1 ) return;
-        /// Ignore if scrolled down.
-        const rect = event.currentTarget.getBoundingClientRect();
-        if ( -rect.top > rect.height / 6 ) {
-            event.currentTarget.style.left = '';
-            event.currentTarget.style.transition = '';
-            return;
-        }
-
-        const x = event.clientX || event.targetTouches[ 0 ].pageX;
-        const dx = ( x - m_pos.x ) * swipe_speed;
-        const width = event.currentTarget.clientWidth * swipe_limit;
-        event.currentTarget.style.left = `${ dx }px`;
-        event.currentTarget.style.transition = 'none';
-        m_pos.prev = dx >= width;
-        m_pos.next = -dx >= width;
-        $( '.swipe-nav-left' ).toggleClass( 'active', m_pos.prev );
-        $( '.swipe-nav-right' ).toggleClass( 'active', m_pos.next );
-    } ).on( 'touchcancel touchend', ( event ) => {
-        const tags = [];
-        // if ( is_enlarged ) tags.push( 'enlarged=true' );
-        // if ( m_pos.scroll_x ) tags.push( `scrollTop=${ m_pos.scroll_x }` );
-
-        if ( url_prev && m_pos.prev ) {
-            window.location = url_prev + ( tags.length ? `?${ tags.join( '&' ) }` : '' );
-        } else if ( url_next && m_pos.next ) {
-            window.location = url_next + ( tags.length ? `?${ tags.join( '&' ) }` : '' );
-        }
-
-        for ( const key of Object.keys( m_pos ) ) {
-            m_pos[ key ] = null;
-        }
-        event.currentTarget.style.left = '';
-        event.currentTarget.style.transition = '';
-        $( '.swipe-nav-left, .swipe-nav-right' ).removeClass( 'show' );
-    } );
-    */
-
     /// Enlarge the image when clicked.
     $( 'body.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
         if ( event.pointerType === 'touch' ) return;
@@ -95,35 +37,35 @@
         _admin_data.dragging_start = _admin_data.dragging = false;
     } );
 
-    const post_thumbnail = $( '.post .post-thumbnail' );
-    if ( post_thumbnail.length ) {
+    const $post_thumbnail = $( '.post .post-thumbnail' );
+    const $toggle_button = $( '.nav-toggle' );
+    if ( $post_thumbnail.length ) {
         /// Toggle area boxes.
-        const toggle_button = $( '.nav-toggle' );
-        let boxes_mode = toggle_button.attr( 'data-boxes_mode' ) || ( isMobile() ? 1 : 0 );
+        let boxes_mode = $toggle_button.attr( 'data-boxes_mode' ) || ( isMobile() ? 1 : 0 );
         --boxes_mode;
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
             if ( isMobile() && boxes_mode === 0 ) {
                 boxes_mode = 1;
             }
-            post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
+            $post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
             switch ( boxes_mode ) {
                 case 0: /// Hover
-                    toggle_button.children( 'a' ).html( 'Translations: Hover' );
+                    $toggle_button.children( 'a' ).html( 'Translations: Hover' );
                     break;
                 case 1: /// Show
-                    toggle_button.children( 'a' ).html( 'Translations: Show' );
-                    post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
+                    $toggle_button.children( 'a' ).html( 'Translations: Show' );
+                    $post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
                     break;
                 case 2: /// Hide
-                    toggle_button.children( 'a' ).html( 'Translations: Hide' );
-                    post_thumbnail.addClass( 'boxes-no_hover' );
+                    $toggle_button.children( 'a' ).html( 'Translations: Hide' );
+                    $post_thumbnail.addClass( 'boxes-no_hover' );
                     break;
             }
-            toggle_button.attr( 'data-boxes_mode', boxes_mode );
+            $toggle_button.attr( 'data-boxes_mode', boxes_mode );
             $.cookie( 'boxes_mode', boxes_mode, { expires: 31, path: COOKIEPATH } );
         };
-        toggle_button.on( 'click', box_toggle_on_click );
+        $toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();
 
         const toXY = function ( event, $target ) {

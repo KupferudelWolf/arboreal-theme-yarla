@@ -718,10 +718,10 @@ main#primary {
     flex-direction: column;
     margin: 0 auto;
     align-items: center;
-    width: 80vw;
+    width: 60vw;
     gap: 1.5em;
 }
-.single main#primary {
+.single main#primary:has(article.has-post-thumbnail) {
     width: min-content;
 }
 .container {
@@ -732,16 +732,11 @@ main#primary {
     margin-top: 4vh;
     max-width: 100vw;
 }
-.single .container {
-    position: relative;
-    left: 0;
-    transition: left 0.5s;
-}
-.single .container:first-of-type {
+.single .container:first-of-type:has(nav:first-child) {
     padding-top: 0;
 }
 
-.post {
+.single article {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -750,25 +745,25 @@ main#primary {
     min-width: 100%;
     margin: 0;
 }
-.post .post-thumbnail {
+.single article .post-thumbnail {
     display: flex;
     width: max-content;
     height: auto;
     margin: 0;
     position: relative;
 }
-.post .post-thumbnail img {
+.single article .post-thumbnail img {
     width: auto;
     height: 71vh;
 }
-.post .post-thumbnail.enlarged img {
+.single article .post-thumbnail.enlarged img {
     width: 80vw;
     height: auto;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
 
-.post .post-thumbnail .hoverbox {
+.single article .post-thumbnail .hoverbox {
     width: 12em;
     height: auto;
     min-height: 1.5em;
@@ -782,11 +777,11 @@ main#primary {
     z-index: 10;
     opacity: 0;
 }
-.post .post-thumbnail .adminbox {
+.single article .post-thumbnail .adminbox {
     z-index: 1;
     background-color: #eecece;
 }
-.post .post-thumbnail .areamap {
+.single article .post-thumbnail .areamap {
     padding: 0;
     margin: 0;
     position: absolute;
@@ -798,27 +793,27 @@ main#primary {
     opacity: 0;
     transition: opacity 0.1s;
 }
-.post .post-thumbnail:not(.boxes-no_hover):hover > .areamap,
-.post .post-thumbnail.boxes-sticky > .areamap,
-.post .post-thumbnail .areamap:hover > .hoverbox,
-.post .post-thumbnail:hover > .hoverbox {
+.single article .post-thumbnail:not(.boxes-no_hover):hover > .areamap,
+.single article .post-thumbnail.boxes-sticky > .areamap,
+.single article .post-thumbnail .areamap:hover > .hoverbox,
+.single article .post-thumbnail:hover > .hoverbox {
     opacity: 1
 }
-.post .entry-header {
+.single article .entry-header {
     margin-top: 1.5vh;
 }
-.post .entry-title {
+.single article .entry-title {
     margin-bottom: 0;
     text-align: center;
     line-height: 100%;
 }
-.post .entry-content {
+.single article .entry-content {
     text-align: center;
 }
-.post .entry-header + .entry-content {
+.single article .entry-header + .entry-content {
     margin-top: 1vh;
 }
-.post .timestamp {
+.single article .timestamp {
     font-size: 1.25vh;
     font-style: italic;
 }
@@ -948,7 +943,7 @@ div.comment {
     min-height: 4em;
     max-height: 32em;
 }
-.comment-respond {
+.comment-respond:not(:first-child) {
     margin-top: 4vh;
 }
 .comment-respond > .comment-reply-title small {
@@ -1010,6 +1005,19 @@ div.comment {
 .search .container .archive-post .has-post-thumbnail {
     position: relative;
     top: -1vh;
+}
+
+
+/*
+ ***************
+ *   Mailpoet  *
+ ***************
+*/
+.single-mailpoet_page nav.post-navigation {
+    opacity: 0;
+}
+.single-mailpoet_page .timestamp {
+    display: none;
 }
 
 
