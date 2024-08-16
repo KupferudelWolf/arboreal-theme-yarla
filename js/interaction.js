@@ -38,20 +38,20 @@
     } );
 
     const $post_thumbnail = $( '.post .post-thumbnail' );
-    const $toggle_button = $( '.nav-toggle' );
     if ( $post_thumbnail.length ) {
+        const $toggle_button = $( '.nav-toggle' );
         /// Toggle area boxes.
         let boxes_mode = $toggle_button.attr( 'data-boxes_mode' ) || ( isMobile() ? 1 : 0 );
         --boxes_mode;
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
-            if ( isMobile() && boxes_mode === 0 ) {
-                boxes_mode = 1;
-            }
+            // if ( isMobile() && boxes_mode === 0 ) {
+            //     boxes_mode = 1;
+            // }
             $post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
             switch ( boxes_mode ) {
                 case 0: /// Hover
-                    $toggle_button.children( 'a' ).html( 'Translations: Hover' );
+                    $toggle_button.children( 'a' ).html( isMobile() ? 'Translations: Tap' : 'Translations: Hover' );
                     break;
                 case 1: /// Show
                     $toggle_button.children( 'a' ).html( 'Translations: Show' );
@@ -64,6 +64,12 @@
             }
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );
             $.cookie( 'boxes_mode', boxes_mode, { expires: 31, path: COOKIEPATH } );
+            if ( boxes_mode !== 2 ) {
+                $post_thumbnail.addClass( 'boxes-active' );
+                setTimeout( () => {
+                    $post_thumbnail.removeClass( 'boxes-active' );
+                }, 500 );
+            }
         };
         $toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();

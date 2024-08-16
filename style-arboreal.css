@@ -763,7 +763,8 @@ main#primary {
     image-rendering: crisp-edges;
 }
 
-.single article .post-thumbnail .hoverbox {
+.single article .post-thumbnail:not(.boxes-sticky) .hoverbox,
+.single article .post-thumbnail .hoverbox.adminbox {
     width: 12em;
     height: auto;
     min-height: 1.5em;
@@ -777,7 +778,19 @@ main#primary {
     z-index: 10;
     opacity: 0;
 }
-.single article .post-thumbnail .adminbox {
+.single article .post-thumbnail.boxes-sticky .hoverbox:not(.adminbox) {
+    width: auto;
+    height: auto;
+    font-size: 1vh;
+    text-align: center;
+    padding: 0.5em 0.125em;
+    opacity: 1;
+    overflow: hidden;
+}
+.single article .post-thumbnail.boxes-sticky.enlarged .hoverbox:not(.adminbox) {
+    font-size: 2vh;
+}
+.single article .post-thumbnail .hoverbox.adminbox {
     z-index: 1;
     background-color: #eecece;
 }
@@ -791,14 +804,50 @@ main#primary {
     background-color: #fcfadebf;
     cursor: crosshair;
     opacity: 0;
-    transition: opacity 0.1s;
+    display: flex;
+    transition: opacity 0.25s, background-color 0.25s;
+}
+.single article .post-thumbnail.boxes-no_hover:not(.boxes-sticky) .areamap {
+    transition: opacity 0.125s, background-color 0.125s;
 }
 .single article .post-thumbnail:not(.boxes-no_hover):hover > .areamap,
+.single article .post-thumbnail.boxes-active > .areamap,
 .single article .post-thumbnail.boxes-sticky > .areamap,
 .single article .post-thumbnail .areamap:hover > .hoverbox,
 .single article .post-thumbnail:hover > .hoverbox {
     opacity: 1
 }
+.single article .post-thumbnail.boxes-no_hover .areamap {
+    border: none;
+}
+.single article .post-thumbnail.boxes-sticky .areamap {
+    background-color: #FFFFFFF7;
+    align-items: center;
+    justify-content: center;
+}
+.single article .post-thumbnail.boxes-sticky .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-sticky .areamap.header .hoverbox,
+.single article .post-thumbnail.boxes-sticky .areamap.footer .hoverbox {
+    font-size: 1.5vh;
+    writing-mode: vertical-rl;
+    align-self: end;
+}
+.single article .post-thumbnail.boxes-sticky .areamap.left.title .hoverbox,
+.single article .post-thumbnail.boxes-sticky .areamap.left.header .hoverbox,
+.single article .post-thumbnail.boxes-sticky .areamap.left.footer .hoverbox {
+    transform: rotate(180deg);
+}
+.single article .post-thumbnail.boxes-sticky.enlarged .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-sticky.enlarged .areamap.header .hoverbox,
+.single article .post-thumbnail.boxes-sticky.enlarged .areamap.footer .hoverbox {
+    font-size: 3vh;
+}
+.single article .post-thumbnail.boxes-sticky .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-sticky .areamap.header .hoverbox {
+    font-weight: bold;
+    align-self: start;
+}
+
 .single article .entry-header {
     margin-top: 1.5vh;
 }
@@ -1067,7 +1116,7 @@ aside#secondary {
     .single main#primary,
     .page main#primary,
     main#primary {
-        width: 100%;
+        width: 100% !important;
     }
 
     .site-description {
@@ -1099,17 +1148,20 @@ aside#secondary {
         padding-top: 0;
     }
 
-    .post .entry-header,
-    .post .entry-content {
+    .single article .entry-header,
+    .single article .entry-content {
         margin-left: 3vh;
         margin-right: 3vh;
     }
-    .post .post-thumbnail img {
+    .single article .post-thumbnail img,
+    .single article .post-thumbnail.enlarged img {
         width: 90vw;
         height: auto;
+        image-rendering: auto;
     }
 
-    .hoverbox {
+
+    .post-thumbnail:not(.boxes-sticky) .hoverbox {
         transform: translate(-50%, -50%);
         text-align: center;
     }
@@ -1126,14 +1178,14 @@ aside#secondary {
         display: flex;
     }
 
-    .post .post-thumbnail,
-    .post .post-thumbnail > .hoverbox {
+    .single article .post-thumbnail,
+    .single article .post-thumbnail > .hoverbox {
         transition: none !important;
     }
-    .post .post-thumbnail:not(.boxes-no_hover) > .areamap {
+    .single article .post-thumbnail:not(.boxes-no_hover) > .areamap {
         opacity: 1;
     }
-    .post .post-thumbnail .areamap {
+    .single article .post-thumbnail .areamap {
         cursor: none;
     }
 
