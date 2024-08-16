@@ -558,14 +558,6 @@ header.site-header .main-navigation a:visited {
     text-decoration: none;
 }
 
-.post-navigation .nav-links > div > a {
-    color: #313f40;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
-    font-size: 1.5vh;
-}
-
 .post-navigation .nav-links > div {
     width: 100%;
     height: 100%;
@@ -578,6 +570,17 @@ header.site-header .main-navigation a:visited {
 }
 .post-navigation .nav-links > div.nav-blank {
     border: none;
+}
+
+.post-navigation .nav-links > div > a {
+    color: #313f40;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-size: 1.5vh;
+}
+.post-navigation .nav-links > div.nav-toggle > a {
+    font-size: 1.25vh;
 }
 
 .swipe-nav-left,

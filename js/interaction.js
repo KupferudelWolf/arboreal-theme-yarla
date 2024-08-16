@@ -109,14 +109,14 @@
             post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
             switch ( boxes_mode ) {
                 case 0: /// Hover
-                    toggle_button.children( 'a' ).html( 'Boxes: Hover' );
+                    toggle_button.children( 'a' ).html( 'Translations: Hover' );
                     break;
                 case 1: /// Show
-                    toggle_button.children( 'a' ).html( 'Boxes: Show' );
+                    toggle_button.children( 'a' ).html( 'Translations: Show' );
                     post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
                     break;
                 case 2: /// Hide
-                    toggle_button.children( 'a' ).html( 'Boxes: Hide' );
+                    toggle_button.children( 'a' ).html( 'Translations: Hide' );
                     post_thumbnail.addClass( 'boxes-no_hover' );
                     break;
             }
