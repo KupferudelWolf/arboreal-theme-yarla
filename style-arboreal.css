@@ -781,11 +781,22 @@ main#primary {
 .single article .post-thumbnail.boxes-sticky .hoverbox:not(.adminbox) {
     width: auto;
     height: auto;
+    min-width: fit-content;
     font-size: 1vh;
+    line-height: 1.25em;
     text-align: center;
     padding: 0.5em 0.125em;
     opacity: 1;
     overflow: hidden;
+    text-shadow:
+        -2px -2px 0 white,
+        0px -2px 0 white,
+        2px -2px 0 white,
+        -2px 0px 0 white,
+        2px 0px 0 white,
+        -2px 2px 0 white,
+        0px 2px 0 white,
+        2px 2px 0 white;
 }
 .single article .post-thumbnail.boxes-sticky.enlarged .hoverbox:not(.adminbox) {
     font-size: 2vh;
@@ -807,6 +818,9 @@ main#primary {
     display: flex;
     transition: opacity 0.25s, background-color 0.25s;
 }
+.single article .post-thumbnail.boxes-sticky .areamap {
+    cursor: default;
+}
 .single article .post-thumbnail.boxes-no_hover:not(.boxes-sticky) .areamap {
     transition: opacity 0.125s, background-color 0.125s;
 }
@@ -821,7 +835,7 @@ main#primary {
     border: none;
 }
 .single article .post-thumbnail.boxes-sticky .areamap {
-    background-color: #FFFFFFF7;
+    background-color: #FFFFFFEF;
     align-items: center;
     justify-content: center;
 }
