@@ -150,10 +150,14 @@ if (!function_exists('arboreal_post_thumbnail')):
 									and array_key_exists('x2', $celldata)
 									and array_key_exists('y2', $celldata)
 								):
-									$left = (float) $celldata['x1'];
-									$top = (float) $celldata['y1'];
-									$right = (float) $celldata['x2'];
-									$bottom = (float) $celldata['y2'];
+									$x1 = (float) $celldata['x1'];
+									$y1 = (float) $celldata['y1'];
+									$x2 = (float) $celldata['x2'];
+									$y2 = (float) $celldata['y2'];
+									$left = min($x1, $x2);
+									$top = min($y1, $y2);
+									$right = max($x1, $x2);
+									$bottom = max($y1, $y2);
 									$width = $right - $left;
 									$height = $bottom - $top;
 									if (

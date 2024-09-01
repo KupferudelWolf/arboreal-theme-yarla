@@ -153,10 +153,10 @@
                 const [ left, top ] = toXY( event, $this );
                 if ( left === null || top === null ) return;
                 const data = {
-                    x1: Math.min( _admin_data.x1, _admin_data.x2 ),
-                    y1: Math.min( _admin_data.y1, _admin_data.y2 ),
-                    x2: Math.max( _admin_data.x1, _admin_data.x2 ),
-                    y2: Math.max( _admin_data.y1, _admin_data.y2 )
+                    x1: _admin_data.x1,
+                    y1: _admin_data.y1,
+                    x2: _admin_data.x2,
+                    y2: _admin_data.y2
                 };
                 navigator.clipboard.writeText( JSON.stringify( data, null, 4 ) );
                 console.log( 'Box:', data, '\n(copied to clipboard)' );
