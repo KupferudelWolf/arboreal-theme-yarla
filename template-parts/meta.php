@@ -23,9 +23,11 @@ if (get_the_post_thumbnail_url()) {
 <meta name="twitter:title" content="Arboreal | <?php echo get_the_title(); ?>">
 <meta name="twitter:description"
     content="Arboreal: A Comic From Another World.</br>&nbsp;(Translations available on website.)">
-<meta name="twitter:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
-<link rel="preload" as="image" href="<?php echo get_the_post_thumbnail_url(); ?>" type="<?php
-   if (get_the_post_thumbnail_url()) {
-       echo wp_get_image_mime(get_the_post_thumbnail_url());
-   }
-   ?>" />
+<meta name="twitter:image" content="<?php
+if (get_the_post_thumbnail_url()) {
+    echo get_the_post_thumbnail_url(
+        null,
+        'preview'
+    );
+}
+?>">
