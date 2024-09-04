@@ -314,7 +314,6 @@ add_action('after_setup_theme', 'register_custom_image_sizes');
 /**
  * Image Slug Generation
  */
-
 function prefix_file_rename_on_upload($filename)
 {
 	$name = explode(".", $filename);
@@ -322,3 +321,24 @@ function prefix_file_rename_on_upload($filename)
 	return implode(".", $name);
 }
 add_filter('sanitize_file_name', 'prefix_file_rename_on_upload', 10);
+
+
+
+/**
+ * Redirect the attachment pages to the file itself for SEO reasons.
+ */
+function wpexplorer_redirect_attachment_page()
+{
+	if (is_attachment()) {
+		global $post;
+		if (is_a($post, 'WP_Post') && !empty($post->post_parent)) {
+			$redirect = esc_url(get_permalink($post->post_parent));
+		} else {
+			$redirect = esc_url(home_url('/'));
+		}
+		if (wp_safe_redirect($redirect, 301)) {
+			exit;
+		}
+	}
+}
+add_action('template_redirect', 'wpexplorer_redirect_attachment_page');
