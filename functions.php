@@ -317,7 +317,7 @@ add_action('after_setup_theme', 'register_custom_image_sizes');
 function prefix_file_rename_on_upload($filename)
 {
 	$name = explode(".", $filename);
-	$name[count($name) - 2] = time() . md5(rand());
+	$name[count($name) - 2] = md5(time()) . md5(rand());
 	return implode(".", $name);
 }
 add_filter('sanitize_file_name', 'prefix_file_rename_on_upload', 10);

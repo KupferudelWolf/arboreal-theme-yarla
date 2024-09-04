@@ -132,7 +132,12 @@ if (!function_exists('arboreal_post_thumbnail')):
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail(); ?>
+				<?php
+				// Append version number to force replaced images to reload.
+				$reg = '#(https?:\/\/[^\/\s]+\/\S+\.(jpg|jpeg|png|webp|gif))#i';
+				$tag = '?v' . do_shortcode('[file_modified id=' . get_post_thumbnail_id() . ' format=U]', true);
+				echo preg_replace($reg, "$1" . $tag, get_the_post_thumbnail(null, 'full'));
+				?>
 				<?php if (current_user_can('edit_posts')): ?>
 					<div class="hoverbox adminbox"></div>
 				<?php endif; ?>
