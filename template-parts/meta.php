@@ -3,7 +3,14 @@
 <meta property="og:title" content="Arboreal | <?php echo get_the_title(); ?>">
 <meta property="og:description"
     content="Arboreal: A Comic From Another World.</br>&nbsp;(Translations available on website.)">
-<meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
+<meta property="og:image" content="<?php
+if (get_the_post_thumbnail_url()) {
+    echo get_the_post_thumbnail_url(
+        null,
+        'preview'
+    );
+}
+?>">
 <meta property="og:image:type" content="<?php
 if (get_the_post_thumbnail_url()) {
     echo wp_get_image_mime(get_the_post_thumbnail_url());

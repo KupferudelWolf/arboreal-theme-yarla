@@ -296,3 +296,15 @@ add_action('do_feed_atom', function ($for_comments) {
  */
 add_theme_support('editor-styles');
 add_editor_style('style-editor.css');
+
+/**
+ * Custom Image Size (for og:image)
+ */
+function register_custom_image_sizes()
+{
+	if (!current_theme_supports('post-thumbnails')) {
+		add_theme_support('post-thumbnails');
+	}
+	add_image_size('preview', 800, 420, array('center', 'top'));
+}
+add_action('after_setup_theme', 'register_custom_image_sizes');
