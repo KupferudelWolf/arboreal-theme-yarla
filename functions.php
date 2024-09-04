@@ -297,6 +297,7 @@ add_action('do_feed_atom', function ($for_comments) {
 add_theme_support('editor-styles');
 add_editor_style('style-editor.css');
 
+
 /**
  * Custom Image Size (for og:image)
  */
@@ -308,3 +309,16 @@ function register_custom_image_sizes()
 	add_image_size('preview', 800, 420, array('center', 'top'));
 }
 add_action('after_setup_theme', 'register_custom_image_sizes');
+
+
+/**
+ * Image Slug Generation
+ */
+
+function prefix_file_rename_on_upload($filename)
+{
+	$name = explode(".", $filename);
+	$name[count($name) - 2] = time() . md5(rand());
+	return implode(".", $name);
+}
+add_filter('sanitize_file_name', 'prefix_file_rename_on_upload', 10);
