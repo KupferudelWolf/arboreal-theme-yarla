@@ -323,7 +323,6 @@ function prefix_file_rename_on_upload($filename)
 add_filter('sanitize_file_name', 'prefix_file_rename_on_upload', 10);
 
 
-
 /**
  * Redirect the attachment pages to the file itself for SEO reasons.
  */

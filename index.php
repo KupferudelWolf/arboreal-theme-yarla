@@ -13,6 +13,8 @@
  * @package Arboreal_Theme
  */
 
+nocache_headers();
+
 $posts_array = get_posts(
 	array(
 		'offset' => 0,
@@ -26,19 +28,4 @@ $posts_array = get_posts(
 
 wp_redirect(get_permalink($posts_array[0]));
 
-get_template_part('template-parts/meta');
-get_header();
-
-?>
-<main id="primary" class="site-main">
-	<div class="container">
-		<?php
-		get_template_part('template-parts/content', 'none');
-		?>
-	</div>
-
-</main><!-- #main -->
-
-<?php
-get_sidebar();
-get_footer();
+exit();
