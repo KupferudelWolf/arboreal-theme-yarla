@@ -870,12 +870,15 @@ main#primary {
 }
 .single article .post-thumbnail.boxes-show .areamap.rotate-left .hoverbox {
     transform: rotate(180deg);
-    font-size: 1.5vh;
     writing-mode: vertical-rl;
 }
 .single article .post-thumbnail.boxes-show .areamap.rotate-right .hoverbox {
-    font-size: 1.5vh;
     writing-mode: vertical-rl;
+}
+.single article .post-thumbnail.boxes-show .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.header .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.footer .hoverbox {
+    font-size: 1.5vh;
 }
 .single article .post-thumbnail.boxes-show.enlarged .areamap.title .hoverbox,
 .single article .post-thumbnail.boxes-show.enlarged .areamap.header .hoverbox,
