@@ -171,15 +171,20 @@ if (!function_exists('arboreal_post_thumbnail')):
 										min($width, $height) > 0
 									):
 										?>
-										<div class="areamap<?php if ($cell[1]['c']) {
+										<div class="areamap<?php
+										if ($cell[1]['c']) {
 											$speaker = strtolower($cell[1]['c']);
 											echo ' ' . preg_replace('/[^a-z]+/', '_', $speaker);
-											if ($left < 50) {
-												echo ' left';
-											} else {
-												echo ' right';
-											}
-										} ?>"
+										}
+										if (array_key_exists('rotate', $celldata)) {
+											$rotate = $celldata['rotate'];
+											echo ' rotate-' . $rotate;
+										}
+										if (array_key_exists('align', $celldata)) {
+											$align = $celldata['align'];
+											echo ' align-' . $align;
+										}
+										?>"
 											style="top: <?php echo $top; ?>%; left: <?php echo $left; ?>%; width: <?php echo $width; ?>%; height: <?php echo $height; ?>%;">
 											<div class="hoverbox">
 												<?php echo $cell[0]['c']; ?>

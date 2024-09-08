@@ -785,14 +785,41 @@ main#primary {
     opacity: 1;
     overflow: hidden;
     text-shadow:
-        -2px -2px 0 white,
-        0px -2px 0 white,
-        2px -2px 0 white,
-        -2px 0px 0 white,
-        2px 0px 0 white,
-        -2px 2px 0 white,
-        0px 2px 0 white,
-        2px 2px 0 white;
+        -1px -1px 0 white,
+        0px -1px 0 white,
+        1px -1px 0 white,
+        -1px 0px 0 white,
+        1px 0px 0 white,
+        -1px 1px 0 white,
+        0px 1px 0 white,
+        1px 1px 0 white,
+
+        -0.75px -0.75px 0 white,
+        0px -0.75px 0 white,
+        0.75px -0.75px 0 white,
+        -0.75px 0px 0 white,
+        0.75px 0px 0 white,
+        -0.75px 0.75px 0 white,
+        0px 0.75px 0 white,
+        0.75px 0.75px 0 white,
+
+        -0.5px -0.5px 0 white,
+        0px -0.5px 0 white,
+        0.5px -0.5px 0 white,
+        -0.5px 0px 0 white,
+        0.5px 0px 0 white,
+        -0.5px 0.5px 0 white,
+        0px 0.5px 0 white,
+        0.5px 0.5px 0 white,
+
+        -0.25px -0.25px 0 white,
+        0px -0.25px 0 white,
+        0.25px -0.25px 0 white,
+        -0.25px 0px 0 white,
+        0.25px 0px 0 white,
+        -0.25px 0.25px 0 white,
+        0px 0.25px 0 white,
+        0.25px 0.25px 0 white;
 }
 .single article .post-thumbnail.boxes-show.enlarged .hoverbox:not(.adminbox) {
     font-size: 2vh;
@@ -835,17 +862,20 @@ main#primary {
     align-items: center;
     justify-content: center;
 }
-.single article .post-thumbnail.boxes-show .areamap.title .hoverbox,
-.single article .post-thumbnail.boxes-show .areamap.header .hoverbox,
-.single article .post-thumbnail.boxes-show .areamap.footer .hoverbox {
-    font-size: 1.5vh;
-    writing-mode: vertical-rl;
+.single article .post-thumbnail.boxes-show .areamap.align-start .hoverbox {
+    align-self: start;
+}
+.single article .post-thumbnail.boxes-show .areamap.align-end .hoverbox {
     align-self: end;
 }
-.single article .post-thumbnail.boxes-show .areamap.left.title .hoverbox,
-.single article .post-thumbnail.boxes-show .areamap.left.header .hoverbox,
-.single article .post-thumbnail.boxes-show .areamap.left.footer .hoverbox {
+.single article .post-thumbnail.boxes-show .areamap.rotate-left .hoverbox {
     transform: rotate(180deg);
+    font-size: 1.5vh;
+    writing-mode: vertical-rl;
+}
+.single article .post-thumbnail.boxes-show .areamap.rotate-right .hoverbox {
+    font-size: 1.5vh;
+    writing-mode: vertical-rl;
 }
 .single article .post-thumbnail.boxes-show.enlarged .areamap.title .hoverbox,
 .single article .post-thumbnail.boxes-show.enlarged .areamap.header .hoverbox,
@@ -855,7 +885,6 @@ main#primary {
 .single article .post-thumbnail.boxes-show .areamap.title .hoverbox,
 .single article .post-thumbnail.boxes-show .areamap.header .hoverbox {
     font-weight: bold;
-    align-self: start;
 }
 
 .single article .entry-header {
