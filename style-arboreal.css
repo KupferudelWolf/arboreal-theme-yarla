@@ -240,10 +240,6 @@ body {
     background: none;
     background-color: #fcfade;
 }
-body,
-body * {
-    /* touch-action: pan-y pinch-zoom; */
-}
 body > div {
     overflow-x: hidden;
 }
@@ -763,7 +759,7 @@ main#primary {
     image-rendering: crisp-edges;
 }
 
-.single article .post-thumbnail:not(.boxes-sticky) .hoverbox,
+.single article .post-thumbnail:not(.boxes-show) .hoverbox,
 .single article .post-thumbnail .hoverbox.adminbox {
     width: 12em;
     height: auto;
@@ -778,7 +774,7 @@ main#primary {
     z-index: 10;
     opacity: 0;
 }
-.single article .post-thumbnail.boxes-sticky .hoverbox:not(.adminbox) {
+.single article .post-thumbnail.boxes-show .hoverbox:not(.adminbox) {
     width: auto;
     height: auto;
     min-width: fit-content;
@@ -798,7 +794,7 @@ main#primary {
         0px 2px 0 white,
         2px 2px 0 white;
 }
-.single article .post-thumbnail.boxes-sticky.enlarged .hoverbox:not(.adminbox) {
+.single article .post-thumbnail.boxes-show.enlarged .hoverbox:not(.adminbox) {
     font-size: 2vh;
 }
 .single article .post-thumbnail .hoverbox.adminbox {
@@ -818,46 +814,46 @@ main#primary {
     display: flex;
     transition: opacity 0.25s, background-color 0.25s;
 }
-.single article .post-thumbnail.boxes-sticky .areamap {
+.single article .post-thumbnail.boxes-show .areamap {
     cursor: default;
 }
-.single article .post-thumbnail.boxes-no_hover:not(.boxes-sticky) .areamap {
+.single article .post-thumbnail.boxes-hide .areamap {
     transition: opacity 0.125s, background-color 0.125s;
 }
-.single article .post-thumbnail:not(.boxes-no_hover):hover > .areamap,
+.single article .post-thumbnail.boxes-hover:hover > .areamap,
+.single article .post-thumbnail.boxes-show > .areamap,
 .single article .post-thumbnail.boxes-active > .areamap,
-.single article .post-thumbnail.boxes-sticky > .areamap,
 .single article .post-thumbnail .areamap:hover > .hoverbox,
 .single article .post-thumbnail:hover > .hoverbox {
     opacity: 1
 }
-.single article .post-thumbnail.boxes-no_hover .areamap {
+.single article .post-thumbnail:not(.boxes-hover) .areamap {
     border: none;
 }
-.single article .post-thumbnail.boxes-sticky .areamap {
+.single article .post-thumbnail.boxes-show .areamap {
     background-color: #FFFFFFEF;
     align-items: center;
     justify-content: center;
 }
-.single article .post-thumbnail.boxes-sticky .areamap.title .hoverbox,
-.single article .post-thumbnail.boxes-sticky .areamap.header .hoverbox,
-.single article .post-thumbnail.boxes-sticky .areamap.footer .hoverbox {
+.single article .post-thumbnail.boxes-show .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.header .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.footer .hoverbox {
     font-size: 1.5vh;
     writing-mode: vertical-rl;
     align-self: end;
 }
-.single article .post-thumbnail.boxes-sticky .areamap.left.title .hoverbox,
-.single article .post-thumbnail.boxes-sticky .areamap.left.header .hoverbox,
-.single article .post-thumbnail.boxes-sticky .areamap.left.footer .hoverbox {
+.single article .post-thumbnail.boxes-show .areamap.left.title .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.left.header .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.left.footer .hoverbox {
     transform: rotate(180deg);
 }
-.single article .post-thumbnail.boxes-sticky.enlarged .areamap.title .hoverbox,
-.single article .post-thumbnail.boxes-sticky.enlarged .areamap.header .hoverbox,
-.single article .post-thumbnail.boxes-sticky.enlarged .areamap.footer .hoverbox {
+.single article .post-thumbnail.boxes-show.enlarged .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-show.enlarged .areamap.header .hoverbox,
+.single article .post-thumbnail.boxes-show.enlarged .areamap.footer .hoverbox {
     font-size: 3vh;
 }
-.single article .post-thumbnail.boxes-sticky .areamap.title .hoverbox,
-.single article .post-thumbnail.boxes-sticky .areamap.header .hoverbox {
+.single article .post-thumbnail.boxes-show .areamap.title .hoverbox,
+.single article .post-thumbnail.boxes-show .areamap.header .hoverbox {
     font-weight: bold;
     align-self: start;
 }

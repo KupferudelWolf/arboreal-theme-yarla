@@ -48,18 +48,21 @@
             // if ( isMobile() && boxes_mode === 0 ) {
             //     boxes_mode = 1;
             // }
-            $post_thumbnail.removeClass( 'boxes-no_hover boxes-sticky' );
+            $post_thumbnail.removeClass( 'boxes-hover boxes-show boxes-hide' );
             switch ( boxes_mode ) {
                 case 0: /// Hover
                     $toggle_button.children( 'a' ).html( isMobile() ? 'Translations: Tap' : 'Translations: Hover' );
+                    $post_thumbnail.addClass( 'boxes-hover' );
                     break;
                 case 1: /// Show
                     $toggle_button.children( 'a' ).html( 'Translations: Show' );
-                    $post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
+                    $post_thumbnail.addClass( 'boxes-show' );
+                    // $post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
                     break;
                 case 2: /// Hide
                     $toggle_button.children( 'a' ).html( 'Translations: Hide' );
-                    $post_thumbnail.addClass( 'boxes-no_hover' );
+                    $post_thumbnail.addClass( 'boxes-hide' );
+                    // $post_thumbnail.addClass( 'boxes-no_hover' );
                     break;
             }
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );
