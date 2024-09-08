@@ -1203,7 +1203,7 @@ aside#secondary {
     }
 
 
-    .post-thumbnail:not(.boxes-sticky) .hoverbox {
+    .post-thumbnail:not(.boxes-show) .hoverbox {
         transform: translate(-50%, -50%);
         text-align: center;
     }
@@ -1224,7 +1224,7 @@ aside#secondary {
     .single article .post-thumbnail > .hoverbox {
         transition: none !important;
     }
-    .single article .post-thumbnail:not(.boxes-no_hover) > .areamap {
+    .single article .post-thumbnail.boxes-hover > .areamap {
         opacity: 1;
     }
     .single article .post-thumbnail .areamap {
