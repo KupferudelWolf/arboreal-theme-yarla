@@ -40,9 +40,19 @@
     const $post_thumbnail = $( '.post .post-thumbnail' );
     if ( $post_thumbnail.length ) {
         const $toggle_button = $( '.nav-toggle' );
+        let timeout_active;
         /// Toggle area boxes.
         let boxes_mode = $toggle_button.attr( 'data-boxes_mode' ) || ( isMobile() ? 1 : 0 );
         --boxes_mode;
+        const box_set_active = function () {
+            if ( boxes_mode !== 2 ) {
+                $post_thumbnail.addClass( 'boxes-active' );
+                clearTimeout( timeout_active );
+                timeout_active = setTimeout( () => {
+                    $post_thumbnail.removeClass( 'boxes-active' );
+                }, 500 );
+            }
+        };
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
             // if ( isMobile() && boxes_mode === 0 ) {
@@ -67,15 +77,13 @@
             }
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );
             $.cookie( 'boxes_mode', boxes_mode, { expires: 31, path: COOKIEPATH } );
-            if ( boxes_mode !== 2 ) {
-                $post_thumbnail.addClass( 'boxes-active' );
-                setTimeout( () => {
-                    $post_thumbnail.removeClass( 'boxes-active' );
-                }, 500 );
-            }
+            box_set_active();
         };
         $toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();
+
+        /// Set boxes active on scroll.
+        document.addEventListener( 'scroll', box_set_active );
 
         const toXY = function ( event, $target ) {
             const mouse_x = event.pageX;
