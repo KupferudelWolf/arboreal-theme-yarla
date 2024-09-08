@@ -5,9 +5,6 @@
  * @package Arboreal_Theme
  */
 
-$nav_prev = null;
-$nav_next = null;
-
 if (is_single()): ?>
     <nav class="navigation post-navigation" aria-label="Posts">
         <h2 class="screen-reader-text">Post navigation</h2>
@@ -32,7 +29,7 @@ if (is_single()): ?>
             <?php endif; ?>
 
             <?php if (get_previous_post_link()): ?>
-                <div class="nav-previous">
+                <div class="nav-previous" data-id="<?php echo get_previous_post()->ID; ?>">
                     <?php echo get_previous_post_link('%link', '&lt;'); ?>
                 </div>
             <?php else: ?>
@@ -54,7 +51,7 @@ if (is_single()): ?>
             <?php endif; ?>
 
             <?php if (get_next_post_link()): ?>
-                <div class="nav-next">
+                <div class="nav-next" data-id="<?php echo get_next_post()->ID; ?>">
                     <?php echo get_next_post_link('%link', '&gt;'); ?>
                 </div>
             <?php else: ?>

@@ -165,6 +165,7 @@ function arboreal_scripts()
 
 	wp_enqueue_script('jquery.cookie.js', get_template_directory_uri() . '/js/jquery.cookie.js', array('jquery'), _S_VERSION, true);
 	wp_enqueue_script('arboreal-interaction', get_template_directory_uri() . '/js/interaction.js', array('jquery'), _S_VERSION, true);
+	wp_enqueue_script('arboreal-saveprogress', get_template_directory_uri() . '/js/saveprogress.js', array('jquery'), _S_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'arboreal_scripts');
 
