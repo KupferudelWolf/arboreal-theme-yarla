@@ -10,9 +10,6 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-	<?php arboreal_post_thumbnail(); ?>
-
 	<header class="entry-header">
 		<?php
 		if (is_singular()):
@@ -64,3 +61,12 @@
 	</div>
 
 </article><!-- #post-<?php the_ID(); ?> -->
+<footer id="colophon" class="site-footer site-footer-not-mobile">
+	<div class="site-info">
+		<?php dynamic_sidebar('footer'); ?>
+	</div><!-- .site-info -->
+</footer>
+
+</div>
+<div class="container container-thumbnail">
+	<?php arboreal_post_thumbnail(); ?>

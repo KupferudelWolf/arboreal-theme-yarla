@@ -34,14 +34,13 @@ get_sidebar();
 			// );
 		
 			// get_template_part('template-parts/nav');
-		
 			?>
 		</div>
 		<?php
 		// If comments are open or we have at least one comment, load up the comment template.
 		if (comments_open() || get_comments_number()):
 			?>
-			<div class="container">
+			<div class="container container-comments">
 				<?php comments_template(); ?>
 			</div>
 			<?php

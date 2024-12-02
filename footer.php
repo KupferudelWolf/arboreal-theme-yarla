@@ -11,11 +11,11 @@
 
 ?>
 
-<footer id="colophon" class="site-footer">
-	<div class="site-info">
-		<?php dynamic_sidebar('footer'); ?>
-	</div><!-- .site-info -->
-</footer><!-- #colophon -->
+<footer id="colophon" class="site-footer site-footer-mobile">
+    <div class="site-info">
+        <?php dynamic_sidebar('footer'); ?>
+    </div><!-- .site-info -->
+</footer>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

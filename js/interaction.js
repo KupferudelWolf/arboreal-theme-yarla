@@ -11,6 +11,7 @@
     // window.history.replaceState( {}, document.title, window.location.pathname );
 
     const _admin_data = {};
+    let timeout_tutorial;
 
     function isMobile() {
         return '' + getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
@@ -32,12 +33,12 @@
     $( 'body.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
         if ( event.pointerType === 'touch' ) return;
         if ( _admin_data.dragging ) return;
-        event.currentTarget.classList.toggle( 'enlarged' );
-        is_enlarged = event.currentTarget.classList.contains( 'enlarged' );
+        event.currentTarget.parentElement.classList.toggle( 'enlarged' );
+        is_enlarged = event.currentTarget.parentElement.classList.contains( 'enlarged' );
         _admin_data.dragging_start = _admin_data.dragging = false;
     } );
 
-    const $post_thumbnail = $( '.post .post-thumbnail' );
+    const $post_thumbnail = $( 'body.single .post-thumbnail' );
     if ( $post_thumbnail.length ) {
         const $toggle_button = $( '.nav-toggle' );
         let timeout_active;
@@ -50,7 +51,7 @@
                 clearTimeout( timeout_active );
                 timeout_active = setTimeout( () => {
                     $post_thumbnail.removeClass( 'boxes-active' );
-                }, 500 );
+                }, 1000 );
             }
         };
         const box_toggle_on_click = function () {
@@ -59,10 +60,27 @@
             //     boxes_mode = 1;
             // }
             $post_thumbnail.removeClass( 'boxes-hover boxes-show boxes-hide' );
+            clearTimeout( timeout_tutorial );
+            $( '.areamap-tutorial' ).remove();
             switch ( boxes_mode ) {
                 case 0: /// Hover
                     $toggle_button.children( 'a' ).html( isMobile() ? 'Translations: Tap' : 'Translations: Hover' );
                     $post_thumbnail.addClass( 'boxes-hover' );
+                    /// Tutorial.
+                    if ( $.cookie( 'has_hovered' ) != '1' ) {
+                        timeout_tutorial = setTimeout( () => {
+                            if ( $.cookie( 'has_hovered' ) != '1' ) {
+                                const $elem = $( '<div>' );
+                                $elem.addClass( 'areamap areamap-tutorial' );
+                                $elem.html( 'Hover over the Yarla text to see the English translation.' );
+                                $elem.css( 'opacity', '0' );
+                                $post_thumbnail.append( $elem );
+                                setTimeout( () => {
+                                    $elem.css( 'opacity', '1' );
+                                }, 100 );
+                            }
+                        }, 5000 );
+                    }
                     break;
                 case 1: /// Show
                     $toggle_button.children( 'a' ).html( 'Translations: Show' );
@@ -76,7 +94,7 @@
                     break;
             }
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );
-            $.cookie( 'boxes_mode', boxes_mode, { expires: 31, path: COOKIEPATH } );
+            $.cookie( 'boxes_mode', boxes_mode, { expires: 365, path: COOKIEPATH } );
             box_set_active();
         };
         $toggle_button.on( 'click', box_toggle_on_click );
@@ -120,8 +138,15 @@
             );
         } );
 
+        /// Tutorial.
+        $( '.areamap' ).on( 'hover mouseover mousemove', function ( event ) {
+            if ( boxes_mode !== 0 ) return;
+            $( '.areamap-tutorial' ).remove();
+            $.cookie( 'has_hovered', 1, { expires: 365, path: COOKIEPATH } );
+        } );
+
         /// Interactive translation tool.
-        $( 'body.admin-bar.single .post-thumbnail' )
+        $post_thumbnail
             .on( 'mousedown', function ( event ) {
                 event.preventDefault();
                 const $this = $( this );

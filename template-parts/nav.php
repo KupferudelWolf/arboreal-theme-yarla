@@ -21,7 +21,7 @@ if (is_single()): ?>
                     )
                 );
                 ?>
-                <div class="nav-first">
+                <div class="nav-first button">
                     <a href="<?php echo get_permalink($posts_array[0]); ?>" rel="first">&lt;&lt;</a>
                 </div>
             <?php else: ?>
@@ -29,7 +29,7 @@ if (is_single()): ?>
             <?php endif; ?>
 
             <?php if (get_previous_post_link()): ?>
-                <div class="nav-previous" data-id="<?php echo get_previous_post()->ID; ?>">
+                <div class="nav-previous button" data-id="<?php echo get_previous_post()->ID; ?>">
                     <?php echo get_previous_post_link('%link', '&lt;'); ?>
                 </div>
             <?php else: ?>
@@ -37,7 +37,7 @@ if (is_single()): ?>
             <?php endif; ?>
 
             <?php if (has_post_thumbnail()): ?>
-                <div class="nav-toggle" data-boxes_mode="<?php
+                <div class="nav-toggle button" data-boxes_mode="<?php
                 $mode = "0";
                 if ($_COOKIE && $_COOKIE['boxes_mode']) {
                     $mode = $_COOKIE['boxes_mode'];
@@ -51,7 +51,7 @@ if (is_single()): ?>
             <?php endif; ?>
 
             <?php if (get_next_post_link()): ?>
-                <div class="nav-next" data-id="<?php echo get_next_post()->ID; ?>">
+                <div class="nav-next button" data-id="<?php echo get_next_post()->ID; ?>">
                     <?php echo get_next_post_link('%link', '&gt;'); ?>
                 </div>
             <?php else: ?>
@@ -60,7 +60,7 @@ if (is_single()): ?>
 
             <?php
             if (get_next_post_link()): ?>
-                <div class="nav-newest">
+                <div class="nav-newest button">
                     <a href="<?php
                     echo get_home_url();
                     ?>" rel="newest">
