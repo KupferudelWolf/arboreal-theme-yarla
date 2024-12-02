@@ -946,6 +946,7 @@ main#primary {
 }
 .single .container-thumbnail.enlarged .post-thumbnail {
     max-height: none;
+    height: auto;
 }
 .single .container-thumbnail.enlarged img {
     width: 80vw;
