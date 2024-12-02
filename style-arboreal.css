@@ -1364,7 +1364,7 @@ aside#secondary {
     main#primary {
         width: 100% !important;
         flex-direction: column;
-        gap: 4vh;
+        /* gap: 4vh; */
     }
 
     .hoverbox.adminbox {
