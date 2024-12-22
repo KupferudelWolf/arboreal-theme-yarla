@@ -122,11 +122,11 @@
         /// Hoverbox functionality.
         $( '.hoverbox' ).parent().on( 'hover mouseover mousemove', function ( event ) {
             const $this = $( this );
-            const [ left, top ] = toXY( event, $this );
+            let [ left, top ] = toXY( event, $this );
             if ( left === null || top === null ) return;
             const $boxes = $this.children( '.hoverbox' );
             if ( _admin_data.dragging ) return;
-            $boxes.css( {
+            const style = {
                 left: left + '%',
                 top: top + '%',
                 right: '',
@@ -134,7 +134,19 @@
                 width: '',
                 height: '',
                 opacity: ''
-            } );
+            };
+            if ( isMobile() ) {
+                const width = document.body.clientWidth;
+                $boxes.css( style );
+                const off_left = $boxes.offset().left;
+                const off_right = off_left + $boxes.width();
+                if ( off_left < 0 ) {
+                    style.left = `calc(${ left }% + ${ -Math.ceil( off_left ) }px)`;
+                } else if ( off_right > width ) {
+                    style.left = `calc(${ left }% - ${ Math.ceil( off_right ) - width }px)`;
+                }
+            }
+            $boxes.css( style );
             _admin_data.$box.html(
                 `left: ${ left + '%' };</br>top: ${ top + '%' };`
             );
