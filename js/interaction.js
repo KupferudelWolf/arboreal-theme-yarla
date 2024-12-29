@@ -15,7 +15,7 @@
     let timeout_tutorial;
 
     function isMobile() {
-        return '' + getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
+        return getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
     }
 
     window.addEventListener( 'touchstart', function ( event ) {
@@ -32,7 +32,8 @@
 
     /// Enlarge the image when clicked.
     $( 'body.single .post-thumbnail' ).on( 'pointerup', ( event ) => {
-        if ( event.pointerType === 'touch' ) return;
+        if ( isMobile() ) return;
+        // if ( event.pointerType === 'touch' ) return;
         if ( _admin_data.dragging ) return;
         if ( event.button !== 0 ) return;
         event.currentTarget.parentElement.classList.toggle( 'enlarged' );
