@@ -885,10 +885,13 @@ main#primary {
     margin: 0 auto;
     align-items: center;
     width: 60vw;
-    gap: 0;
+    gap: 4vw;
 }
 .single main#primary:has(article.has-post-thumbnail) {
     width: 100vw;
+}
+.single main#primary:has(.container-thumbnail.enlarged) {
+    gap: 0;
 }
 .container {
     flex: 1;
@@ -924,7 +927,8 @@ main#primary {
 }
 .single .container-thumbnail {
     padding: 0;
-    max-width: 66.667vw;
+    /* max-width: 66.667vw; */
+    max-width: 61.5384615385vh;
     flex: 2;
 }
 .single .post-thumbnail {
@@ -942,7 +946,8 @@ main#primary {
     /* object-fit: contain; */
 }
 .single .container-thumbnail.enlarged {
-    flex-grow: 3;
+    max-width: none;
+    flex-grow: 4;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -1367,6 +1372,7 @@ aside#secondary {
         width: 100% !important;
         flex-direction: column;
         padding: 0 4vw;
+        gap: 2vh;
     }
 
     .hoverbox.adminbox {
