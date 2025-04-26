@@ -1048,14 +1048,13 @@ main#primary {
     display: flex;
     transition: opacity 0.25s, background-color 0.25s;
 }
-.single .post-thumbnail.boxes-show .areamap {
+.single .post-thumbnail.boxes-show > .areamap {
     cursor: default;
 }
 .single .post-thumbnail.boxes-hide .areamap {
     opacity: 0 !important;
 }
 .single .post-thumbnail.boxes-hover:hover > .areamap,
-.single .post-thumbnail.boxes-show > .areamap,
 .single .post-thumbnail.boxes-active > .areamap,
 .single .post-thumbnail .areamap:hover > .hoverbox,
 .single .post-thumbnail:hover > .hoverbox {

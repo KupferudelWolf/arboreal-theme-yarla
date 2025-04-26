@@ -49,12 +49,30 @@
         let boxes_mode = $toggle_button.attr( 'data-boxes_mode' ) || ( isMobile() ? 1 : 0 );
         --boxes_mode;
         const box_set_active = function () {
-            if ( boxes_mode !== 2 ) {
-                $post_thumbnail.addClass( 'boxes-active' );
-                clearTimeout( timeout_active );
-                timeout_active = setTimeout( () => {
-                    $post_thumbnail.removeClass( 'boxes-active' );
-                }, 1000 );
+            switch ( boxes_mode ) {
+                case 0:
+                    /// Show the boxes at start, then fade them away.
+                    clearTimeout( timeout_active );
+                    $post_thumbnail.addClass( 'boxes-active' );
+                    timeout_active = setTimeout( () => {
+                        $post_thumbnail.removeClass( 'boxes-active' );
+                    }, 1000 );
+                    break;
+                case 1:
+                    if ( typeof ( timeout_active ) === 'undefined' ) {
+                        /// Show the comic without boxes, then fade them in.
+                        /// Only do this if the page loads with this mode on.
+                        $post_thumbnail.removeClass( 'boxes-active' );
+                        timeout_active = setTimeout( () => {
+                            $post_thumbnail.addClass( 'boxes-active' );
+                        }, 500 );
+                    } else {
+                        /// Force the boxes to show.
+                        /// This happens if the mode is switched after loading.
+                        clearTimeout( timeout_active );
+                        $post_thumbnail.addClass( 'boxes-active' );
+                    }
+                    break;
             }
         };
         const box_toggle_on_click = function () {
