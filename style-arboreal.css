@@ -640,10 +640,6 @@ header.site-header a,
     align-content: center;
     padding: 0.5vh 1vh;
 }
-header.site-header a:hover,
-.main-navigation .menu-toggle:hover {
-    color: var(--theme-headertexthover);
-}
 
 .main-navigation ul .page_item,
 .main-navigation .menu-item,
@@ -680,8 +676,12 @@ header.site-header .main-navigation a:visited {
     text-decoration: none;
 }
 header.site-header .site-title a:hover,
-header.site-header .main-navigation:hover,
-header.site-header .main-navigation a:visited:hover {
+/* header.site-header .main-navigation .menu-item:hover, */
+header.site-header .main-navigation .menu-item:hover > a,
+header.site-header .main-navigation .menu-item:hover::after,
+/* header.site-header .main-navigation:hover, */
+/* header.site-header .main-navigation a:visited:hover, */
+header.site-header .main-navigation .menu-toggle:hover {
     color: var(--theme-headertexthover);
 }
 

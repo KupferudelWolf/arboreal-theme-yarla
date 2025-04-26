@@ -5,6 +5,10 @@
  * navigation support for dropdown menus.
  */
 ( function () {
+	function isMobile() {
+		return getComputedStyle( document.body ).getPropertyValue( '--is-mobile' ) === 'true';
+	}
+
 	const siteNavigation = document.getElementById( 'site-navigation' );
 
 	// Return early if the navigation doesn't exist.
@@ -19,15 +23,18 @@
 		return;
 	}
 
-	const menu = siteNavigation.getElementsByTagName( 'li' )[ 0 ];
+	const menus = siteNavigation.getElementsByTagName( 'li' );
 
 	// Hide menu toggle button if menu is empty and return early.
-	if ( 'undefined' === typeof menu ) {
+	if ( !menus.length ) {
 		button.style.display = 'none';
 		return;
 	}
 
-	if ( !menu.classList.contains( 'nav-menu' ) ) {
+	// if ( !menus.classList.contains( 'nav-menu' ) ) {
+	// 	menus.classList.add( 'nav-menu' );
+	// }
+	for ( const menu of menus ) {
 		menu.classList.add( 'nav-menu' );
 	}
 
@@ -53,10 +60,22 @@
 	} );
 
 	// Get all the link elements within the menu.
-	const links = menu.getElementsByTagName( 'a' );
+	const links = [];
+	for ( const menu of menus ) {
+		const link = menu.getElementsByTagName( 'a' );
+		if ( link.length ) {
+			links.push( ...link );
+		}
+	}
 
 	// Get all the link elements with children within the menu.
-	const linksWithChildren = menu.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
+	const linksWithChildren = [];
+	for ( const menu of menus ) {
+		const link = menu.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
+		if ( link.length ) {
+			linksWithChildren.push( ...link );
+		}
+	}
 
 	// Toggle focus each time a menu link is focused or blurred.
 	for ( const link of links ) {
@@ -72,7 +91,9 @@
 	/**
 	 * Sets or removes .focus class on an element.
 	 */
-	function toggleFocus() {
+	function toggleFocus( event ) {
+		const menuItem = this.parentNode;
+		const is_focus = menuItem.classList.contains( 'focus' );
 		if ( event.type === 'focus' || event.type === 'blur' ) {
 			let self = this;
 			// Move up through the ancestors of the current link until we hit .nav-menu.
@@ -84,9 +105,7 @@
 				self = self.parentNode;
 			}
 		}
-
-		if ( event.type === 'touchstart' ) {
-			const menuItem = this.parentNode;
+		if ( !isMobile() && event.type === 'touchstart' && !is_focus ) {
 			event.preventDefault();
 			for ( const link of menuItem.parentNode.children ) {
 				if ( menuItem !== link ) {
