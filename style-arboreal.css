@@ -790,7 +790,7 @@ footer section > p {
     font-size: 1vh;
     line-height: 150%;
 }
-footer.site-footer-mobile {
+.single footer.site-footer-mobile {
     display: none;
 }
 
@@ -902,7 +902,8 @@ main#primary {
     flex-direction: column;
 }
 .page .container {
-    padding: 6vh;
+    padding: 3vh 6vh;
+    padding-bottom: 0;
     margin: 4vh;
     background-color: white;
 }
