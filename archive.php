@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 /**
+ * Template Name: Archive
+ *
  * The template for displaying archive pages
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
@@ -26,7 +28,11 @@ get_header();
 		if (is_page()):
 			$wp_query = new WP_Query(array(
 				'post_type' => 'post',
-				'meta_query' => array(array('key' => '_thumbnail_id'))
+				'meta_query' => array(array('key' => '_thumbnail_id')),
+				'orderby' => 'date',
+				'order' => 'ASC',
+				'posts_per_page' => 2,
+				'paged' => $paged
 			));
 			$title = 'Archive';
 		endif;
