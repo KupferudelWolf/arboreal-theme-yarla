@@ -345,6 +345,11 @@ html {
     opacity: 1;
 }
 
+.mobile-only {
+    display: none;
+}
+.desktop-only {}
+
 
 /*
  ***************
@@ -865,7 +870,7 @@ footer section > p {
  ***********************
 */
 .archive .post-navigation {
-    height: 2rem;
+    height: 2.5em;
     padding: 0;
     margin: 3vh 0;
 }
@@ -877,7 +882,7 @@ footer section > p {
 .archive .post-navigation .nav-links .button {
     width: min-content;
     white-space: nowrap;
-    min-width: 2rem;
+    min-width: 2.5em;
 }
 
 .pt-cv-wrapper .pagination {
@@ -1442,6 +1447,12 @@ aside#secondary {
     :root {
         --is-mobile: true;
     }
+    .mobile-only {
+        display: unset;
+    }
+    .desktop-only {
+        display: none;
+    }
 
     .single main#primary,
     .page main#primary,
@@ -1544,6 +1555,10 @@ aside#secondary {
     }
     .single .post-thumbnail .areamap-tutorial {
         opacity: 0 !important;
+    }
+
+    .archive .post-navigation .button:not(:first-child):not(:last-child) {
+        display: none;
     }
 }
 @media screen and (max-aspect-ratio: 3 / 4) {

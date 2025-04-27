@@ -58,11 +58,15 @@ get_header();
                             echo '<div class="button inactive"><span>&lt; Older</span></div>';
                         }
                         foreach ($links as $key => $link) {
+                            $classes = 'button';
                             if ($key === $paged) {
-                                echo '<div class="button inactive">' . $link . '</div>';
-                            } else {
-                                echo '<div class="button">' . $link . '</div>';
+                                $classes .= ' inactive';
                             }
+                            // if (!str_contains($link, 'prev') and !str_contains($link, 'next')) {
+                            //     $classes .= ' desktop-only';
+                            // }
+                            echo '<div class="' . $classes . '">' . $link . '</div>';
+
                         }
                         if ($paged === $wp_query->max_num_pages) {
                             echo '<div class="button inactive"><span>Newer &gt;</span></div>';
