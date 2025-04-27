@@ -465,6 +465,7 @@ input[type="submit"],
     align-items: center;
     text-align: center;
     padding: 0.6em 1em;
+    cursor: pointer;
 }
 
 button:focus,
@@ -490,6 +491,12 @@ input[type="reset"]:active,
 input[type="submit"]:active,
 .navigation.posts-navigation .nav-links > div:active {
     border: 3px inset var(--theme-buttonborderhover);
+    background-color: var(--theme-buttonbackhover);
+}
+
+.button.inactive {
+    cursor: default;
+    border-color: transparent;
     background-color: var(--theme-buttonbackhover);
 }
 
@@ -697,24 +704,24 @@ header.site-header .main-navigation .menu-toggle:hover {
 .post-navigation .nav-links > div.nav-blank {
     border: none;
 }
-.post-navigation .button {
+/* .post-navigation .button:not(.inactive) {
     border-color: var(--theme-navborder);
     border: 3px outset var(--theme-navborder);
     background-color: var(--theme-navback);
     color: var(--theme-navtext);
 }
-.post-navigation .button:focus,
-.post-navigation .button:hover {
+.post-navigation .button:not(.inactive):focus,
+.post-navigation .button:not(.inactive):hover {
     border-color: var(--theme-navborderhover);
     background-color: var(--theme-navbackhover);
 }
-.post-navigation .button:active {
+.post-navigation .button:not(.inactive):active {
     border: 3px inset var(--theme-navborderhover);
     background-color: var(--theme-navbackhover);
-}
+} */
 
-.post-navigation .nav-links > div > a,
-.posts-navigation .nav-links > div > a {
+.post-navigation .nav-links > div > *,
+.posts-navigation .nav-links > div > * {
     color: var(--theme-navtext);
     text-decoration: none;
     width: 100%;
@@ -857,6 +864,22 @@ footer section > p {
  *  Archive Pagination *
  ***********************
 */
+.archive .post-navigation {
+    height: 2rem;
+    padding: 0;
+    margin: 3vh 0;
+}
+.archive .post-navigation .nav-links {
+    display: flex;
+    grid-template-columns: unset;
+    justify-content: center;
+}
+.archive .post-navigation .nav-links .button {
+    width: min-content;
+    white-space: nowrap;
+    min-width: 2rem;
+}
+
 .pt-cv-wrapper .pagination {
     border-radius: 0;
     gap: 1em;
@@ -1315,7 +1338,11 @@ div.comment {
 .archive .container .page-title,
 .search .container .page-title {
     text-align: center;
-    margin-bottom: 3vmin;
+    margin-bottom: 0;
+}
+.archive .container .page-header + .archive-posts-container,
+.search .container .page-header + .archive-posts-container {
+    margin-top: 3vmin;
 }
 .archive .container .archive-posts-container,
 .search .container .archive-posts-container {
