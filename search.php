@@ -24,8 +24,16 @@ get_header();
 				</h1>
 			</header><!-- .page-header -->
 
+			<?php
+			the_posts_navigation(array(
+				'prev_text' => '&lt; Older',
+				'next_text' => 'Newer &gt;'
+			));
+			?>
+
 			<div class="archive-posts-container">
 				<?php
+
 				/* Start the Loop */
 				while (have_posts()):
 					?>
@@ -47,9 +55,6 @@ get_header();
 				?>
 			</div>
 			<?php
-			the_posts_navigation();
-
-
 		else:
 
 			get_template_part('template-parts/content', 'none');
