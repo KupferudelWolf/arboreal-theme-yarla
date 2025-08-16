@@ -42,6 +42,7 @@
     } );
 
     const $post_thumbnail = $( 'body.single .post-thumbnail' );
+    const $transcript = $( '.entry-transcript.desktop-only table' );
     if ( $post_thumbnail.length ) {
         const $toggle_button = $( '.nav-toggle' );
         let timeout_active;
@@ -50,7 +51,7 @@
         --boxes_mode;
         const box_set_active = function () {
             switch ( boxes_mode ) {
-                case 0:
+                case 0: /// Hover
                     /// Show the boxes at start, then fade them away.
                     clearTimeout( timeout_active );
                     $post_thumbnail.addClass( 'boxes-active' );
@@ -58,7 +59,7 @@
                         $post_thumbnail.removeClass( 'boxes-active' );
                     }, 1000 );
                     break;
-                case 1:
+                case 1: /// Show
                     if ( typeof ( timeout_active ) === 'undefined' ) {
                         /// Show the comic without boxes, then fade them in.
                         /// Only do this if the page loads with this mode on.
@@ -73,19 +74,47 @@
                         $post_thumbnail.addClass( 'boxes-active' );
                     }
                     break;
+                case 2: /// Hide
+                    if ( typeof ( timeout_active ) === 'undefined' ) {
+                        /// Have the transcript visible at the start.
+                        /// Only do this if the page loads with this mode on.
+                        $transcript.css( 'transition', 'none' );
+                        timeout_active = setTimeout( () => {
+                            $transcript.css( 'transition', '' );
+                        }, 10 );
+                    }
+                    break;
             }
         };
+        /// Set the text in the button when resizing.
+        const box_rename = function () {
+            let str = '';
+            switch ( +boxes_mode ) {
+                case 0: /// Hover
+                    str = isMobile() ? 'Tap' : 'Hover';
+                    break;
+                case 1: /// Show
+                    str = 'Show';
+                    break;
+                case 2: /// Hide
+                    str = 'Hide';
+                    break;
+            }
+            console.log( boxes_mode, str );
+            $toggle_button.children( 'a' ).html( 'Translations: ' + str );
+        };
+        $( window ).on( 'resize', box_rename );
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
             // if ( isMobile() && boxes_mode === 0 ) {
             //     boxes_mode = 1;
             // }
             $post_thumbnail.removeClass( 'boxes-hover boxes-show boxes-hide' );
+            $transcript.removeClass( 'active' );
             clearTimeout( timeout_tutorial );
             $( '.areamap-tutorial' ).remove();
             switch ( boxes_mode ) {
                 case 0: /// Hover
-                    $toggle_button.children( 'a' ).html( isMobile() ? 'Translations: Tap' : 'Translations: Hover' );
                     $post_thumbnail.addClass( 'boxes-hover' );
                     /// Tutorial.
                     if ( $.cookie( 'has_hovered' ) != '1' ) {
@@ -104,19 +133,17 @@
                     }
                     break;
                 case 1: /// Show
-                    $toggle_button.children( 'a' ).html( 'Translations: Show' );
                     $post_thumbnail.addClass( 'boxes-show' );
-                    // $post_thumbnail.addClass( 'boxes-no_hover boxes-sticky' );
                     break;
                 case 2: /// Hide
-                    $toggle_button.children( 'a' ).html( 'Translations: Hide' );
                     $post_thumbnail.addClass( 'boxes-hide' );
-                    // $post_thumbnail.addClass( 'boxes-no_hover' );
+                    $transcript.addClass( 'active' );
                     break;
             }
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );
             $.cookie( 'boxes_mode', boxes_mode, { expires: 365, path: COOKIEPATH } );
             box_set_active();
+            box_rename();
         };
         $toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();

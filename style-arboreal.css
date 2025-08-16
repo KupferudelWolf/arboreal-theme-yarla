@@ -262,7 +262,7 @@
     --theme-aspen-header: #252f30;
     --theme-aspen-headertext: #f9f4e5;
     --theme-aspen-headertexthover: #eccaaa;
-    --theme-aspen-areamapback: #f3e9c8d7;
+    --theme-aspen-areamapback: #f3e9c8;
     --theme-aspen-areamaptext: black;
     --theme-aspen-hoverboxback: #f3e9c8;
     --theme-aspen-hoverboxtext: #252f30;
@@ -285,7 +285,7 @@
     --theme-aspennight-header: hsl(185, 13%, 10%);
     --theme-aspennight-headertext: #f9f4e5;
     --theme-aspennight-headertexthover: #eccaaa;
-    --theme-aspennight-areamapback: #f3e9c8d7;
+    --theme-aspennight-areamapback: #f3e9c8;
     --theme-aspennight-areamaptext: black;
     --theme-aspennight-hoverboxback: #f3e9c8;
     --theme-aspennight-hoverboxtext: black;
@@ -308,7 +308,7 @@
     --theme-original-header: #313f40;
     --theme-original-headertext: #fcfade;
     --theme-original-headertexthover: #fcfade;
-    --theme-original-areamapback: #fcfadedf;
+    --theme-original-areamapback: #fcfade;
     --theme-original-areamaptext: black;
     --theme-original-hoverboxback: #fcfade;
     --theme-original-hoverboxtext: #313f40;
@@ -1028,8 +1028,8 @@ main#primary {
 .single .container-thumbnail.enlarged img {
     width: 80vw;
     height: auto;
-    image-rendering: pixelated;
     image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 .single .post-thumbnail:not(.boxes-show) .hoverbox,
@@ -1049,6 +1049,7 @@ main#primary {
     opacity: 0;
 }
 .single .post-thumbnail.boxes-show .hoverbox:not(.adminbox) {
+    color: black;
     width: auto;
     height: auto;
     min-width: fit-content;
@@ -1059,41 +1060,41 @@ main#primary {
     opacity: 1;
     overflow: hidden;
     text-shadow:
-        -1px -1px 0 white,
-        0px -1px 0 white,
-        1px -1px 0 white,
-        -1px 0px 0 white,
-        1px 0px 0 white,
-        -1px 1px 0 white,
-        0px 1px 0 white,
-        1px 1px 0 white,
+        -1px -1px 0 var(--background-color),
+        0px -1px 0 var(--background-color),
+        1px -1px 0 var(--background-color),
+        -1px 0px 0 var(--background-color),
+        1px 0px 0 var(--background-color),
+        -1px 1px 0 var(--background-color),
+        0px 1px 0 var(--background-color),
+        1px 1px 0 var(--background-color),
 
-        -0.75px -0.75px 0 white,
-        0px -0.75px 0 white,
-        0.75px -0.75px 0 white,
-        -0.75px 0px 0 white,
-        0.75px 0px 0 white,
-        -0.75px 0.75px 0 white,
-        0px 0.75px 0 white,
-        0.75px 0.75px 0 white,
+        -0.75px -0.75px 0 var(--background-color),
+        0px -0.75px 0 var(--background-color),
+        0.75px -0.75px 0 var(--background-color),
+        -0.75px 0px 0 var(--background-color),
+        0.75px 0px 0 var(--background-color),
+        -0.75px 0.75px 0 var(--background-color),
+        0px 0.75px 0 var(--background-color),
+        0.75px 0.75px 0 var(--background-color),
 
-        -0.5px -0.5px 0 white,
-        0px -0.5px 0 white,
-        0.5px -0.5px 0 white,
-        -0.5px 0px 0 white,
-        0.5px 0px 0 white,
-        -0.5px 0.5px 0 white,
-        0px 0.5px 0 white,
-        0.5px 0.5px 0 white,
+        -0.5px -0.5px 0 var(--background-color),
+        0px -0.5px 0 var(--background-color),
+        0.5px -0.5px 0 var(--background-color),
+        -0.5px 0px 0 var(--background-color),
+        0.5px 0px 0 var(--background-color),
+        -0.5px 0.5px 0 var(--background-color),
+        0px 0.5px 0 var(--background-color),
+        0.5px 0.5px 0 var(--background-color),
 
-        -0.25px -0.25px 0 white,
-        0px -0.25px 0 white,
-        0.25px -0.25px 0 white,
-        -0.25px 0px 0 white,
-        0.25px 0px 0 white,
-        -0.25px 0.25px 0 white,
-        0px 0.25px 0 white,
-        0.25px 0.25px 0 white;
+        -0.25px -0.25px 0 var(--background-color),
+        0px -0.25px 0 var(--background-color),
+        0.25px -0.25px 0 var(--background-color),
+        -0.25px 0px 0 var(--background-color),
+        0.25px 0px 0 var(--background-color),
+        -0.25px 0.25px 0 var(--background-color),
+        0px 0.25px 0 var(--background-color),
+        0.25px 0.25px 0 var(--background-color);
 }
 .single .container-thumbnail.enlarged .post-thumbnail.boxes-show .hoverbox:not(.adminbox) {
     font-size: 2vh;
@@ -1109,7 +1110,7 @@ main#primary {
     top: 0;
     left: 0;
     border: 2px solid var(--theme-areamaptext);
-    background-color: var(--theme-areamapback);
+    background: color-mix(in srgb, var(--theme-areamapback) 85%, transparent);
     cursor: crosshair;
     opacity: 0;
     display: flex;
@@ -1128,8 +1129,9 @@ main#primary {
     opacity: 1;
 }
 .single .post-thumbnail:not(.boxes-hover) .areamap {
+    --background-color: white;
     border: none;
-    background-color: #ffffffef;
+    background: color-mix(in srgb, var(--background-color) 90%, transparent);
     align-items: center;
     justify-content: center;
 }
@@ -1193,6 +1195,49 @@ main#primary {
 .single article .timestamp {
     font-size: 1.25vh;
     font-style: italic;
+}
+.single .entry-transcript {
+    /* display: none; */
+    /* color: transparent; */
+    margin-top: 2vh;
+    overflow: hidden;
+    height: 100%;
+}
+.single .entry-transcript table {
+    border-collapse: collapse;
+    transition: right 1s;
+}
+.single .entry-transcript.desktop-only table {
+    position: relative;
+    /* Disable animation for now... I'm not sure about it yet. */
+    /* right: -100%; */
+}
+.single .entry-transcript.desktop-only table.active {
+    right: 0%;
+}
+.single table.transcript tr {
+    margin-top: 0.5vh;
+    border-top: 1px dotted lightgrey;
+}
+.single table.transcript tr.new-panel {
+    border-top: 1px solid black;
+}
+.single table.transcript tr:last-child {
+    border-bottom: 1px solid black;
+}
+.single table.transcript th {
+    font-weight: normal;
+    vertical-align: top;
+    font-size: 1.125vh;
+    padding: 0.25rem 0;
+}
+.single table.transcript th:first-child {
+    text-align: right;
+    padding-right: 0.5rem;
+}
+.single table.transcript th:last-child {
+    text-align: left;
+    width: 100%;
 }
 
 .page {
@@ -1509,11 +1554,17 @@ aside#secondary {
     .single .container-thumbnail.enlarged .post-thumbnail img {
         width: 100%;
         height: auto;
-        image-rendering: auto;
+        /* image-rendering: auto; */
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
     }
     .single .container-thumbnail.enlarged {
         flex-grow: 1;
         overflow: hidden;
+    }
+
+    .single table.transcript th {
+        font-size: 1.5vh;
     }
 
     .comment-respond > * {
@@ -1552,6 +1603,8 @@ aside#secondary {
     }
     .single .post-thumbnail .areamap {
         cursor: none;
+        /* dammit, mac... */
+        cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=), auto !important;
     }
     .single .post-thumbnail .areamap-tutorial {
         opacity: 0 !important;

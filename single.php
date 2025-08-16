@@ -37,9 +37,19 @@ get_sidebar();
 			?>
 		</div>
 		<?php
+		// Mobile position of transcript.
+		global $TRANSCRIPT;
+		if (count($TRANSCRIPT) > 0): ?>
+			<!-- Transcript (Mobile) -->
+			<div class="entry-transcript mobile-only">
+				<?php get_template_part('template-parts/transcript'); ?>
+			</div>
+		<?php endif;
+
 		// If comments are open or we have at least one comment, load up the comment template.
 		if (comments_open() || get_comments_number()):
 			?>
+			<!-- Comments -->
 			<div class="container container-comments">
 				<?php comments_template(); ?>
 			</div>

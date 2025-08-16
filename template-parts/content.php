@@ -55,12 +55,24 @@
 			);
 			?>
 		<?php endif; ?>
-		<p class="timestamp"><?php _e('Originally published: ', 'arboreal') . the_time('D, Y M j') ?>, at
-			<?php the_time('g:i a'); ?>
+		<p class="timestamp">
+			<?php _e('Originally published: ', 'arboreal') . the_time('D, Y M j')
+				?>, at <?php the_time('g:i a'); ?>
 		</p>
+
+		<?php
+		// Desktop position of transcript.
+		global $TRANSCRIPT;
+		if (count($TRANSCRIPT) > 0): ?>
+			<!-- Transcript (Desktop) -->
+			<div class="entry-transcript desktop-only" id="#transcript">
+				<?php get_template_part('template-parts/transcript'); ?>
+			</div>
+		<?php endif; ?>
 	</div>
 
 </article><!-- #post-<?php the_ID(); ?> -->
+
 <footer id="colophon" class="site-footer site-footer-not-mobile">
 	<div class="site-info">
 		<?php dynamic_sidebar('footer'); ?>

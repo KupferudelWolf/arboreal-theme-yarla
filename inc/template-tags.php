@@ -140,84 +140,46 @@ if (!function_exists('arboreal_post_thumbnail')):
 				?>
 				<?php if (current_user_can('edit_posts')): ?>
 					<div class="hoverbox adminbox"></div>
-				<?php endif; ?>
-				<?php
-				$arr = get_field('hoverbox_table');
-				if (is_array($arr)) {
-					foreach ($arr as &$row) {
-						if (is_array($row)) {
-							foreach ($row as &$cell) {
-								$celldata = json_decode($cell[2]['c'], true);
-								if (
-									$celldata
-									and array_key_exists('x1', $celldata)
-									and array_key_exists('y1', $celldata)
-									and array_key_exists('x2', $celldata)
-									and array_key_exists('y2', $celldata)
-								):
-									$x1 = (float) $celldata['x1'];
-									$y1 = (float) $celldata['y1'];
-									$x2 = (float) $celldata['x2'];
-									$y2 = (float) $celldata['y2'];
-									$left = min($x1, $x2);
-									$top = min($y1, $y2);
-									$right = max($x1, $x2);
-									$bottom = max($y1, $y2);
-									$width = $right - $left;
-									$height = $bottom - $top;
-									if (
-										min($left, $top) >= 0 &&
-										max($right, $bottom) <= 100 &&
-										min($width, $height) > 0
-									):
-										?>
-										<div class="areamap<?php
-										if ($cell[1]['c']) {
-											$speaker = strtolower($cell[1]['c']);
-											echo ' ' . preg_replace('/[^a-z]+/', '_', $speaker);
-										}
-										if (array_key_exists('rotate', $celldata)) {
-											$rotate = $celldata['rotate'];
-											echo ' rotate-' . $rotate;
-										}
-										if (array_key_exists('align', $celldata)) {
-											$align = $celldata['align'];
-											echo ' align-' . $align;
-										}
-										?>"
-											style="top: <?php echo $top; ?>%; left: <?php echo $left; ?>%; width: <?php echo $width; ?>%; height: <?php echo $height; ?>%;">
-											<div class="hoverbox">
-												<?php echo $cell[0]['c']; ?>
-											</div>
-										</div>
-									<?php endif;
-								endif;
-							}
-						}
-					}
-				}
+				<?php endif;
+
+				global $TRANSCRIPT;
+				if (count($TRANSCRIPT) > 0):
+					foreach ($TRANSCRIPT as $item): ?>
+						<div class="<?php echo $item['class']; ?>" style="<?php
+						   echo $item['style'];
+						   if ($item['speaker']) {
+							   echo ' name="' . $item['speaker'] . '"';
+						   }
+						   ?>">
+							<div class="hoverbox">
+								<?php echo $item['content']; ?>
+							</div>
+						</div>
+						<?php
+					endforeach;
+				endif;
 				?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else: ?>
 
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-				<?php
-				the_post_thumbnail(
-					'post-thumbnail',
-					array(
-						'alt' => the_title_attribute(
-							array(
-								'echo' => false,
-							)
-						),
-					)
-				);
-				?>
-			</a>
+			<!-- <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1"> -->
+			<?php
+			the_post_thumbnail(
+				'post-thumbnail',
+				array(
+					'alt' => the_title_attribute(
+						array(
+							'echo' => false,
+						)
+					),
+				)
+			);
+			?>
+			<!-- </a> -->
 
 			<?php
-		endif; // End is_singular().
+		endif;
 	}
 endif;
 

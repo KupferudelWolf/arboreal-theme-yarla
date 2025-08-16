@@ -12,6 +12,7 @@
 ?>
 
 <footer id="colophon" class="site-footer site-footer-mobile">
+    <!-- Footer (Mobile) -->
     <div class="site-info">
         <?php dynamic_sidebar('footer'); ?>
     </div><!-- .site-info -->

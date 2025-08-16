@@ -2,7 +2,7 @@
 <meta property="og:url" content="<?php echo get_permalink(); ?>">
 <meta property="og:title" content="Arboreal | <?php echo get_the_title(); ?>">
 <meta property="og:description"
-    content="Arboreal: A Comic From Another World.</br>&nbsp;(Translations available on website.)">
+    content="<?php echo get_bloginfo('name'); ?>: <?php echo get_bloginfo('description'); ?>. (Translations available on website.)">
 <meta property="og:image" content="<?php
 if (get_the_post_thumbnail_url()) {
     echo get_the_post_thumbnail_url(
@@ -22,7 +22,7 @@ if (get_the_post_thumbnail_url()) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Arboreal | <?php echo get_the_title(); ?>">
 <meta name="twitter:description"
-    content="Arboreal: A Comic From Another World.</br>&nbsp;(Translations available on website.)">
+    content="<?php echo get_bloginfo('name'); ?>: <?php echo get_bloginfo('description'); ?>. (Translations available on website.)">
 <meta name="twitter:image" content="<?php
 if (get_the_post_thumbnail_url()) {
     echo get_the_post_thumbnail_url(
