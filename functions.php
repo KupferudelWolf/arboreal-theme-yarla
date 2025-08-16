@@ -433,7 +433,7 @@ function get_transcript()
 				$item['color'] = (string) $celldata['background'];
 			}
 			if ($item['color']) {
-				array_push($item['style'], 'color: ' . $item['color']);
+				array_push($item['style'], '--background-color: ' . $item['color']);
 			}
 
 			if (array_key_exists('align', $celldata)) {
@@ -526,7 +526,7 @@ function get_transcript()
 							$item['color'] = (string) $celldata['background'];
 						}
 						if ($item['color']) {
-							array_push($item['style'], 'color: ' . $item['color']);
+							array_push($item['style'], '--background-color: ' . $item['color']);
 						}
 
 						if (array_key_exists('align', $celldata)) {

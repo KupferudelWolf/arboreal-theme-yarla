@@ -100,7 +100,6 @@
                     str = 'Hide';
                     break;
             }
-            console.log( boxes_mode, str );
             $toggle_button.children( 'a' ).html( 'Translations: ' + str );
         };
         $( window ).on( 'resize', box_rename );

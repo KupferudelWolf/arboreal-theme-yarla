@@ -148,7 +148,7 @@ if (!function_exists('arboreal_post_thumbnail')):
 						<div class="<?php echo $item['class']; ?>" style="<?php
 						   echo $item['style'];
 						   if ($item['speaker']) {
-							   echo ' name="' . $item['speaker'] . '"';
+							   echo '" name="' . $item['speaker'];
 						   }
 						   ?>">
 							<div class="hoverbox">
