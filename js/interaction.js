@@ -87,7 +87,7 @@
             }
         };
         /// Set the text in the button when resizing.
-        const box_rename = function () {
+        const renameBox = function () {
             let str = '';
             switch ( +boxes_mode ) {
                 case 0: /// Hover
@@ -102,7 +102,20 @@
             }
             $toggle_button.children( 'a' ).html( 'Translations: ' + str );
         };
-        $( window ).on( 'resize', box_rename );
+
+        /// Scale the image container appropriately.
+        const scaleImageContainer = function () {
+            const img_w = $( '.post-thumbnail img' ).attr( 'width' );
+            const img_h = $( '.post-thumbnail img' ).attr( 'height' );
+            $( '.post-thumbnail' ).css( 'aspect-ratio', img_w / img_h );
+        };
+        scaleImageContainer();
+
+        const onResize = function () {
+            renameBox();
+        };
+        $( window ).on( 'resize', onResize );
+        onResize();
         const box_toggle_on_click = function () {
             boxes_mode = ( boxes_mode + 1 ) % 3;
             // if ( isMobile() && boxes_mode === 0 ) {
@@ -142,7 +155,7 @@
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );
             $.cookie( 'boxes_mode', boxes_mode, { expires: 365, path: COOKIEPATH } );
             box_set_active();
-            box_rename();
+            renameBox();
         };
         $toggle_button.on( 'click', box_toggle_on_click );
         box_toggle_on_click();
@@ -155,27 +168,48 @@
             const mouse_y = event.pageY;
             if ( !mouse_x || !mouse_y ) return null;
             const offset = $target.offset();
+            const left = offset.left;
+            const top = offset.top;
             const width = $target.width();
             const height = $target.height();
-            const x = mouse_x - offset.left;
-            const y = mouse_y - offset.top;
-            const left = Math.round( 10000 * x / width ) / 100;
-            const top = Math.round( 10000 * y / height ) / 100;
-            return [ left, top ];
+            // const width = window.innerWidth;
+            // const height = window.innerHeight;
+            // const left = window.scrollX;
+            // const top = window.scrollY;
+            const x = mouse_x - left;
+            const y = mouse_y - top;
+            return [
+                Math.round( 10000 * x / width ) / 100,
+                Math.round( 10000 * y / height ) / 100
+            ];
+        };
+        const toSXY = function ( event ) {
+            const mouse_x = event.pageX;
+            const mouse_y = event.pageY;
+            if ( !mouse_x || !mouse_y ) return null;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const left = window.scrollX;
+            const top = window.scrollY;
+            const x = mouse_x - left;
+            const y = mouse_y - top;
+            return [
+                Math.round( 10000 * x / width ) / 100,
+                Math.round( 10000 * y / height ) / 100
+            ];
         };
 
         /// Hoverbox functionality.
         $( '.hoverbox' ).parent().on( 'hover mouseover mousemove', function ( event ) {
             const $this = $( this );
-            let [ left, top ] = toXY( event, $this );
+            const [ left_val, top_val ] = toXY( event, $this );
+            let [ left, top ] = toSXY( event ),
+                right = '',
+                bottom = '';
             if ( left === null || top === null ) return;
             const $boxes = $this.children( '.hoverbox' );
             if ( _admin_data.dragging ) return;
             const style = {
-                left: left + '%',
-                top: top + '%',
-                right: '',
-                bottom: '',
                 width: '',
                 height: '',
                 opacity: ''
@@ -186,14 +220,29 @@
                 const off_left = $boxes.offset().left;
                 const off_right = off_left + $boxes.width();
                 if ( off_left < 0 ) {
-                    style.left = `calc(${ left }% + ${ -Math.ceil( off_left ) }px)`;
+                    left = `calc(${ left }% + ${ -Math.ceil( off_left ) }px)`;
                 } else if ( off_right > width ) {
-                    style.left = `calc(${ left }% - ${ Math.ceil( off_right ) - width }px)`;
+                    left = `calc(${ left }% - ${ Math.ceil( off_right ) - width }px)`;
+                }
+                left = left + '%';
+                top = top + '%';
+            } else {
+                left = left + '%';
+                top = top + '%';
+                if ( left > 50 ) {
+                    left, right = right, left;
+                }
+                if ( top > 50 ) {
+                    top, bottom = bottom, top;
                 }
             }
+            style.left = left;
+            style.top = top;
+            style.right = right;
+            style.bottom = bottom;
             $boxes.css( style );
             _admin_data.$box.html(
-                `left: ${ left + '%' };</br>top: ${ top + '%' };`
+                `left: ${ left_val + '%' };</br>top: ${ top_val + '%' };`
             );
         } );
 
@@ -210,54 +259,57 @@
                 .on( 'mousedown', function ( event ) {
                     event.preventDefault();
                     const $this = $( this );
-                    const [ left, top ] = toXY( event, $this );
+                    const [ left_val, top_val ] = toXY( event, $this );
+                    const [ left, top ] = toSXY( event );
                     if ( left === null || top === null ) return;
                     _admin_data.dragging_start = true;
-                    _admin_data.x1 = left;
-                    _admin_data.y1 = top;
+                    _admin_data.x1 = left_val;
+                    _admin_data.y1 = top_val;
+                    _admin_data.sx1 = left;
+                    _admin_data.sy1 = top;
                 } )
                 .on( 'mousemove', function ( event ) {
                     if ( _admin_data.dragging ) {
-                        const $this = $( this );
-                        const [ left, top ] = toXY( event, $this );
-                        _admin_data.x2 = left;
-                        _admin_data.y2 = top;
-                        $( '.adminbox' ).html( '' ).css( {
-                            left: Math.min( _admin_data.x1, _admin_data.x2 ) + '%',
-                            top: Math.min( _admin_data.y1, _admin_data.y2 ) + '%',
-                            right: ( 100 - Math.max( _admin_data.x1, _admin_data.x2 ) ) + '%',
-                            bottom: ( 100 - Math.max( _admin_data.y1, _admin_data.y2 ) ) + '%',
+                        const [ left, top ] = toSXY( event );
+                        _admin_data.sx2 = left;
+                        _admin_data.sy2 = top;
+                        _admin_data.$box.html( '' ).css( {
+                            left: Math.min( _admin_data.sx1, _admin_data.sx2 ) + '%',
+                            top: Math.min( _admin_data.sy1, _admin_data.sy2 ) + '%',
+                            right: ( 100 - Math.max( _admin_data.sx1, _admin_data.sx2 ) ) + '%',
+                            bottom: ( 100 - Math.max( _admin_data.sy1, _admin_data.sy2 ) ) + '%',
                             width: 'auto',
                             height: 'auto',
                             opacity: '50%'
                         } );
                     } else if ( _admin_data.dragging_start ) {
-                        const $this = $( this );
-                        const [ left, top ] = toXY( event, $this );
+                        const [ left, top ] = toSXY( event );
                         if ( left === null || top === null ) return;
                         if (
-                            Math.abs( _admin_data.x1 - left ) > 2 ||
-                            Math.abs( _admin_data.y1 - top ) > 2
+                            Math.abs( _admin_data.sx1 - left ) > 2 ||
+                            Math.abs( _admin_data.sy1 - top ) > 2
                         ) {
                             _admin_data.dragging = true;
+                            _admin_data.$box.addClass( 'active' );
                         }
                     }
                 } )
                 .on( 'mouseup mouseleave', function ( event ) {
                     if ( !_admin_data.dragging ) return;
+                    _admin_data.dragging_start = false;
+                    _admin_data.dragging = false;
+                    _admin_data.$box.removeClass( 'active' );
                     const $this = $( this );
-                    const [ left, top ] = toXY( event, $this );
-                    if ( left === null || top === null ) return;
+                    const [ left_val, top_val ] = toXY( event, $this );
+                    if ( left_val === null || top_val === null ) return;
                     const data = {
                         x1: _admin_data.x1,
                         y1: _admin_data.y1,
-                        x2: _admin_data.x2,
-                        y2: _admin_data.y2
+                        x2: left_val,
+                        y2: top_val
                     };
                     navigator.clipboard.writeText( JSON.stringify( data, null, 4 ) );
                     console.log( 'Box:', data, '\n(copied to clipboard)' );
-                    _admin_data.dragging_start = false;
-                    _admin_data.dragging = false;
                 } );
         } else {
             $post_thumbnail

@@ -1004,10 +1004,13 @@ main#primary {
 .single .container-thumbnail {
     padding: 0;
     /* max-width: 66.667vw; */
-    max-width: 61.5384615385vh;
+    /* max-width: 61.5384615385vh; */
+    max-width: none;
     flex: 2;
 }
 .single .post-thumbnail {
+    /* Aspect ratio is set through code. This should be the default. */
+    aspect-ratio: 0.7692307692307693;
     display: flex;
     margin: 0;
     position: relative;
@@ -1015,17 +1018,22 @@ main#primary {
     /* height: 100%; */
     margin: auto;
     /* max-height: 100%; */
-    width: calc(92vh*800/1040);
+    /* width: calc(92vh*800/1040); */
+    /* width: 100%; */
+    width: auto;
     height: 92vh;
 }
 .single .post-thumbnail img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* image-rendering: crisp-edges; */
-    /* image-rendering: pixelated; */
+    /* This looks weird when hovered over.*/
+    /* I'm not sure why. */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 .single .container-thumbnail.enlarged {
+    width: auto;
     max-width: none;
     flex-grow: 4;
     overflow-x: hidden;
@@ -1051,7 +1059,7 @@ main#primary {
     height: auto;
     min-height: 1.5em;
     padding: 0.5vmin 1vmin;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     color: var(--theme-hoverboxtext);
@@ -1060,6 +1068,16 @@ main#primary {
     pointer-events: none;
     z-index: 10;
     opacity: 0;
+}
+.single .post-thumbnail .hoverbox.adminbox.active {
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 .single .post-thumbnail.boxes-show .hoverbox:not(.adminbox) {
     color: black;
