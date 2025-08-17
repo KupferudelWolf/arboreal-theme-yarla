@@ -49,38 +49,27 @@
                 <description>
                     <![CDATA[<?php echo $post->post_content; ?><a href="<?php
                        echo get_permalink($post); ?>" target="_blank"><img src="<?php
-                         echo get_the_post_thumbnail_url($post, 'small'); ?>" style="display: block; margin: 1em auto; width: auto !important;"></a><?php
+                         echo get_the_post_thumbnail_url($post, 'width'); ?>" style="display: block; margin: 1em auto; width: auto !important;"></a><?php
+                            global $TRANSCRIPT;
+                            get_transcript($post->ID);
                             $desc = "";
-                            $translation = get_field('hoverbox_table', $post);
-                            if (is_array($translation)) {
-                                foreach ($translation as &$row) {
-                                    if (is_array($row)) {
-                                        foreach ($row as &$cell) {
-                                            if (array_key_exists(0, $cell)) {
-                                                $text = (string) $cell[0]['c'];
-                                                $subject = (string) $cell[1]['c'];
-                                                if ($text) {
-                                                    if ($subject) {
-                                                        $desc .= "<b>";
-                                                        $desc .= $subject;
-                                                        $desc .= ":</b> ";
-                                                    }
-                                                    $desc .= $text;
-                                                    $desc .= "<br \>";
-                                                }
-                                            }
-                                        }
+                            foreach ($TRANSCRIPT as $item) {
+                                $content = $item['content'];
+                                if ($content) {
+                                    $speaker = $item['speaker'];
+                                    if ($speaker) {
+                                        $desc .= "<b>";
+                                        $desc .= $speaker;
+                                        $desc .= ":</b> ";
                                     }
+                                    $content = preg_replace(['/\<[ \/]*br[ \/]*\>/', '/\\[nr]/'], ' | ', $content);
+                                    $desc .= $content;
+                                    $desc .= "<br \>";
                                 }
-                                echo $desc;
                             }
+                            echo $desc;
                             ?>]]>
                 </description>
-                <content:encoded>
-                    <![CDATA[<?php echo $post->post_content; ?><a href="<?php
-                       echo get_permalink($post); ?>" target="_blank"><img src="<?php
-                         echo get_the_post_thumbnail_url($post, 'full'); ?>" style="display: block; margin: 1em auto; max-width: 100%;"></a><?php echo $desc; ?>]]>
-                </content:encoded>
             </item>
         <?php endforeach; ?>
     </channel>

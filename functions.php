@@ -349,110 +349,122 @@ function wpexplorer_redirect_attachment_page()
 }
 add_action('template_redirect', 'wpexplorer_redirect_attachment_page');
 
-function get_transcript()
+function get_transcript($id = null)
 {
 	global $TRANSCRIPT;
 	$TRANSCRIPT = [];
 
 	$LANG = 'en';
 
-	$arr = get_post_meta(get_the_ID(), 'translation_data', true);
-	if (is_array($arr) && count($arr) > 0) {
-		foreach ($arr as &$row) {
-			$celldata = json_decode($row[2], true);
-			if (
-				!$celldata
-				or !array_key_exists('x1', $celldata)
-				or !array_key_exists('y1', $celldata)
-				or !array_key_exists('x2', $celldata)
-				or !array_key_exists('y2', $celldata)
-			)
-				continue;
+	if ($id == null) {
+		$id = get_the_ID();
+	}
 
-			$x1 = (float) $celldata['x1'];
-			$y1 = (float) $celldata['y1'];
-			$x2 = (float) $celldata['x2'];
-			$y2 = (float) $celldata['y2'];
-			$left = min($x1, $x2);
-			$top = min($y1, $y2);
-			$right = max($x1, $x2);
-			$bottom = max($y1, $y2);
-			$width = $right - $left;
-			$height = $bottom - $top;
-			if (
-				min($left, $top) < 0 ||
-				max($right, $bottom) > 100 ||
-				min($width, $height) <= 0
-			)
-				continue;
-
-			$item = [];
-			$item['top'] = $top;
-			$item['left'] = $left;
-			$item['width'] = $width;
-			$item['height'] = $height;
-			$item['content'] = false;
-			$item['speaker'] = false;
-			$item['color'] = false;
-			$item['align'] = false;
-			$item['rotate'] = false;
-
-			$item['class'] = ['areamap'];
-			$item['style'] = [
-				'top: ' . $item['top'] . '%',
-				'left: ' . $item['left'] . '%',
-				'width: ' . $item['width'] . '%',
-				'height: ' . $item['height'] . '%'
-			];
-
-			/// Parse JSON for content and speaker fields.
-			for ($i = 0; $i < 2; $i++) {
-				$key = (['content', 'speaker'])[$i];
-				if (!array_key_exists($i, $row)) {
+	if (function_exists('rwmb_get_value')) {
+		/// Meta Boxes.
+		$arr = rwmb_get_value('translation_data', $object_id = $id);
+		if (is_array($arr) && count($arr) > 0) {
+			foreach ($arr as &$row) {
+				$celldata = json_decode($row[2], true);
+				if (
+					!$celldata
+					or !array_key_exists('x1', $celldata)
+					or !array_key_exists('y1', $celldata)
+					or !array_key_exists('x2', $celldata)
+					or !array_key_exists('y2', $celldata)
+				)
 					continue;
+
+				$x1 = (float) $celldata['x1'];
+				$y1 = (float) $celldata['y1'];
+				$x2 = (float) $celldata['x2'];
+				$y2 = (float) $celldata['y2'];
+				$left = min($x1, $x2);
+				$top = min($y1, $y2);
+				$right = max($x1, $x2);
+				$bottom = max($y1, $y2);
+				$width = $right - $left;
+				$height = $bottom - $top;
+				if (
+					min($left, $top) < 0 ||
+					max($right, $bottom) > 100 ||
+					min($width, $height) <= 0
+				)
+					continue;
+
+				$item = [];
+				$item['top'] = $top;
+				$item['left'] = $left;
+				$item['width'] = $width;
+				$item['height'] = $height;
+				$item['content'] = false;
+				$item['speaker'] = false;
+				$item['color'] = false;
+				$item['align'] = false;
+				$item['rotate'] = false;
+
+				$item['class'] = ['areamap'];
+				$item['style'] = [
+					'top: ' . $item['top'] . '%',
+					'left: ' . $item['left'] . '%',
+					'width: ' . $item['width'] . '%',
+					'height: ' . $item['height'] . '%'
+				];
+
+				/// Parse JSON for content and speaker fields.
+				for ($i = 0; $i < 2; $i++) {
+					$key = (['content', 'speaker'])[$i];
+					if (!array_key_exists($i, $row)) {
+						continue;
+					}
+					$val = @json_decode($row[$i]);
+					if ($val == null) {
+						$item[$key] = $row[$i];
+					} elseif (property_exists($val, $LANG)) {
+						$item[$key] = $val->$LANG;
+					} elseif (property_exists($val, 'en')) {
+						$item[$key] = $val->en;
+					} else {
+						$item[$key] = '';
+					}
 				}
-				$val = @json_decode($row[$i]);
-				if ($val == null) {
-					$item[$key] = $row[$i];
-				} elseif (property_exists($val, $LANG)) {
-					$item[$key] = $val->$LANG;
-				} elseif (property_exists($val, 'en')) {
-					$item[$key] = $val->en;
-				} else {
-					$item[$key] = '';
+
+				if ($row[1]) {
+					array_push($item['class'], preg_replace('/[^a-z]+/', '_', strtolower($item['speaker'])));
 				}
-			}
 
-			if ($row[1]) {
-				array_push($item['class'], preg_replace('/[^a-z]+/', '_', strtolower($item['speaker'])));
-			}
+				if (array_key_exists('background-color', $celldata)) {
+					$item['color'] = (string) $celldata['background-color'];
+				} elseif (array_key_exists('background', $celldata)) {
+					$item['color'] = (string) $celldata['background'];
+				}
+				if ($item['color']) {
+					array_push($item['style'], '--background-color: ' . $item['color']);
+				}
 
-			if (array_key_exists('background-color', $celldata)) {
-				$item['color'] = (string) $celldata['background-color'];
-			} elseif (array_key_exists('background', $celldata)) {
-				$item['color'] = (string) $celldata['background'];
-			}
-			if ($item['color']) {
-				array_push($item['style'], '--background-color: ' . $item['color']);
-			}
+				if (array_key_exists('align', $celldata)) {
+					$item['align'] = $celldata['align'];
+					array_push($item['class'], 'align-' . $item['align']);
+				}
+				if (array_key_exists('rotate', $celldata)) {
+					$item['rotate'] = $celldata['rotate'];
+					array_push($item['class'], 'rotate-' . $item['rotate']);
+				}
 
-			if (array_key_exists('align', $celldata)) {
-				$item['align'] = $celldata['align'];
-				array_push($item['class'], 'align-' . $item['align']);
-			}
-			if (array_key_exists('rotate', $celldata)) {
-				$item['rotate'] = $celldata['rotate'];
-				array_push($item['class'], 'rotate-' . $item['rotate']);
-			}
+				$item['class'] = implode(' ', $item['class']);
+				$item['style'] = implode('; ', $item['style']) . ';';
 
-			$item['class'] = implode(' ', $item['class']);
-			$item['style'] = implode('; ', $item['style']) . ';';
-
-			array_push($TRANSCRIPT, $item);
+				array_push($TRANSCRIPT, $item);
+			}
+			if (count($TRANSCRIPT) > 0) {
+				return;
+			}
 		}
-	} elseif (function_exists('get_field')) {
+	}
+
+	if (function_exists('get_field')) {
 		// Legacy support for ACF.
-		$arr = get_field('hoverbox_table');
+		$arr = get_field('hoverbox_table', $id);
 		if (is_array($arr)) {
 			foreach ($arr as &$row) {
 				if (is_array($row)) {
@@ -545,6 +557,9 @@ function get_transcript()
 					}
 				}
 			}
+		}
+		if (count($TRANSCRIPT) > 0) {
+			return;
 		}
 	}
 }

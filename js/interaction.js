@@ -42,7 +42,7 @@
     } );
 
     const $post_thumbnail = $( 'body.single .post-thumbnail' );
-    const $transcript = $( '.entry-transcript.desktop-only table' );
+    // const $transcript = $( '.entry-transcript.desktop-only table' );
     if ( $post_thumbnail.length ) {
         const $toggle_button = $( '.nav-toggle' );
         let timeout_active;
@@ -78,10 +78,10 @@
                     if ( typeof ( timeout_active ) === 'undefined' ) {
                         /// Have the transcript visible at the start.
                         /// Only do this if the page loads with this mode on.
-                        $transcript.css( 'transition', 'none' );
-                        timeout_active = setTimeout( () => {
-                            $transcript.css( 'transition', '' );
-                        }, 10 );
+                        // $transcript.css( 'transition', 'none' );
+                        // timeout_active = setTimeout( () => {
+                        //    $transcript.css( 'transition', '' );
+                        // }, 10 );
                     }
                     break;
             }
@@ -109,7 +109,7 @@
             //     boxes_mode = 1;
             // }
             $post_thumbnail.removeClass( 'boxes-hover boxes-show boxes-hide' );
-            $transcript.removeClass( 'active' );
+            // $transcript.removeClass( 'active' );
             clearTimeout( timeout_tutorial );
             $( '.areamap-tutorial' ).remove();
             switch ( boxes_mode ) {
@@ -136,7 +136,7 @@
                     break;
                 case 2: /// Hide
                     $post_thumbnail.addClass( 'boxes-hide' );
-                    $transcript.addClass( 'active' );
+                    // $transcript.addClass( 'active' );
                     break;
             }
             $toggle_button.attr( 'data-boxes_mode', boxes_mode );

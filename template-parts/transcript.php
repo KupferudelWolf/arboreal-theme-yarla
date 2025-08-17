@@ -17,7 +17,11 @@
                 echo $speaker;
             }
             ?></th>
-            <th><?php echo $item['content']; ?></th>
+            <th><?php
+            $content = $item['content'];
+            $content = preg_replace(['/\<[ \/]*br[ \/]*\>/', '/\\[nr]/'], ' | ', $content);
+            echo $content;
+            ?></th>
             </tr>
             <?php
             $panel_last = $panel;

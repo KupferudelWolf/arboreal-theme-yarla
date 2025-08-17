@@ -143,6 +143,7 @@ if (!function_exists('arboreal_post_thumbnail')):
 				<?php endif;
 
 				global $TRANSCRIPT;
+				// get_transcript();
 				if (count($TRANSCRIPT) > 0):
 					foreach ($TRANSCRIPT as $item): ?>
 						<div class="<?php echo $item['class']; ?>" style="<?php
