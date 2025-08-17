@@ -203,9 +203,7 @@
         $( '.hoverbox' ).parent().on( 'hover mouseover mousemove', function ( event ) {
             const $this = $( this );
             const [ left_val, top_val ] = toXY( event, $this );
-            let [ left, top ] = toSXY( event ),
-                right = '',
-                bottom = '';
+            let [ left, top ] = toSXY( event );
             if ( left === null || top === null ) return;
             const $boxes = $this.children( '.hoverbox' );
             if ( _admin_data.dragging ) return;
@@ -217,8 +215,8 @@
             if ( isMobile() ) {
                 const width = document.body.clientWidth;
                 $boxes.css( style );
-                const off_left = $boxes.offset().left;
-                const off_right = off_left + $boxes.width();
+                const off_left = $this.offset().left;
+                const off_right = off_left + $this.width();
                 if ( off_left < 0 ) {
                     left = `calc(${ left }% + ${ -Math.ceil( off_left ) }px)`;
                 } else if ( off_right > width ) {
@@ -227,19 +225,15 @@
                 left = left + '%';
                 top = top + '%';
             } else {
-                left = left + '%';
-                top = top + '%';
-                if ( left > 50 ) {
-                    left, right = right, left;
-                }
-                if ( top > 50 ) {
-                    top, bottom = bottom, top;
-                }
+                // if ( left > 50 ) {
+                //     left -= 100 * $this.width() / window.innerWidth;
+                // }
+                // if ( top > 50 ) {
+                //     top -= 100 * $this.height() / window.innerHeight;
+                // }
             }
-            style.left = left;
-            style.top = top;
-            style.right = right;
-            style.bottom = bottom;
+            style.left = left + '%';
+            style.top = top + '%';
             $boxes.css( style );
             _admin_data.$box.html(
                 `left: ${ left_val + '%' };</br>top: ${ top_val + '%' };`
