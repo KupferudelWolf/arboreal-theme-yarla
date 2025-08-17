@@ -222,8 +222,6 @@
                 } else if ( off_right > width ) {
                     left = `calc(${ left }% - ${ Math.ceil( off_right ) - width }px)`;
                 }
-                left = left + '%';
-                top = top + '%';
             } else {
                 // if ( left > 50 ) {
                 //     left -= 100 * $this.width() / window.innerWidth;
