@@ -290,7 +290,7 @@
                     if ( !_admin_data.dragging ) return;
                     _admin_data.dragging_start = false;
                     _admin_data.dragging = false;
-                    _admin_data.$box.removeClass( 'active' );
+                    _admin_data.$box.removeClass( 'active' ).css( 'inset', '' );
                     const $this = $( this );
                     const [ left_val, top_val ] = toXY( event, $this );
                     if ( left_val === null || top_val === null ) return;

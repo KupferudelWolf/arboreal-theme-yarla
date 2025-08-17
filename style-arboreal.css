@@ -973,8 +973,8 @@ main#primary {
     object-fit: contain;
     /* This looks weird when hovered over.*/
     /* I'm not sure why. */
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
+    /* image-rendering: crisp-edges;
+    image-rendering: pixelated; */
 }
 .single .container-thumbnail.enlarged {
     width: auto;
