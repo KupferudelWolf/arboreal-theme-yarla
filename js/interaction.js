@@ -300,7 +300,7 @@
                         x2: left_val,
                         y2: top_val
                     };
-                    navigator.clipboard.writeText( JSON.stringify( data, null, 4 ) );
+                    navigator.clipboard.writeText( JSON.stringify( data ) );
                     console.log( 'Box:', data, '\n(copied to clipboard)' );
                 } );
         } else {
