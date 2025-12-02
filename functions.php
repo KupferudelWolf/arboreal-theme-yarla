@@ -420,12 +420,16 @@ function get_transcript($id = null)
 					$val = @json_decode($row[$i]);
 					if ($val == null) {
 						$item[$key] = $row[$i];
-					} elseif (property_exists($val, $LANG)) {
-						$item[$key] = $val->$LANG;
-					} elseif (property_exists($val, 'en')) {
-						$item[$key] = $val->en;
+					} elseif (is_object($val)) {
+						if (property_exists($val, $LANG)) {
+							$item[$key] = $val->$LANG;
+						} elseif (property_exists($val, 'en')) {
+							$item[$key] = $val->en;
+						} else {
+							$item[$key] = '';
+						}
 					} else {
-						$item[$key] = '';
+						$item[$key] = strval($val);
 					}
 				}
 
