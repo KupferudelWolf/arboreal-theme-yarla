@@ -1600,7 +1600,8 @@ aside#secondary {
         display: none;
     }
 }
-@media screen and (max-aspect-ratio: 3 / 4) {
+@media screen and (max-aspect-ratio: 3 / 4),
+(max-width: 960px) {
 
     .single .container,
     .page .container {
@@ -1621,6 +1622,7 @@ aside#secondary {
 
     header.site-header {
         height: auto;
+        min-height: auto;
         align-items: flex-start;
         justify-content: space-between;
     }
