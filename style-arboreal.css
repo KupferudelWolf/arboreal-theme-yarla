@@ -997,9 +997,12 @@ main#primary {
     image-rendering: pixelated;
 }
 
+.single .post-thumbnail .hoverbox {
+    text-wrap: pretty;
+}
 .single .post-thumbnail:not(.boxes-show) .hoverbox,
 .single .post-thumbnail .hoverbox.adminbox {
-    width: auto;
+    width: fit-content;
     min-width: 6rem;
     max-width: 24rem;
     height: auto;
@@ -1012,7 +1015,7 @@ main#primary {
     background-color: var(--theme-hoverboxback);
     border: 2px solid var(--theme-hoverboxtext);
     pointer-events: none;
-    z-index: 10;
+    z-index: 200;
     opacity: 0;
 }
 .single .post-thumbnail .hoverbox.adminbox.active {
@@ -1104,6 +1107,7 @@ main#primary {
 .single .post-thumbnail .areamap:hover > .hoverbox,
 .single .post-thumbnail:hover > .hoverbox {
     opacity: 1;
+    width: fit-content;
 }
 .single .post-thumbnail:not(.boxes-hover) .areamap {
     --background-color: white;

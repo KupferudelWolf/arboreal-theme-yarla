@@ -184,8 +184,8 @@
             // const height = window.innerHeight;
             // const left = window.scrollX;
             // const top = window.scrollY;
-            const x = mouse_x - left;
-            const y = mouse_y - top;
+            const x = Math.min( Math.max( mouse_x - left, 0 ), width );
+            const y = Math.min( Math.max( mouse_y - top, 0 ), height );
             return [
                 Math.round( 10000 * x / width ) / 100,
                 Math.round( 10000 * y / height ) / 100
@@ -199,8 +199,8 @@
             const height = window.innerHeight;
             const left = window.scrollX;
             const top = window.scrollY;
-            const x = mouse_x - left;
-            const y = mouse_y - top;
+            const x = Math.min( Math.max( mouse_x - left, 0 ), width );
+            const y = Math.min( Math.max( mouse_y - top, 0 ), height );
             return [
                 Math.round( 10000 * x / width ) / 100,
                 Math.round( 10000 * y / height ) / 100
@@ -215,31 +215,54 @@
             if ( left === null || top === null ) return;
             const $boxes = $this.children( '.hoverbox' );
             if ( _admin_data.dragging ) return;
+            // const style = {
+            //     width: '',
+            //     height: '',
+            //     opacity: ''
+            // };
+            // if ( isMobile() ) {
+            //     const width = document.body.clientWidth;
+            //     $boxes.css( style );
+            //     const off_left = $this.offset().left;
+            //     const off_right = off_left + $this.width();
+            //     if ( off_left < 0 ) {
+            //         left = `calc(${ left }% + ${ -Math.ceil( off_left ) }px)`;
+            //     } else if ( off_right > width ) {
+            //         left = `calc(${ left }% - ${ Math.ceil( off_right ) - width }px)`;
+            //     }
+            // } else {
+            //     // if ( left > 50 ) {
+            //     //     left -= 100 * $this.width() / window.innerWidth;
+            //     // }
+            //     // if ( top > 50 ) {
+            //     //     top -= 100 * $this.height() / window.innerHeight;
+            //     // }
+            // }
+            // style.left = left + '%';
+            // style.top = top + '%';
+            const screen_w = document.documentElement.clientWidth;
+            const screen_h = document.documentElement.clientHeight;
+            const box_w = $boxes.outerWidth();
+            const box_h = $boxes.outerHeight();
+            const scroll_left = document.body.scrollLeft;
+            const scroll_top = document.body.scrollTop;
+            let min_left = scroll_left;
+            let max_left = scroll_left + screen_w - box_w;
+            let min_top = scroll_top;
+            let max_top = scroll_top + screen_h - box_h;
+            if ( isMobile() ) {
+                min_left += box_w / 2;
+                max_left += box_w / 2;
+                min_top += box_h / 2;
+                max_top += box_h / 2;
+            }
             const style = {
                 width: '',
                 height: '',
+                left: `min(max(${ left }%, ${ min_left }px), ${ max_left }px)`,
+                top: `min(max(${ top }%, ${ min_top }px), ${ max_top }px)`,
                 opacity: ''
             };
-            if ( isMobile() ) {
-                const width = document.body.clientWidth;
-                $boxes.css( style );
-                const off_left = $this.offset().left;
-                const off_right = off_left + $this.width();
-                if ( off_left < 0 ) {
-                    left = `calc(${ left }% + ${ -Math.ceil( off_left ) }px)`;
-                } else if ( off_right > width ) {
-                    left = `calc(${ left }% - ${ Math.ceil( off_right ) - width }px)`;
-                }
-            } else {
-                // if ( left > 50 ) {
-                //     left -= 100 * $this.width() / window.innerWidth;
-                // }
-                // if ( top > 50 ) {
-                //     top -= 100 * $this.height() / window.innerHeight;
-                // }
-            }
-            style.left = left + '%';
-            style.top = top + '%';
             $boxes.css( style );
             _admin_data.$box.html(
                 `left: ${ left_val + '%' };</br>top: ${ top_val + '%' };`
