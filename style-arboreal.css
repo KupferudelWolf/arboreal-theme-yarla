@@ -965,7 +965,7 @@ main#primary {
     position: relative;
     margin: auto;
     width: auto;
-    height: 92vh;
+    max-height: 92vh;
 }
 .single .post-thumbnail img {
     width: 100%;
@@ -1530,9 +1530,9 @@ aside#secondary {
     }
 
     .single .post-thumbnail {
-        max-height: none;
-        width: 100%;
-        height: 100%;
+        max-height: none !important;
+        width: 100% !important;
+        height: 100% !important;
     }
 
     .single .post-thumbnail img,

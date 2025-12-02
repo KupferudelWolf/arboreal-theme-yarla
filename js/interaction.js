@@ -42,6 +42,7 @@
     } );
 
     const $post_thumbnail = $( 'body.single .post-thumbnail' );
+    const $post_thumbnail_img = $( 'body.single .post-thumbnail img' );
     // const $transcript = $( '.entry-transcript.desktop-only table' );
     if ( $post_thumbnail.length ) {
         const $toggle_button = $( '.nav-toggle' );
@@ -105,13 +106,20 @@
 
         /// Scale the image container appropriately.
         const scaleImageContainer = function () {
-            const img_w = $( '.post-thumbnail img' ).attr( 'width' );
-            const img_h = $( '.post-thumbnail img' ).attr( 'height' );
-            $( '.post-thumbnail' ).css( 'aspect-ratio', img_w / img_h );
+            const img_w = $post_thumbnail_img.attr( 'width' );
+            const img_h = $post_thumbnail_img.attr( 'height' );
+            const w = $post_thumbnail.parent().width();
+            const zoom = Math.max( Math.floor( w / img_w ), 1 );
+            $post_thumbnail.css( {
+                'aspect-ratio': img_w / img_h,
+                'max-width': `${ img_w * zoom }px`,
+                'height': `${ img_h * zoom }px`
+            } );
         };
         scaleImageContainer();
 
         const onResize = function () {
+            scaleImageContainer();
             renameBox();
         };
         $( window ).on( 'resize', onResize );
