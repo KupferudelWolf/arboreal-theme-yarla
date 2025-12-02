@@ -1469,7 +1469,8 @@ aside#secondary {
  *   Responsive   *
  ******************
 */
-@media screen and (max-aspect-ratio: 4 / 3) {
+@media screen and (max-aspect-ratio: 4 / 3),
+(max-width: 960px) {
     :root {
         --is-mobile: true;
     }
