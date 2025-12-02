@@ -250,6 +250,7 @@
             $post_thumbnail
                 .on( 'mousedown', function ( event ) {
                     event.preventDefault();
+                    if ( isMobile() ) return;
                     const $this = $( this );
                     const [ left_val, top_val ] = toXY( event, $this );
                     const [ left, top ] = toSXY( event );
@@ -261,6 +262,7 @@
                     _admin_data.sy1 = top;
                 } )
                 .on( 'mousemove', function ( event ) {
+                    if ( isMobile() ) return;
                     if ( _admin_data.dragging ) {
                         const [ left, top ] = toSXY( event );
                         _admin_data.sx2 = left;
@@ -287,6 +289,7 @@
                     }
                 } )
                 .on( 'mouseup mouseleave', function ( event ) {
+                    if ( isMobile() ) return;
                     if ( !_admin_data.dragging ) return;
                     _admin_data.dragging_start = false;
                     _admin_data.dragging = false;
