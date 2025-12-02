@@ -10,20 +10,30 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title(sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())), '</a></h2>'); ?>
-	</header><!-- .entry-header -->
+	<a href="<?php the_permalink(); ?>" rel="bookmark">
+		<?php if (has_post_thumbnail()):
+			arboreal_post_thumbnail();
+			?>
+			<header class="entry-header">
+				<?php the_title(sprintf('<h2 class="entry-title">', esc_url(get_permalink())), '</h2>'); ?>
+			</header>
+			<!-- .entry-header -->
+		</a>
+	<?php else: ?>
+		<header class="entry-header">
+			<?php the_title(sprintf('<h2 class="entry-title">', esc_url(get_permalink())), '</h2>'); ?>
+		</header>
+		<!-- .entry-header -->
+		</a>
 
-	<?php if (has_post_thumbnail()):
-		arboreal_post_thumbnail();
-	else:
-		?>
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
-		</div><!-- .entry-summary -->
+		</div>
+		<!-- .entry-summary -->
 
 		<footer class="entry-footer">
 			<?php arboreal_entry_footer(); ?>
-		</footer><!-- .entry-footer -->
+		</footer>
+		<!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->
